@@ -1,0 +1,42 @@
+HYE-WYE FEATURES:
+
+user accounts
+	registration
+		confirmation
+		capture gender, age, nickname (login), email
+	login/logout
+	reset password
+	openid?
+	user timeline
+		how many question did they answer
+		history of answers (grouped by answer type)
+
+questions
+	belongs to user
+	has many answers
+	live sidebar list: new questions appear
+	140 chars
+	create
+	update (until they are published)
+	publish
+	delete (until they are answered)
+
+answers
+	belongs to user
+	belongs to question
+	home: answer the question, one at a time
+	3 options:
+		i have: ___ (140char)
+		i would: ___ (140char)
+		i would never: ___ (140char)
+	user timeline
+		group by answer type
+
+twitter integration
+	oauth permission
+	tweet out my question - Would you ever.. bit.ly/asdf
+	
+	[ok] id of the question (from @reply id)
+	option (ih, iw, iwn) #ih
+	message
+	
