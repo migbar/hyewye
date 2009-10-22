@@ -53,14 +53,7 @@ describe UsersController do
       post_with_invalid_attributes
       response.should render_template(:new)
     end
-    
-    # it "creates a User given valid attributes" do
-    #   do_post
-    #   User.should_receive(:new).with(@valid_arguments).and_return(@user)
-    #   response.should redirect_to(root_path)
-    #   flash[:notice].should == "Account Created!"
-    # end
-    
+
   end
   
 end

@@ -22,3 +22,32 @@ Feature: User Accounts
     Given I am on the registration page
       And I press "Create Account"
      Then I should see "errors prohibited this user from being saved"
+
+  Scenario: Logging in successfully with an existing userid
+    Given I am on the home page
+      And a user exists with login: "my_login", password: "secret"
+     When I follow "Log in"
+      And I fill in "Login" with "my_login"
+      And I fill in "Password" with "secret"
+      And I press "Log in"
+     Then I should see "Welcome my_login!"
+      And I should be on the home page
+      
+  Scenario: Failing to log in 
+  
+  Scenario: logging out
+  
+  Scenario: attempting to log in twice  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+

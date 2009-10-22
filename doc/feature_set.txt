@@ -16,6 +16,8 @@ questions
 	has many answers
 	live sidebar list: new questions appear
 	140 chars
+	searchable by indexing service 
+	eliminate potential duplicate questions
 	create
 	update (until they are published)
 	publish
@@ -31,6 +33,7 @@ answers
 		i would never: ___ (140char)
 	user timeline
 		group by answer type
+	searchable by indexing service 
 
 twitter integration
 	oauth permission
