@@ -1,4 +1,8 @@
-= link_to "Sign up", new_account_path if !current_user
-= link_to "Log in", new_user_session_path if !current_user
-= link_to "Log out", user_session_path, :method => 'delete' if current_user
+#logo
+  = link_to(image_tag('hyewye_logo.png'), '')
+%p
+  #login_bar
+    = link_to "Sign up", new_account_path if !current_user
+    = link_to "Log in", new_user_session_path if !current_user
+    = link_to "Log out", user_session_path, :method => 'delete' if current_user
 

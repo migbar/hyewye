@@ -1,0 +1,68 @@
+WHY DID I SEE MY CODE ALL SQUASHED INTO ONE BRANCH?
+  I am on branch master ...
+  
+  I want to make some ui changes, or at least play with some ideas
+   10  git checkout -b ui
+  
+  Now I am on the new 'ui' branch .. so I make some ui modifications...
+  I like them so I stage them to be committed to the 'ui' branch 
+   14  add public/stylesheets/
+   16  add app/views/layouts/application.html.haml 
+   
+  I commit them
+   18  commit -m "added very simple styling based on rbates nifty layout"
+   
+  And I push it to github
+   19  push origin ui
+  At this point I should have 'master' (without the ui mods) and 'ui' which has all the ui mods
+  
+  I now have another requirement to add some flash message that requires to add user mocking .. since I dont want to make them on 'ui', I create another branch for them
+   22  git checkout -b user_mocking_play
+   ERROR !!!!!!!!!! (I did this WITHOUT first switching to 'master') or I could have used the shorthand version (git checkout -b user_mocking_play master) which specifies that the new
+   user_mocking_play branch should be created FROM the master instead of the current branch.
+    
+   If what I intended was to have 'ui' contain only the ui changes, I should have switched to 'master' so as to spawn the mocking changes from the 'master' (sans-ui) branch..
+   as it is, the mocking will be 'on top' of the 'ui' changes .. so i happily go along and, blissfully unaware that htey will all be together, I stage the mocking changes and commit ...
+   25  add app/controllers/users_controller.rb  features/accounts.feature  spec/controllers/users_controller_spec.rb 
+   27  commit -m "added Welcome message upon account creation, which needed extra mocking in the users_controller_spec similar to the extra mocking in the user_sessions_controller_spec"
+ 
+  I switch to master and I incorporate ('merge') the 'mocking changes' (which have the ui changes as well)
+   29  git checkout master
+   31  merge user_mocking_play
+   
+   I push all branches up to github
+   35  push --all
+   
+   ...how to solve this?
+   
+   1 TAKE OUT THE UI COMMIT FROM user_mocking_play
+   be on the 'user_mocking_play' branch
+   git rebase -i HEAD~3
+   in the editor remove the commit that i did not want (the ui stuff)
+   save and exit, so that git applies the rebasing operation
+   
+   2 TAKE OUT THE UI and the user_mocking_play COMMIT FROM master
+   be on the 'master' branch
+   git rebase -i HEAD~3
+   in the editor remove both of the commit that i did not want (the ui and the user_mocking_play)
+   save and exit, so that git applies the rebasing operation
+   
+   all seems well....except
+   
+   push --all gives me the following error:
+   To git@github.com:migbar/hyewye.git
+    ! [rejected]        master -> master (non-fast forward)
+    ! [rejected]        user_mocking_play -> user_mocking_play (non-fast forward)
+   error: failed to push some refs to 'git@github.com:migbar/hyewye.git'
+   
+   solution....
+   BEWARE!!! do not do this if you have ppl that depend on your code, I got away with it becauseI was the only one on the repo
+   I know that this is a special case as most ppl do collaborate
+   push --all --force
+   Counting objects: 19, done.
+   Compressing objects: 100% (10/10), done.
+   Writing objects: 100% (10/10), 1.37 KiB, done.
+   Total 10 (delta 7), reused 0 (delta 0)
+   To git@github.com:migbar/hyewye.git
+    + eec9731...053c866 master -> master (forced update)
+    + eec9731...a9bcb3a user_mocking_play -> user_mocking_play (forced update)

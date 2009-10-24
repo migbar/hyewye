@@ -1,5 +1,7 @@
 body {
-  background-color: #4B7399;
+/*  background-color: #4B7399;*/
+/*  background-color: #99cc33;*/
+background-color: #ffCC44;
   font-family: Verdana, Helvetica, Arial;
   font-size: 14px;
 }
@@ -21,9 +23,11 @@ a {
 #banner {
   width: 75%;
   margin: 0 auto;
-  background-color: #F0F0F0;
+  background-color: #FFF;
   padding: 20px 40px;
-  border: solid 1px black;
+  -webkit-border-top-right-radius: 20px 20px;
+  -webkit-border-top-left-radius: 20px 20px;
+/*  border: solid 1px black;*/
   margin-top: 20px;
 }
 
@@ -32,8 +36,10 @@ a {
   margin: 0 auto;
   background-color: #FFF;
   padding: 20px 40px;
-  border: solid 1px black;
-  margin-top: 20px;
+  -webkit-border-bottom-right-radius: 20px 20px;
+  -webkit-border-bottom-left-radius: 20px 20px;
+/*  border: solid 1px black;*/
+/*  margin-top: 20px;*/
 }
 
 #flash_notice, #flash_error {
@@ -87,4 +93,14 @@ a {
 #errorExplanation ul li {
   font-size: 12px;
   list-style: disc;
+}
+
+#login_bar {
+ float: right;
+}
+
+#copyright {
+ color: #333;
+ font-size: 10px;
+ text-align: center;
 }

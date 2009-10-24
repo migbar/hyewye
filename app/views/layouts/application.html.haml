@@ -3,18 +3,18 @@
   %head
     = title_tag
     %meta{"http-equiv"=>"Content-type", :content=>"text/html; charset=utf-8"}
-    = stylesheet_link_tag 'application'
+    = stylesheet_link_tag 'gemcutter'
     = yield(:head)
   %body
     #banner
       #header
         = render :partial => "shared/header"
-      #container
-        #main-content
-          - if show_title?
-            %h2= h yield(:title)
-          = render :partial => "shared/flash", :object => flash
-          = yield
-        #footer
-          = render :partial => "shared/footer"
+    #container
+      #main-content
+        - if show_title?
+          %h2= h yield(:title)
+        = render :partial => "shared/flash", :object => flash
+        = yield
+      #footer
+        = render :partial => "shared/footer"
       
