@@ -6,6 +6,10 @@ describe UserSessionsController do
   end
 
   describe "handling GET new" do
+    before(:each) do
+      UserSession.stub(:find).and_return(nil)
+    end
+    
     it "builds a new user session and assigns it for the view" do
       UserSession.should_receive(:new).and_return(@user_session)
       get :new
@@ -20,12 +24,15 @@ describe UserSessionsController do
   
   describe "handling POST create" do
     before(:each) do
+      UserSession.stub(:find).and_return(nil) # logged out
       UserSession.stub!(:new).and_return(@user_session)
-      UserSession.stub!(:find).and_return(@user_session)
       @user_session.stub!(:record).and_return(mock_model(User, :login => 'my_login'))
     end
     
     def post_with_valid_attributes(options={})
+      @current_user = mock_model(User, :login => options[:user_session].try(:[], :login)) # option[:user_session] && options[:user_session][:login]
+      controller.should_receive(:current_user).and_return(nil) # first time it is the filter that sends :current_user, expects nil
+      controller.should_receive(:current_user).and_return(@current_user) # second time, it is our code, we expect a true user
       @user_session.should_receive(:save).and_return(true)
       post :create, options
     end
@@ -42,7 +49,7 @@ describe UserSessionsController do
     end
     
     it "redirects to the home page and sets the flash message on success" do
-      post_with_valid_attributes
+      post_with_valid_attributes(:user_session => { :login => "my_login" })
       flash[:notice].should == "Welcome my_login!"
       response.should redirect_to(root_path)
     end
@@ -54,4 +61,43 @@ describe UserSessionsController do
 
   end
   
+  describe "handling DELETE destroy" do
+    def do_delete
+      delete :destroy
+    end
+    
+    it "redirects to the login page if not logged in" do
+      do_delete
+      response.should redirect_to(new_user_session_path)
+    end
+    
+    describe "when logged in" do
+      before(:each) do
+        login_user
+        user_session.stub(:destroy)
+      end
+      
+      it "destroys the current user session" do
+        user_session.should_receive(:destroy)
+        do_delete
+      end
+      
+      it "sets the flash message and redirects to the home page" do
+        do_delete
+        flash[:notice].should == "You have logged out"
+        response.should redirect_to(root_path)
+      end
+    end
+    
+    
+  end
+  
 end
+
+
+
+
+
+
+
+

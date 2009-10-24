@@ -12,7 +12,9 @@ module NavigationHelpers
       '/'
     when /the registration page/
       new_account_path
-    
+    when /the login page/
+      new_user_session_path
+      
     # Add more mappings here.
     # Here is a more fancy example:
     #

@@ -23,7 +23,7 @@ Feature: User Accounts
       And I press "Create Account"
      Then I should see "errors prohibited this user from being saved"
 
-  Scenario: Logging in successfully with an existing userid
+  Scenario: Logging in successfully with an existing login name
     Given I am on the home page
       And a user exists with login: "my_login", password: "secret"
      When I follow "Log in"
@@ -33,11 +33,48 @@ Feature: User Accounts
      Then I should see "Welcome my_login!"
       And I should be on the home page
       
-  Scenario: Failing to log in 
-  
+  Scenario: Failing to log in with an invalid login name
+    Given I am on the home page
+     When I follow "Log in"
+      And I fill in "Login" with "my_login"
+      And I fill in "Password" with "secret"
+      And I press "Log in"
+     Then I should see "Login is not valid"
+     # When I go to my account page # => /account
+     # Then I should be on the login page # /user_session/new
+     
+  #################################################################################
+  # HomeWork 2 -- logging out    
+  # features that exercise the destroy action on the user_sessions_controller
+  #################################################################################   
   Scenario: logging out
+    Given I log in with login: "my_login", password: "secret"
+     When I follow "Log out"
+     Then I should see "You have logged out"
+      And I should be on the home page 
   
+  #################################################################################
+  # HomeWork 3 -- Attempting to log in twice    
+  # hint: ...exercise the filter stuff
+  #################################################################################   
   Scenario: attempting to log in twice  
+    Given I log in with login: "my_login", password: "secret"
+     When I go to the login page
+     Then I should see "You must be logged out to access this page"
+      And I should be on the home page
+  
+  ################################################################################
+  # MORE FEATURES - account maintenance (password, email, twitter integration ...)
+  ################################################################################  
+  Scenario: reset password
+  Scenario: change email
+  Scenario: change twitter info
+  
+  
+  
+  
+  
+  
   
   
   
