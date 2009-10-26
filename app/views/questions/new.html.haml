@@ -1,0 +1,11 @@
+- title "Ask a question"
+
+- form_for @question do |f|
+  %p
+    = f.label :body, "Have you ever / Would you ever"
+  
+  %p
+    = f.text_area :body
+    = f.error_message_on :body
+  %p
+    = f.submit "ask away!"
