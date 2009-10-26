@@ -28,6 +28,9 @@ describe UsersController do
     end
     
     def post_with_valid_attributes(options={})
+      @current_user = mock_model(User, :login => options[:user].try(:[], :login)) # same as-> options[:user] && options[:user][:login]
+      controller.should_receive(:current_user).and_return(nil) # first time -> the filter that sends :current_user, expects nil
+      controller.should_receive(:current_user).and_return(@current_user) # second time -> our flash message code, we expect a true user
       @user.should_receive(:save).and_return(true)
       post :create, options
     end
@@ -44,8 +47,8 @@ describe UsersController do
     end
     
     it "redirects to the home page and sets the flash message on success" do
-      post_with_valid_attributes
-      flash[:notice].should == "Account Created!"
+      post_with_valid_attributes(:user => { :login => "my_login" })
+      flash[:notice].should == "Thank you for registering my_login, your account has been created!"
       response.should redirect_to(root_path)
     end
     

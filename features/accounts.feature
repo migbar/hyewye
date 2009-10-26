@@ -15,7 +15,7 @@ Feature: User Accounts
       And I fill in "Password" with "password"
       And I fill in "Password Confirmation" with "password"
       And I press "Create Account"
-     Then I should see "Account Created!"
+     Then I should see "Thank you for registering my_login, your account has been created!"
       And I should be on the home page
   
   Scenario: Failing to register due to invalid options
@@ -43,20 +43,12 @@ Feature: User Accounts
      # When I go to my account page # => /account
      # Then I should be on the login page # /user_session/new
      
-  #################################################################################
-  # HomeWork 2 -- logging out    
-  # features that exercise the destroy action on the user_sessions_controller
-  #################################################################################   
   Scenario: logging out
     Given I log in with login: "my_login", password: "secret"
      When I follow "Log out"
      Then I should see "You have logged out"
       And I should be on the home page 
   
-  #################################################################################
-  # HomeWork 3 -- Attempting to log in twice    
-  # hint: ...exercise the filter stuff
-  #################################################################################   
   Scenario: attempting to log in twice  
     Given I log in with login: "my_login", password: "secret"
      When I go to the login page
