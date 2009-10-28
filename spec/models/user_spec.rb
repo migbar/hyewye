@@ -5,4 +5,5 @@ describe User do
                      :persistence_token, :single_access_token, :perishable_token,
                      :type => :string
   should_have_many :questions
+  should_have_many :answers
 end

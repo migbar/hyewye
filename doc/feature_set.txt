@@ -3,13 +3,28 @@ HYE-WYE FEATURES:
 user accounts
 	registration
 		confirmation
-		capture gender, age, nickname (login), email
+		
+		- users have 
+      - nickname
+      - gender
+      - age
+      - email
+      - twitter id
+      - facebook id
+      - avatar
+      
 	login/logout
 	reset password
 	openid?
 	user timeline
 		how many question did they answer
 		history of answers (grouped by answer type)
+  - users have points? 
+     - based on how many answers their question gets
+     - based on how many questions they have answered
+     - based on how many questions they have created
+  - users have an experienced or daring rating
+     - based on how many times they say I Have(3pts), I would(1pt) or I Would Never(-1)
 
 questions
 	belongs to user
@@ -22,6 +37,8 @@ questions
 	update (until they are published)
 	publish
 	delete (until they are answered)
+  - questions have tags (foursquare)
+  - each question has stats
 
 answers
 	belongs to user
@@ -34,6 +51,8 @@ answers
 	user timeline
 		group by answer type
 	searchable by indexing service 
+	- answers have tags (foursquare)
+  
 
 twitter integration
 	oauth permission
@@ -42,4 +61,13 @@ twitter integration
 	[ok] id of the question (from @reply id)
 	option (ih, iw, iwn) #ih
 	message
-	
+
+  - PAGES (foursquare)
+   - home page shows the stream of questions and answers(foursquare home page)
+   - user profile page shows the number of questions and answers they have(foursquare user page) 
+   - question page shows list of avatars of users that have answered(foursquare location page)
+
+------- wording ------
+how daring are you?
+    find out how daring your friends are.
+   

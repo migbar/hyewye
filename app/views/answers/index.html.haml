@@ -1,0 +1,15 @@
+- form_for @answer, :url => question_answers_path(@question) do |f|
+  %p
+    = f.radio_button :choice, "1"
+    = f.label :choice_1, "I have"
+  %p
+    = f.radio_button :choice, "2"
+    = f.label :choice_2, "I would"
+  %p
+    = f.radio_button :choice, "3"
+    = f.label :choice_3, "I would never"
+  %p
+    = f.text_field :body
+    = f.error_message_on :body
+  %p
+    = f.submit "answer!"

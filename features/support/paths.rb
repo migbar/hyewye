@@ -16,6 +16,9 @@ module NavigationHelpers
       new_user_session_path
     when /the ask question page/
       new_question_path
+    when /the answers page for question "([^\"]*)"/
+      record = Question.find_by_body($1)
+      question_answers_path(record)
       
     # Add more mappings here.
     # Here is a more fancy example:
