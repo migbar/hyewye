@@ -7,4 +7,6 @@ class Event < ActiveRecord::Base
       :order => "events.created_at DESC"
     }
   }
+  
+  delegate :user, :to => :target
 end

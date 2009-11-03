@@ -18,4 +18,10 @@ describe Event do
       end
     end
   end
+  
+  it "delegates user to target" do
+    @user = Factory.build(:user)
+    @event = Factory.build(:event, :target => Factory.build(:answer, :user => @user))
+    @event.user.should == @user
+  end
 end

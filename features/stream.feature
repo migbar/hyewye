@@ -5,20 +5,20 @@ Feature: Stream
   
   Scenario: viewing the stream
     Given the following questions and answers exist
-      | model    | body | since |
-      | question | q1   | 1     |
-      | question | q2   | 2     |
-      | question | q3   | 3     |
-      | question | q4   | 4     |
-      | question | q5   | 90    |
-      | question | q5   | 9000  |
+      | model    | user    | body | since |
+      | question | adam    | q1   | 1     |
+      | question | bob     | q2   | 2     |
+      | question | adam    | q3   | 3     |
+      | question | dave    | q4   | 4     |
+      | question | bob     | q5   | 90    |
+      | question | charlie | q6   | 9000  |
      When I go to the home page
      Then I should see the following events
-      | Event |
-      | q1    |
-      | q2    |
-      | q3    |
-      | q4    |
+      | User | Event |
+      | adam | q1    |
+      | bob  | q2    |
+      | adam | q3    |
+      | dave | q4    |
   
   Scenario: Answering a question in the stream
     Given a question "hps" exists with body: "Have plastic surgery?"
