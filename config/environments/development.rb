@@ -1,5 +1,8 @@
 # Settings specified here will take precedence over those in config/environment.rb
 
+#following needed for passenger pref pane to work with rvm
+# ENV["GEM_HOME"]=%x{bash -l -c "rvm 1.8.7 ; rvm gemdir -m pancake"}.strip
+
 # In the development environment your application's code is reloaded on
 # every request.  This slows down response time but is perfect for development
 # since you don't have to restart the webserver when you make code changes.

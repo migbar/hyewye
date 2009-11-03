@@ -4,13 +4,22 @@ describe AnswersController do
   before(:each) do
     @question = mock_model(Question)
     @answer = mock_model(Answer)
+    @answers = [ mock_model(Answer) ]
+    Question.stub(:find).and_return(@question)
+    @question.stub_chain(:answers, :latest).and_return(@answers)
   end
   
   describe "access control" do
-    [:index, :create].each do |action|
+    [:create].each do |action|
       it "requires user to be logged in for action #{action}" do
         get action, :question_id => 1 # url_for(:controller => 'answers', :action => 'index', :question_id => 1) => /questions/1/answers
-        response.should redirect_to(new_user_session_path)
+        response.should redirect_to(new_user_session_path) # 301
+      end
+    end
+    [:index].each do |action|
+      it "does not require user to be logged in for action #{action}" do
+        get action, :question_id => 1 # url_for(:controller => 'answers', :action => 'index', :question_id => 1) => /questions/1/answers
+        response.should be_success # 200
       end
     end
   end
@@ -18,7 +27,6 @@ describe AnswersController do
   describe "handling GET index action" do
     
     before(:each) do
-      Question.stub(:find).and_return(@question)
       Answer.stub(:new).and_return(@answer)
       login_user
     end
@@ -31,6 +39,12 @@ describe AnswersController do
       Question.should_receive(:find).with("1").and_return(@question)
       do_get
       assigns[:question].should == @question
+    end
+    
+    it "should fetch the latest answers for a question and assigns them for the view" do
+      @question.answers.should_receive(:latest).and_return(@answers)
+      do_get
+      assigns[:answers].should == @answers
     end
     
     it "builds a new answer and assigns it for the view" do
@@ -81,6 +95,12 @@ describe AnswersController do
       assigns[:answer].should == @answer
     end
     
+    it "should fetch the latest answers for a question and assigns them for the view on failure" do
+      @question.answers.should_receive(:latest).and_return(@answers)
+      post_with_invalid_attributes
+      assigns[:answers].should == @answers
+    end
+        
     it "sets the flash and redirects to the answers list for the question" do
       post_with_valid_attributes
       flash[:notice].should == "Thanks for answering!"
@@ -91,6 +111,7 @@ describe AnswersController do
       post_with_invalid_attributes
       response.should render_template(:index)
     end
-  end
+    
+end
   
 end

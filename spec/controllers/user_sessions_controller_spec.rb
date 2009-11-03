@@ -10,6 +10,11 @@ describe UserSessionsController do
       UserSession.stub(:find).and_return(nil)
     end
     
+    it "stores the location to return to" do
+      get :new, {:return_to => "/foo/bar"}
+      session[:return_to].should == "/foo/bar"
+    end
+    
     it "builds a new user session and assigns it for the view" do
       UserSession.should_receive(:new).and_return(@user_session)
       get :new
@@ -20,6 +25,7 @@ describe UserSessionsController do
       get :new
       response.should render_template(:new)
     end
+    
   end
   
   describe "handling POST create" do

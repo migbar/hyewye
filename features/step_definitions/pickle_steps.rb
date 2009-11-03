@@ -45,3 +45,8 @@ end
 Then(/^#{capture_model} should not (?:be|have) (?:an? )?#{capture_predicate}$/) do |name, predicate|
   model(name).should_not send("be_#{predicate.gsub(' ', '_')}")
 end
+
+When /^I follow "([^\"]*)" for #{capture_model}$/ do |link, target|
+  record = model(target)
+  click_link_within("##{dom_id(record)}", link)
+end

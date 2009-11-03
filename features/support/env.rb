@@ -45,3 +45,10 @@ Webrat.configure do |config|
   config.open_error_files = false # Set to true if you want error pages to pop up in the browser
 end
 
+World(ActionView::Helpers::RecordIdentificationHelper)
+
+After do |scenario|
+  if scenario.failed?
+    # save_and_open_page
+  end
+end

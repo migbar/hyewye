@@ -69,5 +69,5 @@ twitter integration
 
 ------- wording ------
 how daring are you?
-    find out how daring your friends are.
+  find out how daring your friends are.
    

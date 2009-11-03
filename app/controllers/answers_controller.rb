@@ -1,8 +1,9 @@
 class AnswersController < ApplicationController
-  before_filter :require_user
+  before_filter :require_user, :except => :index
   before_filter :find_question
   
   def index
+    fetch_answers
     @answer = Answer.new
   end
   
@@ -13,12 +14,17 @@ class AnswersController < ApplicationController
       flash[:notice] = "Thanks for answering!"
       redirect_to question_answers_path(@question)
     else
+      fetch_answers
       render :index
     end
 
   end
   
   private
+    def fetch_answers
+      @answers = @question.answers.latest
+    end
+
     def find_question
       @question = Question.find(params[:question_id])
     end
