@@ -17,12 +17,11 @@ class AnswersController < ApplicationController
       fetch_answers
       render :index
     end
-
   end
   
   private
     def fetch_answers
-      @answers = @question.answers.latest
+      @answers = @question.answers.latest.paginate(:page => params[:page], :per_page => 15)
     end
 
     def find_question

@@ -15,3 +15,11 @@ Then /^I should see the following answers$/ do |expected_table|
   end
   expected_table.diff!(actual_table)
 end
+
+Given /^(\d+) answers exist for #{capture_model}$/ do |quantity, capture|
+  question = model(capture)
+  (1..quantity.to_i).each do |index|
+    Factory.create(:answer, "question" => question, "body" => "Answer-#{index}", "created_at" => index.minutes.ago)
+  end
+  
+end

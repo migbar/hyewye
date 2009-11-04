@@ -6,7 +6,7 @@ describe AnswersController do
     @answer = mock_model(Answer)
     @answers = [ mock_model(Answer) ]
     Question.stub(:find).and_return(@question)
-    @question.stub_chain(:answers, :latest).and_return(@answers)
+    @question.stub_chain(:answers, :latest, :paginate).and_return(@answers)
   end
   
   describe "access control" do
@@ -31,19 +31,19 @@ describe AnswersController do
       login_user
     end
     
-    def do_get
-      get :index, :question_id => 1
+    def do_get(options={})
+      get :index, {:question_id => 1}.merge(options)
     end
     
     it "finds the specified question and assigns it for the view" do
-      Question.should_receive(:find).with("1").and_return(@question)
-      do_get
+      Question.should_receive(:find).with("7").and_return(@question)
+      do_get(:question_id => "7")
       assigns[:question].should == @question
     end
     
     it "should fetch the latest answers for a question and assigns them for the view" do
-      @question.answers.should_receive(:latest).and_return(@answers)
-      do_get
+      @question.answers.latest.should_receive(:paginate).with(hash_including(:page => "42")).and_return(@answers)
+      do_get(:page => 42)
       assigns[:answers].should == @answers
     end
     
@@ -63,7 +63,8 @@ describe AnswersController do
     
     before(:each) do
       Question.stub(:find).and_return(@question)
-      @question.stub_chain(:answers, :build).and_return(@answer)
+      # @question.stub_chain(:answers, :build).and_return(@answer)
+      @question.answers.stub(:build).and_return(@answer)
       # Same as:
       # answers = mock("question answers", :build => @answer)
       # @question.stub(:answers).and_return(answers)
@@ -76,9 +77,9 @@ describe AnswersController do
       post :create, {:question_id => 1}.merge(options)
     end
     
-    def post_with_invalid_attributes
+    def post_with_invalid_attributes(options={})
       @answer.should_receive(:save).and_return(false)
-      post :create, :question_id => 1
+      post :create, {:question_id => 1}.merge(options)
     end
     
     it "finds the specified question and assigns it for the view" do
@@ -95,9 +96,9 @@ describe AnswersController do
       assigns[:answer].should == @answer
     end
     
-    it "should fetch the latest answers for a question and assigns them for the view on failure" do
-      @question.answers.should_receive(:latest).and_return(@answers)
-      post_with_invalid_attributes
+    it "should paginate the latest answers for a question and assign them for the view on failure" do
+      @question.answers.latest.should_receive(:paginate).with(hash_including(:page => "42")).and_return(@answers)
+      post_with_invalid_attributes(:page => 42)
       assigns[:answers].should == @answers
     end
         

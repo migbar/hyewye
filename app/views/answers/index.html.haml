@@ -15,7 +15,8 @@ asked:
       %td= link_to answer.user.login, user_path(answer.user)
       %td= ["I Have", "I Would", "I Would Never"][answer.choice-1]
       %td= h answer.body 
- 
+
+= will_paginate @answers
   
 - if current_user
   = render :partial => "form"

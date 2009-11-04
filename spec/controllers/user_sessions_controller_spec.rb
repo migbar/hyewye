@@ -15,6 +15,12 @@ describe UserSessionsController do
       session[:return_to].should == "/foo/bar"
     end
     
+    it "should not over write the session's return_to if the params' return_to is blank" do
+      session[:return_to] = "/foo/bar"
+      get :new, {:return_to => ""}
+      session[:return_to].should == "/foo/bar"
+    end
+    
     it "builds a new user session and assigns it for the view" do
       UserSession.should_receive(:new).and_return(@user_session)
       get :new

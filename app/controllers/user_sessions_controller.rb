@@ -3,7 +3,7 @@ class UserSessionsController < ApplicationController
   before_filter :require_user, :only => :destroy
   
   def new
-    session[:return_to] = params[:return_to]
+    session[:return_to] = params[:return_to] unless params[:return_to].blank?
     @user_session = UserSession.new
   end
   
