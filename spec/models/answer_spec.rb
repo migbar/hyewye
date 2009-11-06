@@ -34,12 +34,13 @@ describe Answer do
       Event.delete_all
     end
     
-    it "creates an asosciated event when it is created successfully" do
+    it "creates an associated event with user set to answer's user when it is created successfully" do
       lambda {
         @answer = Factory.create(:answer, :question => nil)
       }.should change(Event, :count).by(1)
       
       Event.first.target.should == @answer
+      @answer.event.user.should == @answer.user
     end
   end
 end

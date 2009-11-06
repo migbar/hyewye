@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091028035827) do
+ActiveRecord::Schema.define(:version => 20091106104747) do
 
   create_table "answers", :force => true do |t|
     t.integer  "user_id"
@@ -28,11 +28,13 @@ ActiveRecord::Schema.define(:version => 20091028035827) do
     t.string   "target_type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   add_index "events", ["target_id", "target_type"], :name => "index_events_on_target_id_and_target_type"
   add_index "events", ["target_id"], :name => "index_events_on_target_id"
   add_index "events", ["target_type"], :name => "index_events_on_target_type"
+  add_index "events", ["user_id"], :name => "index_events_on_user_id"
 
   create_table "questions", :force => true do |t|
     t.integer  "user_id"

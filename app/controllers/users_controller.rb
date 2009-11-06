@@ -1,6 +1,11 @@
 class UsersController < ApplicationController
   before_filter :require_no_user, :only => [:new, :create]
   
+  def show
+    @user = User.find(params[:id])
+    @events = @user.events.latest
+  end
+
   def new
     @user = User.new
   end

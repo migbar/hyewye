@@ -8,7 +8,7 @@ Given /^the following questions and answers exist$/ do |events|
   end
 end
 
-Then /^I should see the following events$/ do |expected_table|
+Then /^I should see the following users and events$/ do |expected_table|
   actual_table = table(table_at('#stream').to_table)
   actual_table.map_column!('User') { |text|
     text.strip.match(/>(.*)</)[1]

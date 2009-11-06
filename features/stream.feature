@@ -13,7 +13,7 @@ Feature: Stream
       | question | bob     | q5   | 90    |
       | question | charlie | q6   | 9000  |
      When I go to the home page
-     Then I should see the following events
+     Then I should see the following users and events
       | User | Event |
       | adam | q1    |
       | bob  | q2    |
@@ -24,7 +24,7 @@ Feature: Stream
     Given a question "hps" exists with body: "Have plastic surgery?"
       And I am on the home page
      When I follow "Answer" for question "hps"
-     Then I should be on the answers page for question "Have plastic surgery?"
+     Then I should be at the answers page for question "hps"
   
   
   

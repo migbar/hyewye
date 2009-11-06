@@ -2,6 +2,7 @@ require File.dirname(__FILE__) + '/../spec_helper'
 
 describe Event do
   should_belong_to :target, :polymorphic => true
+  should_belong_to :user
   
   describe "named_scope" do
     describe "latest" do
@@ -19,9 +20,4 @@ describe Event do
     end
   end
   
-  it "delegates user to target" do
-    @user = Factory.build(:user)
-    @event = Factory.build(:event, :target => Factory.build(:answer, :user => @user))
-    @event.user.should == @user
-  end
 end

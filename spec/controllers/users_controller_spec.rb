@@ -24,7 +24,7 @@ describe UsersController do
   
   describe "handling POST create" do
     before(:each) do
-      User.stub!(:new).and_return(@user)
+      User.stub(:new).and_return(@user)
     end
     
     def post_with_valid_attributes(options={})
@@ -57,6 +57,37 @@ describe UsersController do
       response.should render_template(:new)
     end
 
+  end
+  
+  describe "handling GET show" do
+    
+    before(:each) do
+      User.stub(:find).and_return(@user)
+      @events = (1..3).map { mock_model(Event) }
+      @user.stub_chain(:events, :latest).and_return(@events)
+    end
+    
+    def do_get(options={})
+      get :show, {:id => 1}.merge(options)
+    end
+    
+    it "finds the specified user and assigns it for the view" do
+      User.should_receive(:find).with("42").and_return(@user)
+      do_get(:id => 42)
+      assigns[:user].should == @user
+    end
+    
+    it "renders the show template" do
+      do_get
+      response.should render_template(:show)
+    end
+    
+    it "finds the events for the user and assigns them for the view" do
+      @user.events.should_receive(:latest).and_return(@events)
+      do_get
+      assigns[:events].should == @events
+    end
+    
   end
   
 end

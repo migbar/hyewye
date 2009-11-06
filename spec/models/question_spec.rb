@@ -19,6 +19,7 @@ describe Question do
       }.should change(Event, :count).by(1)
       
       Event.first.target.should == @question
+      @question.event.user.should == @question.user
     end
   end
 end

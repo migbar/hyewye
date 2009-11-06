@@ -14,7 +14,7 @@ Feature: Listing answers
        | adam    | 3      | a3   | 3     |
        | charlie | 2      | a4   | 2     |
 
-     When I am on the answers page for question "Have plastic surgery?"
+     When I navigate to the answers page for question "hps"
      Then I should see the following answers
        | User    | Choice        | Answer |
        | adam    | I Have        | a1     |
@@ -24,7 +24,7 @@ Feature: Listing answers
 
   Scenario: Paginating answers for a question
     Given 20 answers exist for question "hps"
-     When I am on the answers page for question "Have plastic surgery?"
+     When I navigate to the answers page for question "hps"
      Then I should see "Answer-1"
       And I should see "Answer-15"
       But I should not see "Answer-16"

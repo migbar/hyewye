@@ -1,0 +1,11 @@
+- title(h "#{@user.login}'s Activity")
+
+%table#stream
+  %tr
+    %th Event
+    %th
+  
+  - @events.each do |event|
+    %tr{ :id => dom_id(event.target), :class => dom_class(event.target) }
+      %td= h event.target.body 
+      %td= link_to "answer", question_answers_path(question_for_event(event))

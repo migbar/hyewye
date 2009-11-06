@@ -1,4 +1,5 @@
 class Event < ActiveRecord::Base
+  belongs_to :user
   belongs_to :target, :polymorphic => true
   named_scope :latest, lambda {
     since = 1.hour.ago
@@ -8,5 +9,4 @@ class Event < ActiveRecord::Base
     }
   }
   
-  delegate :user, :to => :target
 end

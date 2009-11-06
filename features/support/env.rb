@@ -46,6 +46,7 @@ Webrat.configure do |config|
 end
 
 World(ActionView::Helpers::RecordIdentificationHelper)
+World(ActionView::Helpers::UrlHelper)
 
 After do |scenario|
   if scenario.failed?

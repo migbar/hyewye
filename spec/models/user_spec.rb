@@ -6,4 +6,5 @@ describe User do
                      :type => :string
   should_have_many :questions
   should_have_many :answers
+  should_have_many :events
 end
