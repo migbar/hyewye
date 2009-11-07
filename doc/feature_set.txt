@@ -9,6 +9,7 @@ user accounts
       - gender
       - age
       - email
+      - location
       - twitter id
       - facebook id
       - avatar

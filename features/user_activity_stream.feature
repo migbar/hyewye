@@ -30,3 +30,15 @@ Feature: User Activity Stream
       | q5    |
       | q6    |
  
+ 
+  # Scenario: Paginating events for a user
+  #   Given 20 answers exist for user "bob"
+  #    When I navigate to the model page for user "bob"
+  #    Then I should see "Answer-1"
+  #     And I should see "Answer-15"
+  #     But I should not see "Answer-16"
+  #    When I follow "2" within ".pagination"
+  #    Then I should see "Answer-16"
+  #     And I should see "Answer-20"
+  #     But I should not see "Answer-15"
+ 
