@@ -9,7 +9,7 @@ Given /^the following answers exist for #{capture_model}$/ do |capture, answers|
 end
 
 Then /^I should see the following answers$/ do |expected_table|
-  actual_table = table(table_at('#answers').to_table)
+  actual_table = table(table_at('#answers-list').to_table)
   actual_table.map_column!("User")  do |text|
     text.strip.match(/>(.*)</)[1]
   end

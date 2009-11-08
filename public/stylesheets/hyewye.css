@@ -1,0 +1,92 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+/*	font-size: 1.2em;*/
+	font-size: 1.1em;
+	line-height: 1.8em;
+	margin-bottom: 0.8em;
+	font-family: Helvetica, sans-serif;
+	background: url(/images/background_green.png) repeat-x top #788a52;
+}
+
+p, li {
+	font-size: 1.0em;
+	line-height: 1.3em;
+	margin-bottom: 0.8em;
+}
+
+.clear {
+	clear:both;
+}
+
+div#page-wrap {
+	width: 842px;
+	margin: 0 auto;
+
+	}
+
+	div#page-wrap div#banner {
+		height: 276px;
+		background: url(/images/header_background.jpg) no-repeat;
+	}
+
+	div#page-wrap div#container {
+		width: 817px;
+		background: white;
+		float: right;
+		}
+		div#page-wrap div#container div#left-col {
+			float: left;
+			width: 545px;
+			background: #eeeeee;
+			margin-left: 10px;
+			-webkit-border-radius:10px;
+			-moz-border-radius:10px;
+			border: 1px solid blue;
+			}
+			div#page-wrap div#container div#left-col div#stream, div#page-wrap div#container div#left-col table#answers-list {
+				padding: 10px;
+				border: 1px solid red;
+				text-align: center;
+				margin: 0 auto;
+			}
+			div#page-wrap div#container div#left-col div#question {
+				padding: 10px;
+				border: 1px solid black;
+			}			
+			div#page-wrap div#container div#left-col h2#question-body {
+				padding: 10px;
+				border: 1px solid black;
+			}
+			div#page-wrap div#container div#left-col .pagination {
+				text-align: center;
+			}
+			
+		div#page-wrap div#container div#right-col {
+			float: right;
+			width: 245px;
+			background: #eeee66;
+			text-align:center;
+			margin-right: 10px;
+			border-top: 10px solid orange;
+			}
+			div#page-wrap div#container div#right-col div#nav {
+				background: #eeeeee;
+				text-align:center;
+				margin-top: 5px;
+				-webkit-border-radius:10px;
+				-moz-border-radius:10px;
+				border-top: 1px solid green;
+			}
+			
+		
+	
+	div#page-wrap div#footer {
+		padding: 20px;
+		color: white;
+		text-align: center;
+		background: #243647;
+	}
