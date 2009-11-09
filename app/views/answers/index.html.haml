@@ -1,29 +1,52 @@
 #left-col
   #question
-    = link_to @question.user.login, user_path(@question.user)
-    Wanted to know:
+    #user
+      = link_to(image_tag('/images/avatar_3.jpg'), user_path(@question.user))
+      = link_to @question.user.login, user_path(@question.user)
+      Wanted to know:
     %h2#question-body
-      Have you ever / would you ever
+      Have You Ever / Would You Ever
       = h @question.body
+    - if !current_user
+      #nav
+        = link_to "Let me Answer!", new_user_session_path(:return_to => request.request_uri)
+    .clear
 
-  %table#answers-list
-    %tr
-      %th User
-      %th Choice
-      %th Answer
-
+  / %table#answers-list
+  /   %tr
+  /     %th User
+  /     %th Choice
+  /     %th Answer
+  / 
+  /   - @answers.each do |answer|
+  /     %tr{ :id => dom_id(answer) }
+  /       %td= link_to answer.user.login, user_path(answer.user)
+  /       %td= ["I Have", "I Would", "I Would Never"][answer.choice-1]
+  /       %td= h answer.body 
+  #answer-list-heading    
+    What other people said:
+  %ul{:id => "answers-list"}
     - @answers.each do |answer|
-      %tr{ :id => dom_id(answer) }
-        %td= link_to answer.user.login, user_path(answer.user)
-        %td= ["I Have", "I Would", "I Would Never"][answer.choice-1]
-        %td= h answer.body 
+      %li{:id => dom_id(answer), :class =>"answer_in_list"}
+        #user
+          = link_to(image_tag('/images/avatar_3.jpg'), user_path(answer.user))
+        #answer
+          #answer-body
+            = link_to answer.user.login, user_path(answer.user)
+            said:
+            = ["I Have", "I Would", "I Would Never"][answer.choice-1]
+            ,
+            = h answer.body
+        .clear
 
   = will_paginate @answers
   
 #right-col  
   - if current_user
     = render :partial => "form"
-  - else
-    #nav
-    = link_to "Log in to answer this question", new_user_session_path(:return_to => request.request_uri)
+  / - else
+  /   #nav
+  /   = link_to "Log in to answer this question", new_user_session_path(:return_to => request.request_uri)
 .clear
+
+

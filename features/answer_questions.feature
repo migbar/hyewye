@@ -27,7 +27,7 @@ Feature: Answer questions
     Given a user exists with login: "miguel", password: "secret"
       And I navigate to the answers page for question "hps"
      Then I should not see "My answer"
-     When I follow "Log in to answer this question"
+     When I follow "Let me Answer!"
       And I fill in "login" with "miguel"
       And I fill in "password" with "secret"
       And I press "Log in"  
