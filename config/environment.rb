@@ -12,7 +12,7 @@ Rails::Initializer.run do |config|
   # -- all .rb files in that directory are automatically loaded.
 
   # Add additional load paths for your own custom dirs
-  # config.load_paths += %W( #{RAILS_ROOT}/extras )
+  config.load_paths << "app/presenters"
 
   # Specify gems that this application depends on and have them installed with rake gems:install
   # config.gem "bj"
@@ -22,6 +22,8 @@ Rails::Initializer.run do |config|
   config.gem "haml", :version => '2.2.9'
   config.gem "authlogic", :version => '2.1.2'
   config.gem "will_paginate", :version => '2.3.11'
+  config.gem "active_presenter", :version => '1.2.0'
+  
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named
   # config.plugins = [ :exception_notification, :ssl_requirement, :all ]

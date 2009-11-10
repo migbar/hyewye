@@ -19,3 +19,11 @@ end
 
 Factory.define(:event) do |f|
 end
+
+Factory.define(:question_event, :parent => :event) do |f|
+  f.association(:target, :factory => :question)
+end
+
+Factory.define(:answer_event, :parent => :event) do |f|
+  f.association(:target, :factory => :answer)
+end

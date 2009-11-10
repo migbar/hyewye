@@ -21,4 +21,17 @@ describe EventsHelper do
       helper.question_for_event(@event).should == @question
     end
   end
+  
+  describe "present_events" do
+    it "wraps each event in a presenter" do
+      @events = (1..4).map do 
+        mock_model(Event)
+      end
+      @presenters = helper.present_events(@events)
+      @presenters.each_with_index do |presenter, index|
+        presenter.should be_an_instance_of(EventPresenter)
+        presenter.event.should == @events[index]
+      end
+    end
+  end
 end

@@ -32,3 +32,5 @@ config.gem "rspec-rails",      :version => '1.2.9', :lib => false
 config.gem "remarkable_rails", :version => '3.1.10',:lib => false
 config.gem 'factory_girl', :version => '>=1.2.3'
 
+require 'ruby-debug'
+
