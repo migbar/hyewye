@@ -23,6 +23,7 @@ config.gem 'cucumber',    :lib => false,        :version => '>=0.4.2'
 config.gem 'webrat',      :lib => false,        :version => '>=0.5.0' 
 config.gem 'rspec',       :lib => false,        :version => '>=1.2.8' 
 config.gem 'rspec-rails', :lib => false,        :version => '>=1.2.7.1'
+config.gem 'nokogiri',    :lib => false,        :version => '>=1.4.0'
 config.gem 'factory_girl', :version => '>=1.2.3'
 config.gem 'pickle',      :lib => 'pickle/world', :version => '>=0.1.19'
 

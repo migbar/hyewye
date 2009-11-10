@@ -54,7 +54,7 @@ div#page-wrap {
 			div#page-wrap div#container div#left-col div#stream, div#page-wrap div#container div#left-col ul#answers-list {
 /*					padding: 10px;*/
 /*					border: 1px solid red;*/
-					text-align: center;
+/*					text-align: center;*/
 					margin: 0 auto;
 					list-style:none;
 				}

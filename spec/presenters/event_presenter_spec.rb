@@ -53,6 +53,36 @@ describe EventPresenter do
     end  
   end
   
+  describe "#choice" do
+    it "returns the choice of the answer if the event is an answer event" do
+      # @choice = 3
+      # @presenter = EventPresenter.new(:event => Factory.build(:event, :target => Factory.build(:answer, :choice => @choice)))
+      # @presenter.choice.should == @choice
+      # -- OR --
+      @event = Factory.build(:answer_event)
+      @choice = @event.target.choice 
+      @presenter = EventPresenter.new(:event => @event)
+      @presenter.choice.should == @choice
+    end
+    
+    #(above) check choice results
+    #--OR--
+    #(below) just make sure it delegates 
+    
+    it "delegates #choice to the event's target if it's an answer event" do
+      @presenter = EventPresenter.new(:event => Factory.build(:answer_event))
+      @presenter.target.should_receive(:choice)
+      @presenter.choice
+    end
+    
+    it "raises error if the event is a question" do
+      @presenter = EventPresenter.new(:event => Factory.build(:question_event))
+      lambda {
+        @presenter.choice
+      }.should raise_error(NoMethodError)
+    end
+  end
+  
   describe "#dom_id" do
     it "returns the right dom id for the answer" do
       @presenter = EventPresenter.new(:event => Factory.build(:answer_event))

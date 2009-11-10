@@ -13,7 +13,7 @@ Feature: Answer questions
       And I fill in "answer_body" with "and I look great!"
       And I press "answer!"
      Then I should be at the answers page for question "hps"
-      And I should see "Thanks for answering!"
+      And I should see "Thanks for answering!" 
 
   Scenario: Answering a question unsuccessfully 
     Given I am logged in
@@ -34,6 +34,9 @@ Feature: Answer questions
      Then I should be at the answers page for question "hps"
       And I should see "My answer"
       But I should not see "Log in to answer this question"
+            
+      
+      
 
 
 

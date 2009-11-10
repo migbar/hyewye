@@ -9,7 +9,7 @@ class EventPresenter < ActivePresenter::Base
 
   delegate :target, :user, :to => :event
   delegate :login, :to => :user
-  delegate :body, :to => :target
+  delegate :body, :choice, :to => :target
   
   def dom_id
     super(target)

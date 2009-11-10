@@ -8,19 +8,19 @@ Feature: Listing answers
   
   Scenario: Seeing the answers for a question
     Given the following answers exist for question "hps"
-       | user    | choice | body | since |
-       | adam    | 1      | a1   | 1     |
-       | bob     | 2      | a2   | 5     |
-       | adam    | 3      | a3   | 3     |
-       | charlie | 2      | a4   | 2     |
+       | user    | choice | body       | since |
+       | adam    | 1      | Answer-1   | 1     |
+       | bob     | 2      | Answer-2   | 5     |
+       | adam    | 3      | Answer-3   | 3     |
+       | charlie | 2      | Answer-4   | 2     |
 
      When I navigate to the answers page for question "hps"
      Then I should see the following answers
-       | User    | Choice        | Answer |
-       | adam    | I Have        | a1     |
-       | charlie | I Would       | a4     |
-       | adam    | I Would Never | a3     |
-       | bob     | I Would       | a2     |
+       | User    | Choice        | Answer       |
+       | adam    | I Have        | Answer-1     |
+       | charlie | I Would       | Answer-4     |
+       | adam    | I Would Never | Answer-3     |
+       | bob     | I Would       | Answer-2     |
 
   Scenario: Paginating answers for a question
     Given 20 answers exist for question "hps"
