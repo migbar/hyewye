@@ -1,20 +1,24 @@
 - title "Homepage"
-%p
-  = link_to "ask a question", new_question_path
+#right-col
+  #nav
+    = link_to "ask a question", new_question_path
 
-%table#stream
-  %tr
-    %th User
-    %th Event
-    %th
-    %th
+#left-col
+  %table#stream
+    %tr
+      %th User
+      %th Event
+      %th
+      %th
 
-  - present_events(@events).each do |event|
-    %tr{ :id => event.dom_id, :class => event.dom_class }
-      %td= event.link_to_user
-      %td= h event.body 
-      %td<
-        - event.when_answer do
-          = event.choice
-      %td= event.link_to_question("answer")
+    - present_events(@events).each do |event|
+      %tr{ :id => event.dom_id, :class => event.dom_class }
+        %td= event.link_to_user
+        %td= h event.body 
+        %td<
+          - event.when_answer do
+            = event.choice
+        %td= event.link_to_question("answer")
+.clear
+
       
