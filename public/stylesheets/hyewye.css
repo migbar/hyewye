@@ -51,19 +51,27 @@ div#page-wrap {
 			-moz-border-radius:10px;
 /*			border: 1px solid blue;*/
 			}
-			div#page-wrap div#container div#left-col div#stream, div#page-wrap div#container div#left-col ul#answers-list {
+			div#page-wrap div#container div#left-col div#stream, div#page-wrap div#container div#left-col ul#answers-list, ul#events-list {
 /*					padding: 10px;*/
 /*					border: 1px solid red;*/
 /*					text-align: center;*/
 					margin: 0 auto;
 					list-style:none;
 				}
-				div#page-wrap div#container div#left-col div#answer-list-heading{
+				div#page-wrap div#container div#left-col div#answer-list-heading div#event-list-heading{
 					color: #666666;
 					padding: 8px;
 				}
 				
 				div#page-wrap div#container div#left-col ul#answers-list li{
+					background: #f8f8f8;
+					padding: 8px;
+					border-bottom: 1px dotted #dddddd;
+					color: #444444;
+					-webkit-border-radius:8px;
+					-moz-border-radius:8px;
+				}
+				div#page-wrap div#container div#left-col ul#events-list li{
 					background: #f8f8f8;
 					padding: 8px;
 					border-bottom: 1px dotted #dddddd;
@@ -107,14 +115,14 @@ div#page-wrap {
 					-webkit-border-radius:4px;
 					-moz-border-radius:4px;
 				}
-				div#page-wrap div#container div#left-col div#question div#nav{
+				div#nav{
 					background: #e77307;
 					float: right;
 					padding: 6px;	
 					-webkit-border-radius:4px;
 					-moz-border-radius:4px;				
 				}
-				div#page-wrap div#container div#left-col div#question div#nav a{
+				div#nav a{
 					color: white;
 					text-decoration: none;					
 				}
@@ -134,14 +142,15 @@ div#page-wrap {
 /*			background: #eeee66;*/
 			text-align:center;
 			margin-right: 10px;
-/*			border-top: 10px solid orange;*/
+			border-top: 10px solid orange;
 			}
 			div#page-wrap div#container div#right-col div#nav {
 /*				background: #eeeeee;*/
 				text-align:center;
-				margin-top: 5px;
-				-webkit-border-radius:10px;
-				-moz-border-radius:10px;
+				margin-top: 15px;
+				margin-left: 10px;
+				float: left;
+
 /*				border-top: 1px solid green;*/
 			}
 			

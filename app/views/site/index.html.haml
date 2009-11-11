@@ -1,24 +1,28 @@
-- title "Homepage"
+/ - title "Recent posts"
+
+#left-col
+  #event-list-heading
+    Recent Posts:
+  %ul{:id => "events-list"}
+    - present_events(@events).each do |event|
+      %li{:id => event.dom_id, :class => event.dom_class}
+        #user
+          / = link_to(image_tag('/images/avatar_3.jpg'), user_path(event.user))
+        #event
+          #event-body
+            = event.link_to_user
+            said:
+            = h event.body 
+            - event.when_answer do
+              = event.choice
+            = event.link_to_question("Answer")
+        .clear
+
+/  = will_paginate(@events)
+
 #right-col
   #nav
     = link_to "ask a question", new_question_path
-
-#left-col
-  %table#stream
-    %tr
-      %th User
-      %th Event
-      %th
-      %th
-
-    - present_events(@events).each do |event|
-      %tr{ :id => event.dom_id, :class => event.dom_class }
-        %td= event.link_to_user
-        %td= h event.body 
-        %td<
-          - event.when_answer do
-            = event.choice
-        %td= event.link_to_question("answer")
 .clear
 
-      
+

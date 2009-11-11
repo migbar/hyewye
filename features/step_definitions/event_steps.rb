@@ -1,3 +1,5 @@
+BODY_REGEX = /[a-zAZ]+-\d+/
+
 Given /^the following questions and answers exist$/ do |events|
   events.hashes.each do |hash|
     factory = hash.delete("model")
@@ -9,10 +11,13 @@ Given /^the following questions and answers exist$/ do |events|
 end
 
 Then /^I should see the following users and events$/ do |expected_table|
-  actual_table = table(table_at('#stream').to_table)
-  actual_table.map_column!('User') { |text|
-    text.strip.match(/>(.*)</)[1]
-  }
-  # ... more columns
-  expected_table.diff!(actual_table)
+  doc = Nokogiri::HTML(response.body) 
+  hand_made = [%w{user body}]  
+  doc.css('#events-list #event #event-body').each do |event|
+    user = event.css('a').first.content
+    body = event.content[BODY_REGEX, 0]
+    hand_made = hand_made + [[user, body]]
+  end
+  my_table = Cucumber::Ast::Table.new(hand_made)
+  expected_table.diff!(my_table)
 end

@@ -1,8 +1,8 @@
-require 'rubygems'
-require 'cucumber'
-require 'cucumber/ast/table'
-require 'nokogiri'
-require 'open-uri'
+# require 'rubygems'
+# require 'cucumber'
+# require 'cucumber/ast/table'
+# require 'nokogiri'
+# require 'open-uri'
 
 CHOICE_REGEX = /I (Have|Would Never|Would)/
 BODY_REGEX = /[a-zAZ]+-\d+/
