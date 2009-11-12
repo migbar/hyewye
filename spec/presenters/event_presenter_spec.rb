@@ -55,31 +55,31 @@ describe EventPresenter do
   
   describe "#choice" do
     it "returns the choice of the answer if the event is an answer event" do
-      # @choice = 3
-      # @presenter = EventPresenter.new(:event => Factory.build(:event, :target => Factory.build(:answer, :choice => @choice)))
-      # @presenter.choice.should == @choice
-      # -- OR --
       @event = Factory.build(:answer_event)
-      @choice = @event.target.choice 
+      @answer = @event.target
       @presenter = EventPresenter.new(:event => @event)
-      @presenter.choice.should == @choice
+      
+      ["I Have", "I Would", "I Would Never"].each_with_index do |value, index|
+        @answer.choice = index + 1
+        @presenter.choice.should == value
+      end
     end
     
-    #(above) check choice results
-    #--OR--
-    #(below) just make sure it delegates 
-    
-    it "delegates #choice to the event's target if it's an answer event" do
-      @presenter = EventPresenter.new(:event => Factory.build(:answer_event))
-      @presenter.target.should_receive(:choice)
-      @presenter.choice
-    end
-    
-    it "raises error if the event is a question" do
+    it "returns nil if the event is a question" do
       @presenter = EventPresenter.new(:event => Factory.build(:question_event))
-      lambda {
-        @presenter.choice
-      }.should raise_error(NoMethodError)
+      @presenter.choice.should be_nil
+    end
+  end
+  
+  describe "#answer?" do
+    it "returns true if the event is an answer event" do
+      @presenter = EventPresenter.new(:event => Factory.build(:answer_event))
+      @presenter.should be_answer
+    end
+    
+    it "returns false if the event is not an answer event" do
+      @presenter = EventPresenter.new(:event => Factory.build(:question_event))
+      @presenter.should_not be_answer
     end
   end
   

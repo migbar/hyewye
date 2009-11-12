@@ -1,6 +1,6 @@
 class Answer < ActiveRecord::Base
   belongs_to :user
-  belongs_to :question
+  belongs_to :question, :counter_cache => true
   validates_presence_of :body
   validates_length_of :body, :maximum => 140
   validates_inclusion_of :choice, :in => 1..3

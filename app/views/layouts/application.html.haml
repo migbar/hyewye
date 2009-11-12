@@ -9,14 +9,16 @@
   %body
     #page-wrap
       #banner
-        #header
+        #logo
+        #banner-body.clearfix
           = render :partial => "shared/header"
       #container
         #main-content
           - if show_title?
             %h2= h yield(:title)
           = render :partial => "shared/flash", :object => flash
-          = yield
+          .clearfix
+            = yield
         #footer
           = render :partial => "shared/footer"
       

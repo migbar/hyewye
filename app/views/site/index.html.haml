@@ -7,7 +7,7 @@
     - present_events(@events).each do |event|
       %li{:id => event.dom_id, :class => event.dom_class}
         #user
-          / = link_to(image_tag('/images/avatar_3.jpg'), user_path(event.user))
+          = link_to(image_tag('/images/avatar_3.jpg', :width => 40), user_path(event.user))
         #event
           #event-body
             = event.link_to_user
@@ -16,13 +16,9 @@
             - event.when_answer do
               = event.choice
             = event.link_to_question("Answer")
-        .clear
-
-/  = will_paginate(@events)
-
 #right-col
   #nav
-    = link_to "ask a question", new_question_path
+    = link_to "Ask a question", new_question_path
 .clear
 
 

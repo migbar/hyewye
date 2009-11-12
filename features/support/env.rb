@@ -53,3 +53,5 @@ After do |scenario|
     # save_and_open_page
   end
 end
+
+require 'features/support/regex_helpers'

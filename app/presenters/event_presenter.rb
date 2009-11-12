@@ -9,7 +9,7 @@ class EventPresenter < ActivePresenter::Base
 
   delegate :target, :user, :to => :event
   delegate :login, :to => :user
-  delegate :body, :choice, :to => :target
+  delegate :body, :to => :target
   
   def dom_id
     super(target)
@@ -20,7 +20,7 @@ class EventPresenter < ActivePresenter::Base
   end
   
   def when_answer
-    yield if Answer === target
+    yield if answer?
   end
   
   def link_to_user
@@ -33,6 +33,14 @@ class EventPresenter < ActivePresenter::Base
   
   def question
     event.target_type == "Question" ? event.target : event.target.question
+  end
+  
+  def choice
+    ["I Have", "I Would", "I Would Never"][target.choice-1] if answer?
+  end
+  
+  def answer?
+    Answer === target
   end
   
   def method_missing(sym, *args, &block)

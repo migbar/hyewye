@@ -4,7 +4,6 @@
 }
 
 body {
-/*	font-size: 1.2em;*/
 	font-size: 1.1em;
 	line-height: 1.8em;
 	margin-bottom: 0.8em;
@@ -17,25 +16,146 @@ p, li {
 	line-height: 1.3em;
 	margin-bottom: 0.8em;
 }
+
 a {
 	color: #e77307;
 	text-decoration: none;
 }
 
+
 .clear {
 	clear:both;
 }
 
+.clearfix {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    display: block !important;
+}
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+
 div#page-wrap {
-	width: 842px;
-	margin: 0 auto;
-
+		width: 842px;
+		margin: 0 auto;
 	}
-
 	div#page-wrap div#banner {
-		height: 276px;
-		background: url(/images/header_background.jpg) no-repeat;
-	}
+			height: 276px;
+		}
+		div#page-wrap div#banner div#logo {
+			height: 276px;
+			width: 334px;
+			background: url(/images/header_background_left.jpg) no-repeat;
+			float:left;
+			}
+			div#page-wrap div#banner div#banner-body {
+				height: 276px;
+				width: 508px;
+				background: url(/images/header_background_right.jpg) no-repeat;
+				float:right;
+				}
+				div#page-wrap div#banner div#banner-body div#login-bar{
+/*					float:right;
+*/					
+					padding-top: 20px;
+					padding-right: 15px;
+					
+					}
+					div#page-wrap div#banner div#banner-body div#login-bar div#login{
+						font-size: 0.7em;
+						color: white;
+						float:right;
+						padding-top:7px;
+						padding-right: 10px;
+					}
+					div#page-wrap div#banner div#banner-body div#login-bar div#nav{
+						font-size: 0.9em;
+						float:right;
+						padding-top: 0px;
+						padding-right: 15px;
+						padding-bottom: 0px;
+						padding-left: 15px;
+						
+					}
+			div#page-wrap div#banner div#banner-body div#banner-slogan{
+				color:#e77307;
+				float:left;
+/*				padding-top:80px;*/
+				font-size: 1.8em;
+				line-height: 1.2em;
+				margin-bottom: 0.0em;
+				margin-top:-15px;
+/*				font-weight:bold;*/
+				
+			}
+			div#page-wrap div#banner div#banner-body div#banner-container-inner{
+				color:#cccccc;
+			}
+			div#page-wrap div#banner div#banner-body div#banner-container-inner-left{
+
+				float:left;
+				padding-left:10px;
+				font-size: 0.8em;
+				line-height: 1.0em;
+				margin-bottom: 0.0em;
+				
+			}
+			div#page-wrap div#banner div#banner-body div#banner-container-inner-right{
+				width:232px;
+				float:right;
+			}
+			div#banner-container-inner-right-text{
+				text-align:right;
+				margin-right:23px;
+/*				border:1px solid yellow;*/
+			}
+			
+			div#page-wrap div#banner div#banner-body div#banner-container-inner-right-button {
+				text-align:right;
+				margin-right:20px;
+				background: url(/images/button_signup.png) no-repeat;
+				width:114px;
+				height:45px;
+/*				border:5px solid white;*/
+			}
+			
+			div#page-wrap div#banner div#banner-body div#banner-container-inner-right-button a {
+				color:#243647;
+				display:inline;
+			}
+			
+			div#page-wrap div#banner div#banner-body div#banner-container-inner-right-button a img{
+/*				background-position:center;*/
+/*				color:#ffffff;
+				padding-left:25%;
+				float:right;
+				margin: 0 auto;
+				background: url(/images/button_signup.png) no-repeat;
+				width:114px;
+				height:45px;
+				margin-left:25%;
+				border:5px solid orange;
+*/			}
+			
+			div#page-wrap div#banner div#banner-body div#banner-footer{
+					text-align:left;
+					color: #cccccc;
+					font-size: 0.7em;
+					line-height: 1.2em;
+					margin-left: -120px;
+					margin-right:40px;
+					margin-top:25px;
+/*					font-weight: bold;*/
+			}
+		
 
 	div#page-wrap div#container {
 		width: 817px;
@@ -45,22 +165,19 @@ div#page-wrap {
 		div#page-wrap div#container div#left-col {
 			float: left;
 			width: 545px;
-/*			background: #eeeeee;*/
 			margin-left: 10px;
 			-webkit-border-radius:10px;
 			-moz-border-radius:10px;
-/*			border: 1px solid blue;*/
 			}
 			div#page-wrap div#container div#left-col div#stream, div#page-wrap div#container div#left-col ul#answers-list, ul#events-list {
-/*					padding: 10px;*/
-/*					border: 1px solid red;*/
-/*					text-align: center;*/
 					margin: 0 auto;
 					list-style:none;
 				}
-				div#page-wrap div#container div#left-col div#answer-list-heading div#event-list-heading{
-					color: #666666;
-					padding: 8px;
+				div#page-wrap div#container div#left-col div#answer-list-heading, div#event-list-heading{
+					margin-top: 10px;
+					color: #aaaaaa;
+					padding: 1px;
+					border-bottom: 4px solid #dddddd;
 				}
 				
 				div#page-wrap div#container div#left-col ul#answers-list li{
@@ -80,7 +197,6 @@ div#page-wrap {
 					-moz-border-radius:8px;
 				}
 				div#page-wrap div#container div#left-col ul#answers-list div#user {
-/*					border: 1px solid #666666;*/
 					float: left;
 					}
 					div#page-wrap div#container div#left-col ul#answers-list div#user img{
@@ -90,16 +206,11 @@ div#page-wrap {
 						-moz-border-radius:4px;
 						}
 					
-
 				div#page-wrap div#container div#left-col ul#answers-list div#answer {
-/*					border: 1px solid orange;*/
-/*					float: left;*/
 					margin-left: 58px;
 					}
 					div#page-wrap div#container div#left-col ul#answers-list div#answer div#answer-body {
-/*						border: 1px solid green;*/
 						float: left;
-/*						margin: 0 auto;*/
 						}
 
 			div#page-wrap div#container div#left-col div#question {
@@ -139,23 +250,17 @@ div#page-wrap {
 		div#page-wrap div#container div#right-col {
 			float: right;
 			width: 245px;
-/*			background: #eeee66;*/
-			text-align:center;
+/*			text-align:center;*/
 			margin-right: 10px;
-			border-top: 10px solid orange;
+/*			border-top: 10px solid orange;*/
 			}
 			div#page-wrap div#container div#right-col div#nav {
-/*				background: #eeeeee;*/
-				text-align:center;
+/*				text-align:center;*/
 				margin-top: 15px;
 				margin-left: 10px;
-				float: left;
-
-/*				border-top: 1px solid green;*/
+/*				float: right;*/
 			}
 			
-		
-	
 	div#page-wrap div#footer {
 		padding: 20px;
 		color: white;

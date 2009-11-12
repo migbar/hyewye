@@ -1,5 +1,3 @@
-BODY_REGEX = /[a-zAZ]+-\d+/
-
 Given /^the following questions and answers exist$/ do |events|
   events.hashes.each do |hash|
     factory = hash.delete("model")
@@ -15,8 +13,8 @@ Then /^I should see the following users and events$/ do |expected_table|
   hand_made = [%w{user body}]  
   doc.css('#events-list #event #event-body').each do |event|
     user = event.css('a').first.content
-    body = event.content[BODY_REGEX, 0]
-    hand_made = hand_made + [[user, body]]
+    body = event.content[body_regex, 0]
+    hand_made << [user, body]
   end
   my_table = Cucumber::Ast::Table.new(hand_made)
   expected_table.diff!(my_table)

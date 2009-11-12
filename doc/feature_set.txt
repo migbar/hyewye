@@ -40,7 +40,12 @@ questions
 	delete (until they are answered)
   - questions have tags (foursquare)
   - each question has stats
-
+  
+  235 answered
+    9% have
+    17% would
+    74% would never
+  
 answers
 	belongs to user
 	belongs to question

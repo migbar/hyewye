@@ -1,5 +1,5 @@
 #left-col
-  #question
+  #question.clearfix
     #user
       = link_to(image_tag('/images/avatar_3.jpg'), user_path(@question.user))
       = link_to @question.user.login, user_path(@question.user)
@@ -7,16 +7,22 @@
     %h2#question-body
       Have You Ever / Would You Ever
       = h @question.body
+      
+    #stats
+      - unless @question.answers.size == 0
+        .i_have= "#{@question.answers.count(:all, :conditions => "choice = 1") * 100 / @question.answers.size}% have"
+        .i_would= "#{@question.answers.count(:all, :conditions => "choice = 2") * 100 / @question.answers.size}% would"
+        .i_would_never= "#{@question.answers.count(:all, :conditions => "choice = 3") * 100 / @question.answers.size}% would never"
+      
     - if !current_user
       #nav
         = link_to "Let me Answer!", new_user_session_path(:return_to => request.request_uri)
-    .clear
 
   #answer-list-heading    
     What other people said:
   %ul{:id => "answers-list"}
     - @answers.each do |answer|
-      %li{:id => dom_id(answer), :class =>"answer_in_list"}
+      %li.clearfix{:id => dom_id(answer), :class =>"answer_in_list"}
         #user
           = link_to(image_tag('/images/avatar_3.jpg'), user_path(answer.user))
         #answer
@@ -26,13 +32,11 @@
             = ["I Have", "I Would", "I Would Never"][answer.choice-1]
             ,
             = h answer.body
-        .clear
 
   = will_paginate @answers
   
 #right-col  
   - if current_user
     = render :partial => "form"
-.clear
 
 

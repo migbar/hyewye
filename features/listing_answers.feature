@@ -32,3 +32,13 @@ Feature: Listing answers
      Then I should see "Answer-16"
       And I should see "Answer-20"
       But I should not see "Answer-15"
+
+  Scenario: title
+    Given 2 answers exist with question: question "hps", choice: "1"
+      And 3 answers exist with question: question "hps", choice: "2"
+      And 5 answers exist with question: question "hps", choice: "3"
+     When I navigate to the answers page for question "hps"
+     Then I should see "20%" within "#stats .i_have"
+      And I should see "30%" within "#stats .i_would"
+      And I should see "50%" within "#stats .i_would_never"
+   
