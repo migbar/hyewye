@@ -27,6 +27,20 @@ describe Answer do
         @answers.should == @expected_answers
       end
     end
+    
+    Answer.choices.keys.each do |choice|
+      describe choice do
+        it "fetches the answers having choice :#{choice}" do
+          @expected_answers = (1..4).map do |value|
+            Factory.create(:answer, :choice => Answer.choices[choice])
+          end
+          other_options = Answer.choices.values - [Answer.choices[choice]]
+          Factory.create(:answer, :choice => other_options.first)
+          Factory.create(:answer, :choice => other_options.last)
+          Answer.send(choice).should == @expected_answers
+        end
+      end
+    end
   end
   
   describe "creating associated event" do 
@@ -43,4 +57,19 @@ describe Answer do
       @answer.event.user.should == @answer.user
     end
   end
+  
+  it "#to_s returns the body of the answer" do
+    answer = Answer.new(:body => "foo")
+    answer.to_s.should == "foo"
+  end
+  
+  it "#choice_name returns the choice name for answer's choice" do
+    @answer = Answer.new
+    
+    ["I Have", "I Would", "I Would Never"].each_with_index do |value, index|
+      @answer.choice = index + 1
+      @answer.choice_name.should == value
+    end
+  end
+  
 end

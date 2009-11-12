@@ -36,7 +36,7 @@ class EventPresenter < ActivePresenter::Base
   end
   
   def choice
-    ["I Have", "I Would", "I Would Never"][target.choice-1] if answer?
+    target.choice_name if answer?
   end
   
   def answer?

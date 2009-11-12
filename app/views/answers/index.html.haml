@@ -2,17 +2,17 @@
   #question.clearfix
     #user
       = link_to(image_tag('/images/avatar_3.jpg'), user_path(@question.user))
-      = link_to @question.user.login, user_path(@question.user)
+      = link_to @question.user, user_path(@question.user)
       Wanted to know:
     %h2#question-body
       Have You Ever / Would You Ever
-      = h @question.body
+      = h @question
       
     #stats
       - unless @question.answers.size == 0
-        .i_have= "#{@question.answers.count(:all, :conditions => "choice = 1") * 100 / @question.answers.size}% have"
-        .i_would= "#{@question.answers.count(:all, :conditions => "choice = 2") * 100 / @question.answers.size}% would"
-        .i_would_never= "#{@question.answers.count(:all, :conditions => "choice = 3") * 100 / @question.answers.size}% would never"
+        .i_have= "#{@question.i_have_percent}% have"
+        .i_would= "#{@question.i_would_percent}% would"
+        .i_would_never= "#{@question.i_would_never_percent}% would never"
       
     - if !current_user
       #nav
@@ -27,11 +27,11 @@
           = link_to(image_tag('/images/avatar_3.jpg'), user_path(answer.user))
         #answer
           #answer-body
-            = link_to answer.user.login, user_path(answer.user)
+            = link_to answer.user, user_path(answer.user)
             said:
-            = ["I Have", "I Would", "I Would Never"][answer.choice-1]
+            = answer.choice_name
             ,
-            = h answer.body
+            = h answer
 
   = will_paginate @answers
   

@@ -122,6 +122,7 @@ div#page-wrap {
 				text-align:right;
 				margin-right:20px;
 				background: url(/images/button_signup.png) no-repeat;
+				background-position:center;
 				width:114px;
 				height:45px;
 /*				border:5px solid white;*/

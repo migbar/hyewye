@@ -59,10 +59,8 @@ describe EventPresenter do
       @answer = @event.target
       @presenter = EventPresenter.new(:event => @event)
       
-      ["I Have", "I Would", "I Would Never"].each_with_index do |value, index|
-        @answer.choice = index + 1
-        @presenter.choice.should == value
-      end
+      @answer.should_receive(:choice_name).and_return("the name of the choice")
+      @presenter.choice.should == "the name of the choice"
     end
     
     it "returns nil if the event is a question" do
