@@ -42,34 +42,4 @@ describe Answer do
       end
     end
   end
-  
-  describe "creating associated event" do 
-    before(:each) do
-      Event.delete_all
-    end
-    
-    it "creates an associated event with user set to answer's user when it is created successfully" do
-      lambda {
-        @answer = Factory.create(:answer, :question => nil)
-      }.should change(Event, :count).by(1)
-      
-      Event.first.target.should == @answer
-      @answer.event.user.should == @answer.user
-    end
-  end
-  
-  it "#to_s returns the body of the answer" do
-    answer = Answer.new(:body => "foo")
-    answer.to_s.should == "foo"
-  end
-  
-  it "#choice_name returns the choice name for answer's choice" do
-    @answer = Answer.new
-    
-    ["I Have", "I Would", "I Would Never"].each_with_index do |value, index|
-      @answer.choice = index + 1
-      @answer.choice_name.should == value
-    end
-  end
-  
 end

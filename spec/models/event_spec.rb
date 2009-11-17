@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe Event do
-  should_belong_to :target, :polymorphic => true
+  should_belong_to :subject, :polymorphic => true
   should_belong_to :user
   
   describe "named_scope" do
@@ -20,4 +20,15 @@ describe Event do
     end
   end
   
+  it "does not double wrap" do
+    @question = Question.create(:body => 'foo') # Factory.create(:answer)
+    @question.event.subject.should == @question
+    
+    @answer = Answer.create(:question => @question, :body => 'bar', :choice => 1)
+    @answer.event.subject.should == @answer
+    
+    event = Factory.create(:event, :subject => @answer)
+    event.subject.should_not == event
+    event.subject.should == @answer
+  end
 end

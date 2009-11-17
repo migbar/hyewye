@@ -7,16 +7,16 @@ class EventPresenter < ActivePresenter::Base
   presents :event
   attr_accessor :controller
 
-  delegate :target, :user, :to => :event
+  delegate :subject, :user, :to => :event
   delegate :login, :to => :user
-  delegate :body, :to => :target
+  delegate :body, :to => :subject
   
   def dom_id
-    super(target)
+    super(subject)
   end
   
   def dom_class
-    super(target)
+    super(subject)
   end
   
   def when_answer
@@ -32,15 +32,15 @@ class EventPresenter < ActivePresenter::Base
   end
   
   def question
-    event.target_type == "Question" ? event.target : event.target.question
+    event.subject_type == "Question" ? event.subject : event.subject.question
   end
   
   def choice
-    target.choice_name if answer?
+    subject.choice_name if answer?
   end
   
   def answer?
-    Answer === target
+    Answer === subject
   end
   
   def method_missing(sym, *args, &block)

@@ -1,5 +1,20 @@
+# == Schema Information
+# Schema version: 20091111111409
+#
+# Table name: answers
+#
+#  id          :integer(4)      not null, primary key
+#  user_id     :integer(4)
+#  question_id :integer(4)
+#  choice      :integer(4)
+#  body        :string(255)
+#  created_at  :datetime
+#  updated_at  :datetime
+#
+
 class Answer < ActiveRecord::Base
   include Behaviours::CreateEvent
+  after_create :notify_question
   
   CHOICES = {
     :i_have        => 1,
@@ -15,7 +30,7 @@ class Answer < ActiveRecord::Base
   
   belongs_to :user
   belongs_to :question, :counter_cache => true
-  has_one :event, :as => :target
+  has_one :event, :as => :subject
   
   validates_presence_of :body
   validates_length_of :body, :maximum => 140
@@ -34,5 +49,10 @@ class Answer < ActiveRecord::Base
   def choice_name
     ["I Have", "I Would", "I Would Never"][choice-1]
   end
+  
+  private
+    def notify_question
+      question.answer_created
+    end
 end
 

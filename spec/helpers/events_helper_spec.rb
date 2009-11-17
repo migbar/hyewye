@@ -6,18 +6,18 @@ describe EventsHelper do
       @event = mock_model(Event)
       @question = mock_model(Question)
       @answer = mock_model(Answer)
-      @event.stub_chain(:target, :question).and_return(@question)
+      @event.stub_chain(:subject, :question).and_return(@question)
     end
     
-    it "returns the target if target is a Question" do
-      @event.should_receive(:target_type).and_return("Question")
-      @event.should_receive(:target).and_return(@question)
+    it "returns the subject if subject is a Question" do
+      @event.should_receive(:subject_type).and_return("Question")
+      @event.should_receive(:subject).and_return(@question)
       helper.question_for_event(@event).should == @question
     end
     
-    it "returns the target if target is a Question" do
-      @event.should_receive(:target_type).and_return("Answer")
-      @event.target.should_receive(:question).and_return(@question)
+    it "returns the subject if subject is a Question" do
+      @event.should_receive(:subject_type).and_return("Answer")
+      @event.subject.should_receive(:question).and_return(@question)
       helper.question_for_event(@event).should == @question
     end
   end

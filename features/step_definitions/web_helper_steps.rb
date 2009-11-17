@@ -1,5 +1,5 @@
-When /^I follow "([^\"]*)" for #{capture_model}$/ do |link, target|
-  record = model(target)
+When /^I follow "([^\"]*)" for #{capture_model}$/ do |link, capture|
+  record = model(capture)
   click_link_within("##{dom_id(record)}", link)
 end
 

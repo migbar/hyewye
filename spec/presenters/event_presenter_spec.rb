@@ -14,9 +14,15 @@ describe EventPresenter do
   end
   
   describe "delegates" do
-    it "target to event" do
+    let(:answer_presenter) {EventPresenter.new(:event => Factory.build(:question_event))}
+    
+    it "subject to event" do
+      answer_presenter.subject.should == answer_presenter.event.subject
+    end
+    
+    it "subject to event" do
       @presenter = EventPresenter.new(:event => Factory.build(:answer_event))
-      @presenter.target.should == @presenter.event.target
+      @presenter.subject.should == @presenter.event.subject
     end
     
     it "user to event" do
@@ -26,7 +32,7 @@ describe EventPresenter do
     
     it "body to event" do
       @presenter = EventPresenter.new(:event => Factory.build(:answer_event))
-      @presenter.body.should == @presenter.event.target.body
+      @presenter.body.should == @presenter.event.subject.body
     end
 
     it "login to user" do
@@ -36,7 +42,7 @@ describe EventPresenter do
   end
   
   describe "#when_answer" do
-    it "yields if event target is an answer" do
+    it "yields if event subject is an answer" do
       @presenter = EventPresenter.new(:event => Factory.build(:answer_event))
       @presenter.when_answer do
         do_yield
@@ -44,7 +50,7 @@ describe EventPresenter do
       @yielded.should be_true
     end
     
-    it "does not yield if event target is a question" do
+    it "does not yield if event subject is a question" do
       @presenter = EventPresenter.new(:event => Factory.build(:question_event))
       @presenter.when_answer do
         do_yield
@@ -56,7 +62,7 @@ describe EventPresenter do
   describe "#choice" do
     it "returns the choice of the answer if the event is an answer event" do
       @event = Factory.build(:answer_event)
-      @answer = @event.target
+      @answer = @event.subject
       @presenter = EventPresenter.new(:event => @event)
       
       @answer.should_receive(:choice_name).and_return("the name of the choice")
@@ -84,12 +90,12 @@ describe EventPresenter do
   describe "#dom_id" do
     it "returns the right dom id for the answer" do
       @presenter = EventPresenter.new(:event => Factory.build(:answer_event))
-      @presenter.dom_id.should == "answer_#{@presenter.event.target.id}"
+      @presenter.dom_id.should == "answer_#{@presenter.event.subject.id}"
     end
     
     it "returns the right dom id for the question" do
       @presenter = EventPresenter.new(:event => Factory.build(:question_event))
-      @presenter.dom_id.should == "question_#{@presenter.event.target.id}"
+      @presenter.dom_id.should == "question_#{@presenter.event.subject.id}"
     end
   end
   
@@ -121,7 +127,7 @@ describe EventPresenter do
   describe "#link_to_question" do
     before(:each) do
       @event = Factory.create(:question_event)
-      @question = @event.target
+      @question = @event.subject
       @presenter = EventPresenter.new(:event => @event, :controller => mock("controller"))
     end
     
@@ -137,20 +143,20 @@ describe EventPresenter do
       @event = mock_model(Event)
       @question = mock_model(Question)
       @answer = mock_model(Answer)
-      @event.stub_chain(:target, :question).and_return(@question)
+      @event.stub_chain(:subject, :question).and_return(@question)
       
       @presenter = EventPresenter.new(:event => @event)
     end
     
-    it "returns the target if target is a Question" do
-      @event.should_receive(:target_type).and_return("Question")
-      @event.should_receive(:target).and_return(@question)
+    it "returns the subject if subject is a Question" do
+      @event.should_receive(:subject_type).and_return("Question")
+      @event.should_receive(:subject).and_return(@question)
       @presenter.question.should == @question
     end
     
-    it "returns the target's question if target is a Answer" do
-      @event.should_receive(:target_type).and_return("Answer")
-      @event.target.should_receive(:question).and_return(@question)
+    it "returns the subject's question if subject is a Answer" do
+      @event.should_receive(:subject_type).and_return("Answer")
+      @event.subject.should_receive(:question).and_return(@question)
       @presenter.question.should == @question
     end
   end
