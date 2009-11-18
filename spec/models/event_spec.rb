@@ -20,15 +20,13 @@ describe Event do
     end
   end
   
-  it "does not double wrap" do
-    @question = Question.create(:body => 'foo') # Factory.create(:answer)
+  it "wraps a question as a subject" do
+    @question = Factory.create(:question)
     @question.event.subject.should == @question
-    
-    @answer = Answer.create(:question => @question, :body => 'bar', :choice => 1)
+  end
+  
+  it "wraps an answer s a subject" do
+    @answer = Factory.create(:answer)
     @answer.event.subject.should == @answer
-    
-    event = Factory.create(:event, :subject => @answer)
-    event.subject.should_not == event
-    event.subject.should == @answer
   end
 end

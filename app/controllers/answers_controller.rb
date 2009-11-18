@@ -21,7 +21,7 @@ class AnswersController < ApplicationController
   
   private
     def fetch_answers
-      @answers = @question.answers.latest.paginate(:page => params[:page], :per_page => 15)
+      @answers = @question.answers.latest.paginate(:page => params[:page], :per_page => 15, :include => :user) #, :total_results => @question.answers_count)
     end
 
     def find_question

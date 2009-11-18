@@ -38,9 +38,9 @@ class Question < ActiveRecord::Base
   end
   
   def expire_percentages_cache
-    Rails.cache.fetch(percentage_cache_key(:i_have_percent), :force => true)
-    Rails.cache.fetch(percentage_cache_key(:i_would_percent), :force => true)
-    Rails.cache.fetch(percentage_cache_key(:i_would_never_percent), :force => true)
+    Rails.cache.fetch(percentage_cache_key(:i_have_percent), :force => true) { nil }
+    Rails.cache.fetch(percentage_cache_key(:i_would_percent), :force => true) { nil }
+    Rails.cache.fetch(percentage_cache_key(:i_would_never_percent), :force => true) { nil }
   end
   
   def answer_created
