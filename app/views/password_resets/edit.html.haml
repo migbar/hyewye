@@ -1,0 +1,11 @@
+- form_for @user, :url => password_reset_path(:id => @user.perishable_token) do |f|
+  %p
+    = f.label :password
+  %p
+    = f.password_field :password
+  %p
+    = f.label :password_confirmation
+  %p
+    = f.password_field :password_confirmation
+  %p
+    = f.submit "Update my password and log me in"

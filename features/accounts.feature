@@ -55,12 +55,6 @@ Feature: User Accounts
      Then I should see "You must be logged out to access this page"
       And I should be on the home page
   
-  ################################################################################
-  # MORE FEATURES - account maintenance (password, email, twitter integration ...)
-  ################################################################################  
-  Scenario: reset password
-  Scenario: change email
-  Scenario: change twitter info
   
   
   

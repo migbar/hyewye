@@ -26,3 +26,7 @@ config.action_mailer.raise_delivery_errors = false
 if "irb" == $0
   ActiveRecord::Base.logger = Logger.new(STDOUT)
 end
+
+config.after_initialize do
+  ActionMailer::Base.default_url_options[:host] = "hyewye.local"
+end

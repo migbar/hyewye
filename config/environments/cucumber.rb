@@ -26,4 +26,19 @@ config.gem 'rspec-rails', :lib => false,        :version => '>=1.2.7.1'
 config.gem 'nokogiri',    :lib => false,        :version => '>=1.4.0'
 config.gem 'factory_girl', :version => '>=1.2.3'
 config.gem 'pickle',      :lib => 'pickle/world', :version => '>=0.1.19'
+config.gem 'email_spec',   :version => '>=0.3.5'
 
+config.after_initialize do
+  ActionMailer::Base.default_url_options[:host] = "example.com"
+end
+
+# implicit, no :lib specified
+# gem "email_spec", ">=0.3.5"
+# require "email_spec"
+
+# :lib => "will_paginate"
+# gem "mislav-will_paginate", "= 0.3.11"
+# require "will_paginate"
+
+# :lib => false
+# gem "email_spec", ">=0.3.5"
