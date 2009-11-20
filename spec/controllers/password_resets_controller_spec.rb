@@ -18,14 +18,25 @@ describe PasswordResetsController do
       @user.stub(:deliver_password_reset_instructions!)
     end
     
-    def post_with_valid_email(options={})
+    def post_with_valid_email
       User.should_receive(:find_by_email).with("miguel@example.com").and_return(@user)
-      post :create, {:email => "miguel@example.com"}.merge(options)
+      post :create, :email => "miguel@example.com"
+    end
+    
+    def post_with_invalid_email(email)
+      User.should_receive(:find_by_email).with("miguel@example.com").and_return(nil)
+      post :create, :email => email
     end
     
     it "delivers password reset instructions to the user if user is found" do
       @user.should_receive(:deliver_password_reset_instructions!)
       post_with_valid_email
+    end
+    
+    it "renders the new template if the user is not found by email" do
+      post_with_invalid_email("miguel@example.com")
+      # flash[:notice].should  == "We could not find a user with email miguel@example.com."
+      response.should render_template(:new)
     end
     
     it "sets the flash message and redirects to the home page" do

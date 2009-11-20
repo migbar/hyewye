@@ -1,16 +1,19 @@
 class PasswordResetsController < ApplicationController
   before_filter :find_user_by_token, :only => [:edit, :update]
-  before_filter :find_user_by_email, :only => :create
   
   def new
     render
   end
   
   def create
+    @user = User.find_by_email(params[:email])
     if @user
       @user.deliver_password_reset_instructions!
       flash[:notice] = "We have sent password reset instructions to #{@user.email}. Please check your email."
       redirect_to root_path
+    else
+      flash.now[:notice] = "We could not find a user with email #{params[:email]}."
+      render :new
     end
   end
   
@@ -30,11 +33,7 @@ class PasswordResetsController < ApplicationController
     end
   end
   
-  private    
-    def find_user_by_email
-      @user = User.find_by_email(params[:email])
-    end
-    
+  private
     def find_user_by_token
       @user = User.find_using_perishable_token(params[:id])
       unless @user
