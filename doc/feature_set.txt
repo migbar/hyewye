@@ -27,6 +27,50 @@ user accounts
   - users have an experienced or daring rating
      - based on how many times they say I Have(3pts), I would(1pt) or I Would Never(-1)
 
+-------------------- twitter integration ----------------------------
+Master -> ui changes -> merge into stable
+Twitter -> oauth, twitter integration -> merge into master (rebase from master to pull in design changes)
+Stable -> used to deploy
+
+ - oauth
+  - twitter integration: tweet on user events
+ - thinking_sphinx
+ - openid
+ - DSL over twitter
+ 
+#hyewye have plastic surgery? http://bit.ly/sd892
+
+@jim
+#wouldnever have plasti... http://bit.ly/sdafds3
+#would have plasti... http://bit.ly/sdafds3
+#have have plasti... http://bit.ly/sdafds3
+
+@hyewye #wouldnever have plastic surgery. # infer choice from hash tag; normalize: strip all tags, all punctuation
+
+  have plastic surgery # md5
+  indexing engine: search questions body "have plastic surgery" => [{:id => 1, :score => 0.9452384}, {:id => 15, :score => 0.3}]
+
+hi: 0.9
+lo: 0.5
+
+
+jim:
+DM @hyewye have plastic surgery.
+
+jim:
+#hyewye have plastic surgery? http://bit.ly/sd892
+
+
+@hyewye
+30%of ppl would get plastic surgery http://bit.ly/ksjdl
+
+RoR
+40% nokogiri
+
+
+* tweet my question
+* tweet my answers
+-----------------------------------------------
 questions
 	belongs to user
 	has many answers
