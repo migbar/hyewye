@@ -5,7 +5,7 @@ role :app, "hyewye.com"                          # This may be the same as your 
 role :db,  "hyewye.com", :primary => true        # This is where Rails migrations will run
 
 default_run_options[:pty] = true
-ssh_options[:forward_agent] = true
+# ssh_options[:forward_agent] = true
 set :use_sudo, false
 set :user, "hyewye"
 set :branch, "stable"
