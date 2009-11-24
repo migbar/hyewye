@@ -17,7 +17,7 @@ describe Notifier do
     end
     
     it "it sets the from field" do
-      @email.from.should == ["no-reply@hyewye.com"]
+      @email.from.should == ["notifier@hyewye.com"]
     end
     
     it "sets the recipient to the user's email" do
@@ -48,7 +48,7 @@ describe Notifier do
     end
     
     it "it sets the from field" do
-      @email.from.should == ["no-reply@hyewye.com"]
+      @email.from.should == ["notifier@hyewye.com"]
     end
     
     it "sets the recipient to the user's email" do
