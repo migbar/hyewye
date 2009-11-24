@@ -30,3 +30,14 @@ config.action_view.cache_template_loading            = true
 config.after_initialize do
   ActionMailer::Base.default_url_options[:host] = "hyewye.com"
 end
+
+ActionMailer::Base.delivery_method = :smtp
+ActionMailer::Base.smtp_settings = {
+  :address => "smtp.gmail.com",
+  :port => 587,
+  :enable_starttls_auto => true,
+  :domain => "hyewye.com",
+  :authentication => :plain,
+  :user_name => "notifier@hyewye.com",
+  :password => "oD5CvBqfCU"
+}

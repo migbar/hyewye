@@ -17,7 +17,7 @@ class Notifier < ActionMailer::Base
   private
     def setup_email_defaults(options={})
       subject       "[HyeWye] #{options[:subject]}"
-      from          "HyeWye Notifier <no-reply@hyewye.com>"
+      from          "notifier@hyewye.com"
     end
 
 end
