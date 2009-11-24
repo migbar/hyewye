@@ -10,6 +10,8 @@ module NavigationHelpers
     
     when /the home\s?page/
       '/'
+    when /the site index/
+      site_index_path
     when /the registration page/
       new_account_path
     when /the login page/

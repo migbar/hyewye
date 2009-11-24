@@ -33,4 +33,26 @@ describe Notifier do
     end
   end
   
+  describe "#deliver_invitation_notification" do
+    before(:each) do
+      @invitation = Invitation.new(:email => "foo@example.com")
+      @email = Notifier.create_invitation_notification(@invitation)
+    end
+    
+    it "sets the subject" do
+      @email.should have_subject("\[HyeWye\] Notification request")
+    end
+    
+    it "sets the body" do
+      @email.should have_text(/#{@invitation.email}/)
+    end
+    
+    it "it sets the from field" do
+      @email.from.should == ["no-reply@hyewye.com"]
+    end
+    
+    it "sets the recipient to the user's email" do
+      @email.should deliver_to("notifications@hyewye.com")
+    end
+  end
 end

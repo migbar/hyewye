@@ -1,0 +1,27 @@
+!!!
+%html{html_attrs}
+  %head
+    = title_tag
+    %meta{"http-equiv"=>"Content-type", :content=>"text/html; charset=utf-8"}
+    / = stylesheet_link_tag 'application'
+    = stylesheet_link_tag 'invitation'
+    = yield(:head)
+  %body
+    #page-wrap
+      #invitation-main.clearfix
+        #left-panel
+        #right-panel
+          #invite-header
+            %h1 Have you ever, Would you ever ...?
+            %h3 Fun and easy way to find out what your friends are thinking.
+          #invite-text
+            %p  Challenge yourself and your friends on interesting questions with HyeWye, the easiest way to create, broadcast and compile questions and aswers that will have you and your friends thinking about.
+            %p Sign up to be notified when HyeWye launches. We'll send you a timely notice so you can get started as soon as we go live!
+          #invite-form.clearfix
+            = render :partial => "shared/flash", :object => flash
+            = yield
+          #dont-worry
+            Don't worry - we will not share your email with anyone.
+      #footer
+        brought to you by Galar Systems, Inc.
+       

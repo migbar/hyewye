@@ -1,0 +1,2 @@
+default: --tags ~@wip --format progress -r features features
+autotest: --tags @wip --format pretty -r features features

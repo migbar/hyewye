@@ -4,7 +4,7 @@ Feature: User Accounts
   I want to register for an account, login and logout
 
   Scenario: Going to the registration page
-    Given I am on the home page
+    Given I am on the site index
      When I follow "Sign Up"
      Then I should see "Register for an account"
     
@@ -24,7 +24,7 @@ Feature: User Accounts
      Then I should see "errors prohibited this user from being saved"
 
   Scenario: Logging in successfully with an existing login name
-    Given I am on the home page
+    Given I am on the site index
       And a user exists with login: "my_login", password: "secret"
      When I follow "Log in"
       And I fill in "Login" with "my_login"
@@ -34,7 +34,7 @@ Feature: User Accounts
       And I should be on the home page
       
   Scenario: Failing to log in with an invalid login name
-    Given I am on the home page
+    Given I am on the site index
      When I follow "Log in"
       And I fill in "Login" with "my_login"
       And I fill in "Password" with "secret"
@@ -45,6 +45,7 @@ Feature: User Accounts
      
   Scenario: logging out
     Given I log in with login: "my_login", password: "secret"
+      And I am on the site index
      When I follow "Log out"
      Then I should see "You have logged out"
       And I should be on the home page 

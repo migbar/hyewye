@@ -7,7 +7,7 @@ Feature: Managing Questions
     Given I am logged in
 
   Scenario: Creating a question successfully
-    Given I am on the home page
+    Given I am on the site index
      When I follow "ask a question"
      Then I should be on the ask question page
      When I fill in "Have you ever / Would you ever" with "get plastic surgery?" 

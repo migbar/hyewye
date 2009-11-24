@@ -8,6 +8,11 @@ class Notifier < ActionMailer::Base
     body          :edit_password_reset_url => edit_password_reset_url(user.perishable_token)
   end
   
+  def invitation_notification(invitation)
+    setup_email_defaults(:subject => "Notification request")
+    body          :email => invitation.email
+    recipients    "HyeWye Notifications <notifications@hyewye.com>"
+  end
   
   private
     def setup_email_defaults(options={})

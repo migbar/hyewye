@@ -19,10 +19,12 @@ Rails::Initializer.run do |config|
   # config.gem "hpricot", :version => '0.6', :source => "http://code.whytheluckystiff.net"
   # config.gem "sqlite3-ruby", :lib => "sqlite3"
   # config.gem "aws-s3", :lib => "aws/s3"
-  config.gem "haml", :version => '2.2.9'
-  config.gem "authlogic", :version => '2.1.2'
-  config.gem "will_paginate", :version => '2.3.11'
-  config.gem "active_presenter", :version => '1.2.0'
+  config.gem "haml",                :version => '2.2.9'
+  config.gem "authlogic",           :version => '2.1.2'
+  config.gem "will_paginate",       :version => '2.3.11'
+  config.gem "active_presenter",    :version => '1.2.0'
+  config.gem "inherited_resources", :version => '0.9.3'
+  config.gem "formtastic",          :version => '0.9.3'
   
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named

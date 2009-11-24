@@ -1,0 +1,143 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+
+body {
+	font-size: 1.1em;
+	line-height: 1.8em;
+	margin-bottom: 0.8em;
+	font-family: Helvetica, sans-serif;
+/*	background-color: #243647;*/
+	background-color: #888899;
+
+}
+
+div#page-wrap {
+		width: 1024px;
+		margin: 0 auto;
+/*		padding: 30px;*/
+	}
+	div#invitation-main {
+			font-size: 1.1em;
+			line-height: 1.8em;
+/*			margin-bottom: 0.8em;*/
+			margin-top: 50px;
+			font-family: Helvetica, sans-serif;
+			color: #ffffff;
+			padding: 30px;
+			-webkit-border-radius:20px;
+			-moz-border-radius:20px;
+			}
+			div#invitation-main div#left-panel {
+				height: 223px;
+				width: 35%;
+				margin-top: 20px;
+				background: url(/images/hyewye_logo_only.jpg) no-repeat;
+				float: left;
+			}
+			div#invitation-main div#right-panel {
+/*				height: 276px;*/
+				width: 65%;
+				margin-top: 20px;
+				float: right;
+				}
+				div#invitation-main div#right-panel div#invite-header {
+					color: orange;
+				}
+				div#invitation-main div#right-panel div#invite-header h1 {
+					font-size: 30px;
+				}
+				div#invitation-main div#right-panel div#invite-header h3 {
+					font-size: 18px;
+					font-family: Courier;
+					font-style:normal;
+					margin-top: 20px;
+				}
+				div#invitation-main div#right-panel #invite-text p{
+					color: #aaaaaa;
+					margin-top: 20px;
+				}
+				div#invitation-main div#right-panel #dont-worry {
+					color: #888899;
+					font-size: 0.6em;
+					margin-top: -45px;
+				}
+	fieldset {
+		border: none;
+	}
+	.inputs {
+		float: left;
+	}
+	.buttons {
+		float: left;
+/*		margin-top: 30px;
+		margin-left: 10px;
+*/		padding: 30px;
+	}
+	ol {
+		list-style: none;
+	}
+	
+	#new_invitation label {
+		font-size: 12px;
+/*	  font-weight: bold;*/
+		display: block; 
+	}
+	#new_invitation input {
+		font-size: 14px;
+		padding: 6px;
+	 	color: #444455;
+	}
+				
+	div#page-wrap div#footer {
+		padding: 2px;
+		color: white;
+		text-align: center;
+/*		background: #243647;*/
+		background: #888899;
+		-webkit-border-radius:10px;
+		-moz-border-radius:10px;
+	}
+
+
+p, li {
+	font-size: 1.0em;
+	line-height: 1.3em;
+	margin-bottom: 0.8em;
+}
+
+a {
+	color: #e77307;
+	text-decoration: none;
+}
+
+
+.clear {
+	clear:both;
+}
+
+.clearfix {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    display: block !important;
+}
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+div#invitation-main {
+		font-size: 1.1em;
+		line-height: 1.8em;
+		margin-bottom: 0.8em;
+		font-family: Helvetica, sans-serif;
+		background-color: #243647;
+		color: #ffffff;
+}

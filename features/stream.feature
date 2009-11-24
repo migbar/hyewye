@@ -12,7 +12,7 @@ Feature: Stream
       | question | dave    | question-4   | 4     |
       | question | bob     | question-5   | 90    |
       | question | charlie | question-6   | 9000  |
-     When I go to the home page
+      And I am on the site index
      Then I should see the following users and events
       | user | body          |
       | adam | question-1    |
@@ -22,7 +22,7 @@ Feature: Stream
   
   Scenario: Answering a question in the stream
     Given a question "hps" exists with body: "Have plastic surgery?"
-      And I am on the home page
+      And I am on the site index
      When I follow "Answer" for question "hps"
      Then I should be at the answers page for question "hps"
   
