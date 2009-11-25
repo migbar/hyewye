@@ -9,7 +9,8 @@ describe User do
   should_have_many :events
   
   it "#to_s returns the login for the user" do
-    user = User.new(:login => 'bob')
+    user = User.new
+    user.login = "bob"
     user.to_s.should == 'bob'
   end
 end

@@ -10,8 +10,14 @@ Feature: Account maintenance
 
 
   Scenario: change email
-  Scenario: change twitter info
-  
+@wip
+  Scenario: change password
+    Given I am logged in
+      And I am on my account page
+     When I fill in "password" with "secret"
+      And I fill in "password confirmation" with "secret"
+      And I press "save"
+     Then I should see "Account successfully updated"
 
   Scenario: reset password
     Given a user exists with email: "miguel@example.com"

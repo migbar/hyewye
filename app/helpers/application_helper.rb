@@ -7,7 +7,7 @@ module ApplicationHelper
 
   def title_tag
     common_title = 'HyeWye'
-    content_tag(:title, @content_for_title.blank? && "Untitled | #{common_title}" || "#{@content_for_title} | #{common_title}")
+    content_tag(:title, @content_for_title.blank? && "Untitled | #{common_title}" || "#{h(@content_for_title)} | #{common_title}")
   end
 
   def show_title?

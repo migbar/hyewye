@@ -1,4 +1,3 @@
-@wip
 Feature: Invitations
   In order find out when HyeWye launches
   As a user

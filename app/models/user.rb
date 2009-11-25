@@ -21,6 +21,8 @@ class User < ActiveRecord::Base
   has_many :answers
   has_many :events
   
+  attr_accessible :password, :password_confirmation
+  
   def to_s
     login
   end

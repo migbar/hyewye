@@ -1,0 +1,8 @@
+- title "Edit account"
+
+- semantic_form_for @user, :url => account_path do |f|
+  - f.inputs "Account information" do
+    = f.input :password
+    = f.input :password_confirmation
+  - f.buttons do
+    = f.commit_button "Save"

@@ -18,6 +18,8 @@ module NavigationHelpers
       new_user_session_path
     when /the ask question page/
       new_question_path
+    when /my account page/
+      edit_account_path
       
     # Add more mappings here.
     # Here is a more fancy example:
