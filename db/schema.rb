@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091123110141) do
+ActiveRecord::Schema.define(:version => 20091126152538) do
 
   create_table "answers", :force => true do |t|
     t.integer  "user_id"
@@ -53,19 +53,25 @@ ActiveRecord::Schema.define(:version => 20091123110141) do
   add_index "questions", ["user_id"], :name => "index_questions_on_user_id"
 
   create_table "users", :force => true do |t|
-    t.string   "login",               :null => false
+    t.string   "login"
     t.string   "email",               :null => false
-    t.string   "crypted_password",    :null => false
-    t.string   "password_salt",       :null => false
+    t.string   "crypted_password"
+    t.string   "password_salt"
     t.string   "persistence_token",   :null => false
     t.string   "single_access_token", :null => false
     t.string   "perishable_token",    :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "oauth_token"
+    t.string   "oauth_secret"
+    t.string   "twitter_uid"
+    t.string   "avatar_url"
+    t.string   "name"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"
   add_index "users", ["login"], :name => "index_users_on_login"
+  add_index "users", ["oauth_token"], :name => "index_users_on_oauth_token"
   add_index "users", ["perishable_token"], :name => "index_users_on_perishable_token"
   add_index "users", ["persistence_token"], :name => "index_users_on_persistence_token"
   add_index "users", ["single_access_token"], :name => "index_users_on_single_access_token"

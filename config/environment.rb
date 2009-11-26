@@ -25,6 +25,9 @@ Rails::Initializer.run do |config|
   config.gem "active_presenter",    :version => '1.2.0'
   config.gem "inherited_resources", :version => '0.9.3'
   config.gem "formtastic",          :version => '0.9.3'
+  config.gem "oauth",               :version => '0.3.6'
+  config.gem "authlogic-oauth",     :version => '1.0.8', :lib => "authlogic_oauth"
+  config.gem "twitter_oauth",       :version => '0.2.1'
   
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named

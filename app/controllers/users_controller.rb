@@ -33,6 +33,7 @@ class UsersController < ApplicationController
     else
       render :new
     end
+    
   end
   
   # GET /account/edit
@@ -44,11 +45,15 @@ class UsersController < ApplicationController
   def update
     @user = current_user
     @user.attributes = params[:user]
-    if @user.save
-      flash[:notice] = "Account successfully updated"
-      redirect_to edit_account_path
-    else 
-      render :edit
+    
+    @user.save do |result|
+      if result
+        flash[:notice] = "Account successfully updated"
+        redirect_to edit_account_path
+      else 
+        render :edit
+      end
     end
+    
   end
 end
