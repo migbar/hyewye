@@ -1,6 +1,12 @@
 - title "Register for an account"
 
-- form_for @user, :url => account_path do |f|
-  = f.error_messages
-  = render :partial => "form", :object => f
-  = f.submit "Create Account"
+- semantic_form_for @user, :url => account_path do |f|
+  - f.buttons :name => "I am a Twitter user", :id => "twitter" do
+    = oauth_register_button :value => "Register using Twitter"
+  - f.inputs "Register for an account" do
+    = f.input :login
+    = f.input :email
+    = f.input :password
+    = f.input :password_confirmation
+  - f.buttons do
+    = f.commit_button "Create Account"

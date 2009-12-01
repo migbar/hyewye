@@ -27,11 +27,13 @@ class UsersController < ApplicationController
       @user.login = params[:user][:login]
     end
     
-    if @user.save
-      redirect_to root_path
-      flash[:notice] = "Thank you for registering #{current_user.login}, your account has been created!"
-    else
-      render :new
+    @user.save do |result|
+      if result
+        redirect_to root_path
+        flash[:notice] = "Thank you for registering #{current_user}, your account has been created!"
+      else
+        render :new
+      end
     end
     
   end

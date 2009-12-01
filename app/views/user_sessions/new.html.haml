@@ -1,12 +1,21 @@
-- form_for @user_session, :url => user_session_path do |f|
-  = f.error_messages
-  %p
-    = f.label :login
-    = f.text_field :login
-  %p
-    = f.label :password
-    = f.password_field :password
-  %p
-    = f.submit "Log in"
-  %p
-    = link_to "Recover password", new_password_reset_path
+- if @user_session.errors.on_base =~ /Could not find user in our database/
+  It looks like you have not created an account on HyeWye yet. You can easily do this
+  by using your Twitter account.
+
+  - form_tag account_path do
+    = oauth_register_button :value => "Use my Twitter account to register with HyeWye"
+  
+- else
+  - semantic_form_for @user_session, :url => user_session_path do |f|
+    = f.error_message_on(:base)
+    - f.buttons :name => "I am a Twitter user", :id => "twitter" do
+      = oauth_login_button :value => "Log in using Twitter"
+  
+    - f.inputs do
+      = f.input :login
+      = f.input :password
+    
+      - f.buttons do
+        = f.commit_button "Log in"
+        = link_to "Recover password", new_password_reset_path
+    

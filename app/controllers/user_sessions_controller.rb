@@ -9,11 +9,13 @@ class UserSessionsController < ApplicationController
   
   def create
     @user_session = UserSession.new(params[:user_session])
-    if @user_session.save
-      flash[:notice] = "Welcome #{current_user.login}!"
-      redirect_back_or_default root_path
-    else
-      render :new
+    @user_session.save do |result|
+      if result
+        flash[:notice] = "Welcome #{@user_session.record}!"
+        redirect_back_or_default root_path
+      else
+        render :new
+      end
     end
   end
   

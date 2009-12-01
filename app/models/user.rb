@@ -17,6 +17,7 @@
 
 class User < ActiveRecord::Base
   acts_as_authentic
+  
   has_many :questions
   has_many :answers
   has_many :events
@@ -26,12 +27,16 @@ class User < ActiveRecord::Base
   before_save :populate_oauth_user
 
   def to_s
-    login
+    name || login
   end
   
   def deliver_password_reset_instructions!
     reset_perishable_token!
     Notifier.deliver_password_reset_instructions(self)
+  end
+  
+  def using_twitter?
+    !oauth_token.blank?
   end
 
   private
@@ -39,7 +44,7 @@ class User < ActiveRecord::Base
     def populate_oauth_user
       return unless twitter_uid.blank?
       
-      unless oauth_token.blank?
+      if using_twitter?
         @response = UserSession.oauth_consumer.request(:get, '/account/verify_credentials.json',
         access_token, { :scheme => :query_string })
         case @response

@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(:version => 20091126152538) do
 
   create_table "users", :force => true do |t|
     t.string   "login"
-    t.string   "email",               :null => false
+    t.string   "email"
     t.string   "crypted_password"
     t.string   "password_salt"
     t.string   "persistence_token",   :null => false
@@ -62,11 +62,11 @@ ActiveRecord::Schema.define(:version => 20091126152538) do
     t.string   "perishable_token",    :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "oauth_token"
-    t.string   "oauth_secret"
     t.string   "twitter_uid"
     t.string   "avatar_url"
     t.string   "name"
+    t.string   "oauth_token"
+    t.string   "oauth_secret"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"
