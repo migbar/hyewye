@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + '/../spec_helper'
 
 describe UserSessionsController do
   before(:each) do
-    @user_session = mock_model(UserSession)
+    @user_session = UserSession.new
   end
 
   describe "handling GET new" do
@@ -38,19 +38,18 @@ describe UserSessionsController do
     before(:each) do
       UserSession.stub(:find).and_return(nil) # logged out
       UserSession.stub!(:new).and_return(@user_session)
-      @user_session.stub!(:record).and_return(mock_model(User, :login => 'my_login'))
+      @user_session.stub!(:record).and_return(stub_model(User, :save => true, :to_s => 'my_login'))
     end
     
     def post_with_valid_attributes(options={})
       @current_user = mock_model(User, :login => options[:user_session].try(:[], :login)) # option[:user_session] && options[:user_session][:login]
       controller.should_receive(:current_user).and_return(nil) # first time it is the filter that sends :current_user, expects nil
-      controller.should_receive(:current_user).and_return(@current_user) # second time, it is our code, we expect a true user
-      @user_session.should_receive(:save).and_return(true)
+      @user_session.should_receive(:valid?).and_return(true)
       post :create, options
     end
     
     def post_with_invalid_attributes
-      @user_session.should_receive(:save).and_return(false)
+      @user_session.should_receive(:valid?).and_return(false)
       post :create
     end
 

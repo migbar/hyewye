@@ -1,4 +1,4 @@
-require 'spec_helper'
+require File.dirname(__FILE__) + '/../spec_helper'
 
 describe User do
   should_have_column :login, :email, :crypted_password, :password_salt,

@@ -16,12 +16,18 @@ require "email_spec/matchers"
 Dir[File.expand_path(File.join(File.dirname(__FILE__),'support','**','*.rb'))].each {|f| require f}
 
 Spec::Runner.configure do |config|
+  include Authlogic::TestCase
+  
   # If you're not using ActiveRecord you should remove these
   # lines, delete config/database.yml and disable :active_record
   # in your config/boot.rb
   config.use_transactional_fixtures = true
   config.use_instantiated_fixtures  = false
   config.fixture_path = RAILS_ROOT + '/spec/fixtures/'
+  
+  config.before(:each) do
+    activate_authlogic
+  end
 
   def current_user(stubs = {})
     @current_user ||= stub_model(User, stubs)

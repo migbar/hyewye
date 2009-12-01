@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + '/../spec_helper'
 
 describe UsersController do
   before(:each) do
-    @user = mock_model(User, :login= => nil, :email= => nil)
+    @user = stub_model(User, :create_or_update => true)
   end
   
   describe "access control" do
@@ -37,15 +37,14 @@ describe UsersController do
     end
     
     def post_with_valid_attributes(options={})
-      @current_user = mock_model(User, :login => options[:user].try(:[], :login)) # same as-> options[:user] && options[:user][:login]
       controller.should_receive(:current_user).and_return(nil) # first time -> the filter that sends :current_user, expects nil
-      controller.should_receive(:current_user).and_return(@current_user) # second time -> our flash message code, we expect a true user
-      @user.should_receive(:save).and_return(true)
+      controller.should_receive(:current_user).and_return(options[:user].try(:[], :login)) # second time -> our flash message code, we expect a true user
+      @user.should_receive(:valid?).and_return(true)
       post :create, options
     end
     
     def post_with_invalid_attributes
-      @user.should_receive(:save).and_return(false)
+      @user.should_receive(:valid?).and_return(false)
       post :create
     end
 
@@ -132,17 +131,17 @@ describe UsersController do
   
   describe "handling PUT update" do
     before(:each) do
-      login_user
+      login_user({}, :create_or_update => true)
       @user = current_user
     end
     
     def put_with_valid_attributes(options={})
-      current_user.should_receive(:save).and_return(true)
+      current_user.should_receive(:valid?).and_return(true)
       put :update, :user => options
     end
     
     def put_with_invalid_attributes(options={})
-      current_user.should_receive(:save).and_return(false)
+      current_user.should_receive(:valid?).and_return(false)
       put :update
     end
     
