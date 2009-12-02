@@ -26,7 +26,7 @@ Spec::Runner.configure do |config|
   config.fixture_path = RAILS_ROOT + '/spec/fixtures/'
   
   config.before(:each) do
-    activate_authlogic
+    # activate_authlogic
   end
 
   def current_user(stubs = {})
