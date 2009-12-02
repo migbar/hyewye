@@ -1,0 +1,27 @@
+indigosilver3:
+#1a1d3d
+#292d60
+#6a7ea6
+#96a9c8
+#b9c8e2
+#becbdc
+#cfd7e3         
+             
+indigosilver:
+#293154
+#788ca6
+#b9cbe2
+#cfd7e3
+#dcdfe3
+#d9d9d9
+              
+some bright blues
+
+blue: rgb(41, 160, 214)
+light-blue: rgb(131, 213, 247)
+
+plus some oranges,reds etc:
+red: rgb(173, 15, 50)
+orange: rgb(229, 149, 43)
+
+
