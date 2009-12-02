@@ -1,4 +1,3 @@
-@wip
 Feature: User Accounts
   In order to Ask and Answer questions
   As a user
@@ -22,7 +21,7 @@ Feature: User Accounts
   Scenario: Failing to register due to invalid options
     Given I am on the registration page
       And I press "Create Account"
-     Then I should see "errors prohibited this user from being saved"
+     Then I should see "is too short"
 
   Scenario: Logging in successfully with an existing login name
     Given I am on the site index
@@ -40,7 +39,7 @@ Feature: User Accounts
       And I fill in "Login" with "my_login"
       And I fill in "Password" with "secret"
       And I press "Log in"
-     Then I should see "Login is not valid"
+     Then I should see "is not valid"
      # When I go to my account page # => /account
      # Then I should be on the login page # /user_session/new
      

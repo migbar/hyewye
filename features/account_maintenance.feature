@@ -10,7 +10,7 @@ Feature: Account maintenance
 
 
   Scenario: change email
-@wip
+
   Scenario: change password
     Given I am logged in
       And I am on my account page
