@@ -34,7 +34,16 @@ Feature: Answer questions
      Then I should be at the answers page for question "hps"
       And I should see "My answer"
       But I should not see "Log in to answer this question"
-            
+      
+  Scenario: a registered twitter user that is not logged in can log in with twitter to answer a question
+    Given a Twitter user "twitter_guy" registered with HyeWye
+      And I navigate to the answers page for question "hps"
+     Then I should not see "My answer" 
+     When I follow "Let me Answer!"
+      And I press "Let me log in using Twitter" 
+     Then I should be at the answers page for question "hps"
+      And I should see "My answer"
+      But I should not see "Log in to answer this question"            
       
       
 

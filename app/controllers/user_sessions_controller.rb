@@ -14,7 +14,12 @@ class UserSessionsController < ApplicationController
         flash[:notice] = "Welcome #{@user_session.record}!"
         redirect_back_or_default root_path
       else
-        render :new
+        if params[:denied]
+          flash[:notice] = "You did not allow HyeWye to use your Twitter account"
+          redirect_to new_user_session_path
+        else
+          render :new
+        end
       end
     end
   end

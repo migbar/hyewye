@@ -43,9 +43,9 @@ describe UsersController do
       post :create, options
     end
     
-    def post_with_invalid_attributes
+    def post_with_invalid_attributes(options={})
       @user.should_receive(:valid?).and_return(false)
-      post :create
+      post :create, options
     end
 
     it "builds a new User from params and assigns it for the view" do
@@ -66,7 +66,12 @@ describe UsersController do
       post_with_invalid_attributes
       response.should render_template(:new)
     end
-
+    
+    it "sets the notice flash and redirects to the registration page if denied OAuth authentication" do
+      post_with_invalid_attributes(:denied => "foo")
+      flash[:notice].should == "You did not allow HyeWye to use your Twitter account"
+      response.should redirect_to(new_account_path)
+    end
   end
   
   describe "handling GET show" do

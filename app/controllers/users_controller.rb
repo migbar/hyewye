@@ -32,7 +32,12 @@ class UsersController < ApplicationController
         redirect_to root_path
         flash[:notice] = "Thank you for registering #{current_user}, your account has been created!"
       else
-        render :new
+        if params[:denied]
+          flash[:notice] = "You did not allow HyeWye to use your Twitter account"
+          redirect_to new_account_path
+        else
+          render :new
+        end
       end
     end
     
