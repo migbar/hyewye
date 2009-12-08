@@ -6,10 +6,10 @@
   %ul{:id => "events-list"}
     - present_events(@events).each do |event|
       %li{:id => event.dom_id, :class => event.dom_class}
-        #user
-          = link_to(image_tag('/images/avatar_3.jpg', :width => 40), user_path(event.user))
-        #event
-          #event-body
+        .user
+          = link_to(image_tag(event.user.avatar), user_path(event.user))
+        .event
+          .event-body
             = event.link_to_user
             said:
             = h event.body 

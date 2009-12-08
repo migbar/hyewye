@@ -1,0 +1,3 @@
+module AvatarHelper
+  
+end

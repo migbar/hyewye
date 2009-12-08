@@ -1,7 +1,7 @@
 #left-col
   #question.clearfix
     #user
-      = link_to(image_tag('/images/avatar_3.jpg'), user_path(@question.user))
+      = link_to(image_tag(@question.user.avatar), user_path(@question.user))
       = link_to @question.user, user_path(@question.user)
       Wanted to know:
     %h2#question-body
@@ -23,10 +23,10 @@
   %ul{:id => "answers-list"}
     - @answers.each do |answer|
       %li.clearfix{:id => dom_id(answer), :class =>"answer_in_list"}
-        #user
-          = link_to(image_tag('/images/avatar_3.jpg'), user_path(answer.user))
-        #answer
-          #answer-body
+        .user
+          = link_to(image_tag(answer.user.avatar), user_path(answer.user))
+        .event
+          .event-body
             = link_to answer.user, user_path(answer.user)
             said:
             = answer.choice_name

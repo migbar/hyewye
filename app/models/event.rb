@@ -12,6 +12,8 @@
 #
 
 class Event < ActiveRecord::Base
+  attr_writer :notify_user
+  
   belongs_to :user
   belongs_to :subject, :polymorphic => true
   named_scope :latest, lambda {
@@ -21,5 +23,22 @@ class Event < ActiveRecord::Base
       :order => "events.created_at DESC"
     }
   }
+  
+  after_create :notify_user
+  
+  def self.with_notify_user(&block)
+    with_scope(:create => { :notify_user => true }) do
+      yield
+    end
+  end
+  
+  def notify_user?
+    @notify_user
+  end
+  
+  private
+    def notify_user
+      user.event_created(subject) if notify_user?
+    end
   
 end

@@ -2,35 +2,45 @@ require File.dirname(__FILE__) + '/../spec_helper'
 
 describe Question do
   
-  describe "structure" do
-    should_have_column :body, :type => :string    
-  end
-  
-  describe "associations" do
-    should_belong_to :user
-    should_have_many :answers
-    should_have_one :event, :as => :subject    
-  end
-  
-  describe "validations" do
-    should_validate_length_of :body, :maximum => 140
-    should_validate_presence_of :body    
-  end
+  # describe "structure" do
+  #   should_have_column :body, :type => :string    
+  # end
+  # 
+  # describe "associations" do
+  #   should_belong_to :user
+  #   should_have_many :answers
+  #   should_have_one :event, :as => :subject    
+  # end
+  # 
+  # describe "validations" do
+  #   should_validate_length_of :body, :maximum => 140
+  #   should_validate_presence_of :body    
+  # end
     
-  describe "creating associated event" do      
-    before(:each) do
-      Event.delete_all
-    end
+  # describe "creating associated event" do      
+  #   before(:each) do
+  #     Event.delete_all
+  #     @user = Factory.create(:user)
+  #   end
+    # 
+    # it "creates an asosciated event when it is created successfully" do
+    #   lambda {
+    #     @question = Factory.create(:question, :user => @user)
+    #   }.should change(Event, :count).by(1)
+    #   
+    #   Event.first.subject.should == @question
+    #   @question.event.user.should == @question.user
+    # end
     
-    it "creates an asosciated event when it is created successfully" do
-      lambda {
-        @question = Factory.create(:question)
-      }.should change(Event, :count).by(1)
-      
-      Event.first.subject.should == @question
-      @question.event.user.should == @question.user
+    describe "#save_with_notification" do
+      question = Factory.create(:question, :user => @user)
+      # question = Factory.create(:question) # Event.create! ignored
+      puts question.methods.inspect
+      # question.should_receive(:foo)   #.with(hash_including(:notify_user => true))
+      Rails.cache.should_receive(:fetch)
+      question.save_with_notification
     end
-  end
+  # end
   
   describe "answers" do
     def build_question_with_answers
