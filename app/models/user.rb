@@ -82,13 +82,13 @@ class User < ActiveRecord::Base
   end
   
   def tweet(status)
-    # client = TwitterOAuth::Client.new(
-    #     :consumer_key => 'YOUR_CONSUMER_KEY',
-    #     :consumer_secret => 'YOUR-CONSUMER-SECRET',
-    #     :token => oauth_token, 
-    #     :secret => oauth_secret
-    # )
-    # client.update(status) if client.authorized?
+    client = TwitterOAuth::Client.new(
+        :consumer_key => "DLdF4bL5BFCpgVLSY2niQ", 
+        :consumer_secret => "GjVRwnTiwDArWcq2GVVt3KCtBKhw1UNzz8OurLKAE",
+        :token => oauth_token, 
+        :secret => oauth_secret
+    )
+    client.update(status) if client.authorized?
   end
 
   private

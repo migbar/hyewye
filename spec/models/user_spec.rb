@@ -77,11 +77,35 @@ describe User do
       user.should_not_receive(:tweet)
       user.tweet_event(question)
     end
+  end
+  
+  describe "#tweet" do
+    before(:each) do
+      @client = mock("TwitterOAuth::Client", :update => nil, :authorized? => true)
+      TwitterOAuth::Client.stub!(:new).and_return(@client)
+      @user = Factory.build(:twitter_user)
+    end
+    it "builds a Twitter auth client with the consumer and user credentials" do
+      TwitterOAuth::Client.should_receive(:new).
+        with(:consumer_key => "DLdF4bL5BFCpgVLSY2niQ",
+             :consumer_secret => 'GjVRwnTiwDArWcq2GVVt3KCtBKhw1UNzz8OurLKAE',
+             :token => @user.oauth_token, 
+             :secret => @user.oauth_secret).
+        and_return(@client)
+      @user.tweet("this is my status")
+    end
     
-    # it "tweets the creation of an answer" do
-    #   "@another_guy: @twitter_guy I (have|would|would never) http://hyewye.com/questions/5"
-    #   "@another_guy: @twitter_guy I have had plastic surgery http://hyewye.com/questions/5"
-    # end
+    it "updates the status of the Twitter user using the OAuth client if authorized" do
+      @client.should_receive(:authorized?).and_return(true)
+      @client.should_receive(:update).with("this is my status")
+      @user.tweet("this is my status")
+    end
+    
+    it "does not try to update the status if client is not authorized" do
+      @client.should_receive(:authorized?).and_return(false)
+      @client.should_not_receive(:update).with("this is my status")
+      @user.tweet("this is my status")
+    end
   end
 
   describe "populate user data from Twitter profile" do

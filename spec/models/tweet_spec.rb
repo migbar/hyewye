@@ -25,31 +25,23 @@ describe Tweet do
     
     describe "for an answer" do
       before(:each) do
-        @answer = mock_model(Answer, :question => @question, :body => "Short Answer") 
+        @answer = mock_model(Answer, :question => @question, :body => "Short Answer", :choice_name => "i have") 
+        @user = mock_model(User, :screen_name => "question_guy")
+        @question.stub!(:user).and_return(@user)
       end
       it "returns a tweet with the full body if not over 140 characters" do
         tweet = Tweet.new(@answer)
-        tweet.to_s.should == "@question_guy I HAVE, and it was great! #hyewye http://bit.ly"
+        tweet.to_s.should == "@#{@user.screen_name} #{@answer.choice_name}, #{@answer.body} #hyewye #{question_answers_url(@question, :host => Tweet::HOST)}"
       end
       
       it "return a tweet with a trimmed body if over 140 characters" do
-        pending
+        @answer.stub(:body).and_return("Foo bar" * 50)
+        tweet = Tweet.new(@answer).to_s
+        tweet.size.should == 140
+        escaped_url = Regexp.escape(question_answers_url(@question, :host => Tweet::HOST))
+        tweet.should =~ /^@#{@user.screen_name} #{@answer.choice_name}, Foo bar.+?\.{3} #hyewye #{escaped_url}$/
       end
     end
   end
   
-  describe "#url" do
-    it "returns the URL for the answers page of the specified question" do
-      question = mock_model(Question)
-      tweet = Tweet.new(question)
-      tweet.url.should == question_answers_url(question, :host => Tweet::HOST)
-    end
-    
-    it "returns the URL for the answers page of the specified answer's question" do
-      question = mock_model(Question)
-      answer = mock_model(Answer, :question => question)
-      tweet = Tweet.new(answer)
-      tweet.url.should == question_answers_url(question, :host => Tweet::HOST)
-    end
-  end
 end
