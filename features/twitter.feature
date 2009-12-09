@@ -16,3 +16,17 @@ Feature: Twitter Messaging
      When I click the first link in the tweet 
      Then I should be on the answers page for "get plastic surgery?"
   
+  @wip
+  Scenario: Tweeting an answer
+    Given a question "hps" exists
+      And I navigate to the answers page for question "hps"
+     When I choose "I have"
+      And I fill in "answer_body" with "and I look great!"
+      And I press "answer!"
+     Then "twitter_user" should have a tweet
+      #need specialization
+      And the tweet should contain "and I look great!" 
+     When I click the first link in the tweet 
+     Then I should be at the answers page for question "hps"
+  
+  

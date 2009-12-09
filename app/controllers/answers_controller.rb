@@ -10,7 +10,7 @@ class AnswersController < ApplicationController
   def create
     @answer = @question.answers.build(params[:answer])
     @answer.user = current_user
-    if @answer.save
+    if @answer.save_with_notification
       flash[:notice] = "Thanks for answering!"
       redirect_to question_answers_path(@question)
     else

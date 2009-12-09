@@ -73,12 +73,12 @@ describe AnswersController do
     end
     
     def post_with_valid_attributes(options={})
-      @answer.should_receive(:save).and_return(true)
+      @answer.should_receive(:save_with_notification).and_return(true)
       post :create, {:question_id => 1}.merge(options)
     end
     
     def post_with_invalid_attributes(options={})
-      @answer.should_receive(:save).and_return(false)
+      @answer.should_receive(:save_with_notification).and_return(false)
       post :create, {:question_id => 1}.merge(options)
     end
     

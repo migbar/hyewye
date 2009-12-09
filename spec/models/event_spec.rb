@@ -31,12 +31,10 @@ describe Event do
   end
   
   it "sends the user #event_created with the subject on create" do
-    # user = Factory.create(:user)
-    question = Factory.create(:question) # Event.create! ignored
-    puts question.methods.inspect
-
-    # event = Factory.build(:event, :subject => question, :user => user, :notify_user => true)
-    # user.should_receive(:event_created).with(question)
-    # event.save!
+    user = Factory.build(:user)
+    question = Factory.build(:question)
+    event = Factory.build(:event, :subject => question, :user => user, :notify_user => true)
+    user.should_receive(:event_created).with(question)
+    event.save!
   end
 end

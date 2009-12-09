@@ -72,6 +72,24 @@ class User < ActiveRecord::Base
     grav_url << "&default=#{gravatar_options[:default]}" if gravatar_options[:default]
     return grav_url
   end
+  
+  def event_created(subject)
+    tweet_event subject
+  end
+  
+  def tweet_event(subject)
+    tweet(Tweet.new(subject).to_s) if using_twitter?
+  end
+  
+  def tweet(status)
+    # client = TwitterOAuth::Client.new(
+    #     :consumer_key => 'YOUR_CONSUMER_KEY',
+    #     :consumer_secret => 'YOUR-CONSUMER-SECRET',
+    #     :token => oauth_token, 
+    #     :secret => oauth_secret
+    # )
+    # client.update(status) if client.authorized?
+  end
 
   private
 
@@ -81,13 +99,14 @@ class User < ActiveRecord::Base
       if using_twitter?
         @response = UserSession.oauth_consumer.request(:get, '/account/verify_credentials.json',
         access_token, { :scheme => :query_string })
-        case @response
-        when Net::HTTPSuccess
+        if @response.is_a?(Net::HTTPSuccess)
           user_info = JSON.parse(@response.body)
 
           self.name        = user_info['name']
           self.twitter_uid = user_info['id']
           self.avatar_url  = user_info['profile_image_url']
+          self.screen_name = user_info['screen_name']
+          self.location    = user_info['location']
         end
       end
     end

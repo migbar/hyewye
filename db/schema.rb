@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091126152538) do
+ActiveRecord::Schema.define(:version => 20091209112920) do
 
   create_table "answers", :force => true do |t|
     t.integer  "user_id"
@@ -67,6 +67,8 @@ ActiveRecord::Schema.define(:version => 20091126152538) do
     t.string   "name"
     t.string   "oauth_token"
     t.string   "oauth_secret"
+    t.string   "screen_name"
+    t.string   "location"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"

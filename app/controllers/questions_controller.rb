@@ -8,7 +8,7 @@ class QuestionsController < ApplicationController
   def create
     @question = current_user.questions.build(params[:question])
     
-    if @question.save
+    if @question.save_with_notification
       flash[:notice] = "thanks for asking!"
       redirect_to root_path
     else

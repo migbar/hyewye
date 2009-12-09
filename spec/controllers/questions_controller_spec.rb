@@ -41,12 +41,12 @@ describe QuestionsController do
     end
     
     def post_with_valid_attributes(options={})
-      @question.should_receive(:save).and_return(true)
+      @question.should_receive(:save_with_notification).and_return(true)
       post :create, :question => options
     end
     
     def post_with_invalid_attributes
-      @question.should_receive(:save).and_return(false)
+      @question.should_receive(:save_with_notification).and_return(false)
       post :create
     end
     
