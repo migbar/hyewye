@@ -78,21 +78,21 @@ class User < ActiveRecord::Base
   end
   
   def tweet_event(subject)
-    tweet(Tweet.new(subject)) if using_twitter?
+    tweet(subject) if using_twitter?
   end
   
-  def tweet(status)
-    send_later(:perform_twitter_update, status)
+  def tweet(subject)
+    send_later(:perform_twitter_update, subject)
   end
   
-  def perform_twitter_update(status)
+  def perform_twitter_update(subject)
     client = TwitterOAuth::Client.new(
         :consumer_key => Settings.twitter.consumer_key, 
         :consumer_secret => Settings.twitter.consumer_secret,
         :token => oauth_token, 
         :secret => oauth_secret
     )
-    client.update(status.to_s) if client.authorized?
+    client.update(Tweet.new(subject).to_s) if client.authorized?
   end
 
   private

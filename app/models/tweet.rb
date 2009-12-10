@@ -5,13 +5,13 @@ class Tweet
   MAXIMUM_TWEET_SIZE = 140
   HASHTAG = "#hyewye"
   
-  attr_accessor :type, :param, :subject_body, :screen_name, :choice
+  attr_accessor :subject_type, :param, :subject_body, :screen_name, :choice
   
   def initialize(subject)
-    self.type          = subject.class.name
+    self.subject_type          = subject.class.name
     self.subject_body  = subject.body
     
-    case type
+    case subject_type
     when "Question"
       self.param       = subject.to_param
     when "Answer"
@@ -22,15 +22,15 @@ class Tweet
   end
   
   def url
-    @url ||= question_answers_url(param, :host => Settings.host)
+    @url ||= shorten(question_answers_url(param, :host => Settings.host))
   end
-  
+    
   def body(joined_values)
     truncate(subject_body, :length => trimmed_size(joined_values))
   end
   
   def to_s
-    case type
+    case subject_type
     when "Question"
       joined_values = [HASHTAG, url]
       "#{HASHTAG} #{body(joined_values)} #{url}"
@@ -45,4 +45,13 @@ class Tweet
     def trimmed_size(joined_values)
       MAXIMUM_TWEET_SIZE - (joined_values.sum(&:size) + joined_values.size)
     end
+    
+    def shorten(url)
+      UrlShortener::Client.new(bitly_authorization).shorten(url).urls
+    end
+
+    def bitly_authorization
+      UrlShortener::Authorize.new(Settings.bitly.login, Settings.bitly.api_key)
+    end
+    
 end
