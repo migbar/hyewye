@@ -82,6 +82,10 @@ class User < ActiveRecord::Base
   end
   
   def tweet(status)
+    send_later(:perform_twitter_update, status)
+  end
+  
+  def perform_twitter_update(status)
     client = TwitterOAuth::Client.new(
         :consumer_key => "DLdF4bL5BFCpgVLSY2niQ", 
         :consumer_secret => "GjVRwnTiwDArWcq2GVVt3KCtBKhw1UNzz8OurLKAE",

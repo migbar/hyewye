@@ -79,12 +79,20 @@ describe User do
     end
   end
   
-  describe "#tweet" do
+  
+  it "#tweet enqueues perform_twitter_update" do
+    @user = Factory.build(:twitter_user)
+    @user.should_receive(:send_later).with(:perform_twitter_update, "the status")
+    @user.tweet("the status")
+  end
+  
+  describe "#perform_twitter_update" do
     before(:each) do
       @client = mock("TwitterOAuth::Client", :update => nil, :authorized? => true)
       TwitterOAuth::Client.stub!(:new).and_return(@client)
       @user = Factory.build(:twitter_user)
     end
+    
     it "builds a Twitter auth client with the consumer and user credentials" do
       TwitterOAuth::Client.should_receive(:new).
         with(:consumer_key => "DLdF4bL5BFCpgVLSY2niQ",
@@ -92,19 +100,19 @@ describe User do
              :token => @user.oauth_token, 
              :secret => @user.oauth_secret).
         and_return(@client)
-      @user.tweet("this is my status")
+      @user.perform_twitter_update("this is my status")
     end
     
     it "updates the status of the Twitter user using the OAuth client if authorized" do
       @client.should_receive(:authorized?).and_return(true)
       @client.should_receive(:update).with("this is my status")
-      @user.tweet("this is my status")
+      @user.perform_twitter_update("this is my status")
     end
     
     it "does not try to update the status if client is not authorized" do
       @client.should_receive(:authorized?).and_return(false)
       @client.should_not_receive(:update).with("this is my status")
-      @user.tweet("this is my status")
+      @user.perform_twitter_update("this is my status")
     end
   end
 
