@@ -62,11 +62,12 @@ describe User do
   
   describe "#tweet_event" do
     it "builds a tweet for the creation of an event and tweets it if the user is using twitter" do
-      tweet = mock("tweet", :to_s => "#hyewye have plastic surgery? http://hyewye.com/questions/5")
+      tweet = mock("tweet")
       question = Factory.build(:question)
       user = Factory.build(:twitter_user)
       Tweet.should_receive(:new).with(question).and_return(tweet)
-      user.should_receive(:tweet).with("#hyewye have plastic surgery? http://hyewye.com/questions/5")
+      # user.should_receive(:tweet).with("#hyewye have plastic surgery? http://hyewye.com/questions/5")
+      user.should_receive(:tweet).with(tweet)
       user.tweet_event(question)
     end
     

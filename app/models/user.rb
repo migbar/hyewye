@@ -78,7 +78,7 @@ class User < ActiveRecord::Base
   end
   
   def tweet_event(subject)
-    tweet(Tweet.new(subject).to_s) if using_twitter?
+    tweet(Tweet.new(subject)) if using_twitter?
   end
   
   def tweet(status)
@@ -92,7 +92,7 @@ class User < ActiveRecord::Base
         :token => oauth_token, 
         :secret => oauth_secret
     )
-    client.update(status) if client.authorized?
+    client.update(status.to_s) if client.authorized?
   end
 
   private

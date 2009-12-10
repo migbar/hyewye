@@ -5,28 +5,39 @@ class Tweet
   MAXIMUM_TWEET_SIZE = 140
   HASHTAG = "#hyewye"
   
-  attr_reader :subject
+  attr_accessor :type, :param, :subject_body, :screen_name, :choice
   
   def initialize(subject)
-    @subject = subject
+    self.type          = subject.class.name
+    self.subject_body  = subject.body
+    
+    case type
+    when "Question"
+      self.param       = subject.to_param
+    when "Answer"
+      self.param       = subject.question.to_param
+      self.screen_name = subject.question.user.screen_name
+      self.choice      = subject.choice_name
+    end
+  end
+  
+  def url
+    @url ||= question_answers_url(param, :host => Settings.host)
+  end
+  
+  def body(joined_values)
+    truncate(subject_body, :length => trimmed_size(joined_values))
   end
   
   def to_s
-    case subject
-    when Question
-      url           = question_answers_url(subject, :host => Settings.host)
+    case type
+    when "Question"
       joined_values = [HASHTAG, url]
-      body          = truncate(subject.body, :length => trimmed_size(joined_values))
-      
-      "#{HASHTAG} #{body} #{url}"
-    when Answer
-      url           = question_answers_url(subject.question, :host => Settings.host)
-      choice        = subject.choice_name
-      screen_name   = subject.question.user.screen_name
+      "#{HASHTAG} #{body(joined_values)} #{url}"
+    when "Answer"
       joined_values = [HASHTAG, url, "#{choice},", "@#{screen_name}"]
-      body          = truncate(subject.body, :length => trimmed_size(joined_values))
       
-      "@#{screen_name} #{choice}, #{body} #{HASHTAG} #{url}"
+      "@#{screen_name} #{choice}, #{body(joined_values)} #{HASHTAG} #{url}"
     end
   end
   

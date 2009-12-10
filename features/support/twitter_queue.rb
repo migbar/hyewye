@@ -9,7 +9,7 @@ class TwitterQueue
     end
     
     def add(screen_name, status)
-      for_user(screen_name) << status
+      for_user(screen_name) << status.to_s
     end
     
     def for_user(screen_name)
