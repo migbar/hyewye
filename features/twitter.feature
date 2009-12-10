@@ -6,7 +6,6 @@ Feature: Twitter Messaging
   Background:
     Given I am a logged in as the Twitter user "twitter_guy"
   
-  @wip
   Scenario: Tweeting a question
     Given I am on the ask question page
      When I fill in "Have you ever / Would you ever" with "get plastic surgery?"
@@ -16,7 +15,6 @@ Feature: Twitter Messaging
      When I click the first link in the tweet 
      Then I should be on the answers page for "get plastic surgery?"
   
-  @wip
   Scenario: Tweeting an answer
     Given a twitter user "question_guy" exists with screen_name: "question_guy"
       And a question "hps" exists with user: twitter user "question_guy"
