@@ -20,6 +20,9 @@ module NavigationHelpers
       new_question_path
     when /my account page/
       edit_account_path
+    when /the answers page for "([^\"]*)"/
+      record = Question.find_by_body($1)
+      question_answers_path(record)
       
     # Add more mappings here.
     # Here is a more fancy example:

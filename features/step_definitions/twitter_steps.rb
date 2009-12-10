@@ -1,5 +1,5 @@
 Given /^a Twitter user "([^\"]*)" registered with HyeWye$/ do |name|
-  Given %Q{a user "#{name}" exists with oauth_token: "foo", oauth_secret: "secret", name: "#{name}", avatar_url: "http://a3.twimg.com/profile_images/63673063/images-2_normal.jpeg"}
+  Given %Q{a twitter user "#{name}" exists with oauth_token: "foo", oauth_secret: "secret", screen_name: "#{name}", name: "#{name}", avatar_url: "http://a3.twimg.com/profile_images/63673063/images-2_normal.jpeg"}
   
   UserSession.class_eval do
     def redirect_to_oauth
@@ -13,7 +13,11 @@ Given /^a Twitter user "([^\"]*)" registered with HyeWye$/ do |name|
     end
   end
   
-  @twitter_queue = {}
+  User.class_eval do
+    def tweet(status)
+      TwitterQueue.add(screen_name, status)
+    end
+  end
 end
 
 Given /^a Twitter user "([^\"]*)" that is not registered with HyeWye$/ do |twitter_name|
@@ -93,17 +97,18 @@ end
 
 Then /^"([^\"]*)" should have a tweet$/ do |name|
   # { "twitter_guy" => [ :body => "#hyewye have plastic..." ] }
-  guy_queue = @twitter_queue[name] || []
+  guy_queue = TwitterQueue.for_user(name)
   guy_queue.size.should == 1
+  @twitter_guy = name
 end
 
 Then /^the tweet should contain "([^\"]*)"$/ do |text|
-  @the_tweet = guy_queue.shift
-  @the_tweet[:body].should match(/#{text}/)
+  @the_tweet = TwitterQueue.for_user(@twitter_guy).shift
+  @the_tweet.should match(/#{text}/)
 end
 
 When /^I click the first link in the tweet$/ do
-  link = URI.extract(@the_tweet[:body]).first
+  link = URI.extract(@the_tweet).first
   visit link
 end
 

@@ -27,8 +27,10 @@ config.gem 'nokogiri',    :lib => false,        :version => '>=1.4.0'
 config.gem 'factory_girl', :version => '>=1.2.3'
 config.gem 'pickle',      :lib => 'pickle/world', :version => '>=0.1.19'
 config.gem 'email_spec',   :version => '>=0.3.5'
+config.gem 'fakeweb',      :version => '>=1.2.7'
 
 config.after_initialize do
+  FakeWeb.allow_net_connect = false
   ActionMailer::Base.default_url_options[:host] = "example.com"
 end
 

@@ -32,8 +32,10 @@ config.gem "rspec-rails",      :version => '1.2.9',   :lib => false
 config.gem "remarkable_rails", :version => '3.1.11',  :lib => false
 config.gem 'factory_girl',     :version => '>=1.2.3'
 config.gem 'email_spec',       :version => '>=0.3.5'
+config.gem 'fakeweb',          :version => '>=1.2.7'
 
 config.after_initialize do
+  FakeWeb.allow_net_connect = false
   ActionMailer::Base.default_url_options[:host] = "example.com"
 end
 

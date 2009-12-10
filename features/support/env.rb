@@ -50,6 +50,8 @@ World(ActionView::Helpers::RecordIdentificationHelper)
 World(ActionView::Helpers::UrlHelper)
 
 After do |scenario|
+  TwitterQueue.reset
+  
   if scenario.failed?
     # save_and_open_page
   end
