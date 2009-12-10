@@ -87,8 +87,8 @@ class User < ActiveRecord::Base
   
   def perform_twitter_update(status)
     client = TwitterOAuth::Client.new(
-        :consumer_key => "DLdF4bL5BFCpgVLSY2niQ", 
-        :consumer_secret => "GjVRwnTiwDArWcq2GVVt3KCtBKhw1UNzz8OurLKAE",
+        :consumer_key => Settings.twitter.consumer_key, 
+        :consumer_secret => Settings.twitter.consumer_secret,
         :token => oauth_token, 
         :secret => oauth_secret
     )

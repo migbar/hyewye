@@ -27,10 +27,6 @@ config.action_view.cache_template_loading            = true
 # Enable threaded mode
 # config.threadsafe!
 
-config.after_initialize do
-  ActionMailer::Base.default_url_options[:host] = "hyewye.com"
-end
-
 ActionMailer::Base.delivery_method = :smtp
 ActionMailer::Base.smtp_settings = {
   :address => "smtp.gmail.com",

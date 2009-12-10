@@ -2,7 +2,6 @@ class Tweet
   include ActionController::UrlWriter
   include ActionView::Helpers::TextHelper
   
-  HOST = "hyewye.com"
   MAXIMUM_TWEET_SIZE = 140
   HASHTAG = "#hyewye"
   
@@ -15,13 +14,13 @@ class Tweet
   def to_s
     case subject
     when Question
-      url           = question_answers_url(subject, :host => HOST)
+      url           = question_answers_url(subject, :host => Settings.host)
       joined_values = [HASHTAG, url]
       body          = truncate(subject.body, :length => trimmed_size(joined_values))
       
       "#{HASHTAG} #{body} #{url}"
     when Answer
-      url           = question_answers_url(subject.question, :host => HOST)
+      url           = question_answers_url(subject.question, :host => Settings.host)
       choice        = subject.choice_name
       screen_name   = subject.question.user.screen_name
       joined_values = [HASHTAG, url, "#{choice},", "@#{screen_name}"]

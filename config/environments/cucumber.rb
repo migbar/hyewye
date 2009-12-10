@@ -31,7 +31,6 @@ config.gem 'fakeweb',      :version => '>=1.2.7'
 
 config.after_initialize do
   FakeWeb.allow_net_connect = false
-  ActionMailer::Base.default_url_options[:host] = "example.com"
 end
 
 # implicit, no :lib specified

@@ -95,8 +95,8 @@ describe User do
     
     it "builds a Twitter auth client with the consumer and user credentials" do
       TwitterOAuth::Client.should_receive(:new).
-        with(:consumer_key => "DLdF4bL5BFCpgVLSY2niQ",
-             :consumer_secret => 'GjVRwnTiwDArWcq2GVVt3KCtBKhw1UNzz8OurLKAE',
+        with(:consumer_key => Settings.twitter.consumer_key,
+             :consumer_secret => Settings.twitter.consumer_secret,
              :token => @user.oauth_token, 
              :secret => @user.oauth_secret).
         and_return(@client)

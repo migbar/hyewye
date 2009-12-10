@@ -29,6 +29,7 @@ Rails::Initializer.run do |config|
   config.gem "authlogic-oauth",     :version => '1.0.8', :lib => "authlogic_oauth"
   config.gem "twitter_oauth",       :version => '0.2.1'
   config.gem "delayed_job",         :version => '1.8.4'
+  config.gem "settingslogic",       :version => '2.0.3'
   
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named
@@ -48,6 +49,10 @@ Rails::Initializer.run do |config|
   # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
   # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}')]
   # config.i18n.default_locale = :de
+  
+  config.after_initialize do
+    ActionMailer::Base.default_url_options[:host] = Settings.host
+  end
 end
 
 require 'digest/md5'
