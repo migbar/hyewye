@@ -1,5 +1,5 @@
-THIS_FILE = File.symlink?(__FILE__) ? File.readlink(__FILE__) : __FILE__
-RAILS_ROOT = File.expand_path(File.dirname(THIS_FILE) + '/../..')
+this_file = File.symlink?(__FILE__) ? File.readlink(__FILE__) : __FILE__
+rails_root = File.expand_path(File.dirname(this_file) + '/../..')
 
 God.watch do |w|
   w.name = "dj-1"
@@ -8,10 +8,10 @@ God.watch do |w|
   
   env = ENV["RAILS_ENV"] || "production"
   
-  w.pid_file = "#{RAILS_ROOT}/tmp/pids/delayed_job.pid"
-  w.start = "RAILS_ENV=#{env} #{RAILS_ROOT}/script/delayed_job start"
-  w.stop = "RAILS_ENV=#{env} #{RAILS_ROOT}/script/delayed_job stop"
-  w.restart = "RAILS_ENV=#{env} #{RAILS_ROOT}/script/delayed_job restart"
+  w.pid_file = "#{rails_root}/tmp/pids/delayed_job.pid"
+  w.start = "RAILS_ENV=#{env} #{rails_root}/script/delayed_job start"
+  w.stop = "RAILS_ENV=#{env} #{rails_root}/script/delayed_job stop"
+  w.restart = "RAILS_ENV=#{env} #{rails_root}/script/delayed_job restart"
 
   if env == "production"
     w.uid = 'hyewye'

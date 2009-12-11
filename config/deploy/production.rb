@@ -10,4 +10,4 @@ set :use_sudo, false
 set :user, "hyewye"
 set :branch, "stable"
 set :deploy_to, "/home/hyewye/app"
-
+set :rails_env, "production"

@@ -25,7 +25,7 @@ namespace :gems do
   task :install, :roles => :app, :except => {:no_symlink => true} do
     run <<-CMD
       cd #{release_path} &&
-      rake gems:install
+      RAILS_ENV=#{rails_env} rake gems:install
     CMD
   end
 end
@@ -34,15 +34,15 @@ after 'deploy:update_code', 'gems:install'
 
 namespace :god do
   task :stop_dj do
-    run "sudo god stop dj"
+    sudo "god stop dj"
   end
   
   task :start_dj do
-    run "sudo god start dj"
+    sudo "god start dj"
   end
   
   task :reload do
-    run "sudo god load #{release_path}/config/god/app.god"
+    sudo "god load #{release_path}/config/god/app.god"
   end
 end
 
