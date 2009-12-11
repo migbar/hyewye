@@ -4,20 +4,24 @@ RAILS_ROOT = File.expand_path(File.dirname(THIS_FILE) + '/../..')
 God.watch do |w|
   w.name = "dj-1"
   w.group = 'dj'
-  w.interval = 5.seconds
+  w.interval = 30.seconds
+  
+  env = ENV["RAILS_ENV"] || "production"
   
   w.pid_file = "#{RAILS_ROOT}/tmp/pids/delayed_job.pid"
-  w.start = "#{RAILS_ROOT}/script/delayed_job start"
-  w.stop = "#{RAILS_ROOT}/script/delayed_job stop"
-  w.restart = "#{RAILS_ROOT}/script/delayed_job restart"
+  w.start = "#{RAILS_ROOT}/script/delayed_job -e #{env} start"
+  w.stop = "#{RAILS_ROOT}/script/delayed_job -e #{env} stop"
+  w.restart = "#{RAILS_ROOT}/script/delayed_job -e #{env} restart"
 
-  # w.uid = 'your_app_user'
-  # w.gid = 'your_app_user'
+  if env == "production"
+    w.uid = 'hyewye'
+    w.gid = 'hyewye'
+  end
 
-  # retart if memory gets too high
+  # restart if memory gets too high
   w.transition(:up, :restart) do |on|
     on.condition(:memory_usage) do |c|
-      c.above = 300.megabytes
+      c.above = 75.megabytes
       c.times = 2
     end
   end
