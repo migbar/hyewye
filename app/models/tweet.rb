@@ -6,6 +6,7 @@ class Tweet
   HASHTAG = "#hyewye"
   
   attr_accessor :subject_type, :param, :subject_body, :screen_name, :choice
+  attr_writer :url
   
   def initialize(subject)
     self.subject_type          = subject.class.name
@@ -22,7 +23,11 @@ class Tweet
   end
   
   def url
-    @url ||= shorten(question_answers_url(param, :host => Settings.host))
+    @url ||= shorten(normal_url)
+  end
+  
+  def normal_url
+    question_answers_url(param, :host => Settings.host)
   end
     
   def body(joined_values)
@@ -41,17 +46,16 @@ class Tweet
     end
   end
   
+  def shorten(url)
+    UrlShortener::Client.new(bitly_authorization).shorten(url).urls
+  end
+
+  def bitly_authorization
+    UrlShortener::Authorize.new(Settings.bitly.login, Settings.bitly.api_key)
+  end
+  
   private
     def trimmed_size(joined_values)
       MAXIMUM_TWEET_SIZE - (joined_values.sum(&:size) + joined_values.size)
     end
-    
-    def shorten(url)
-      UrlShortener::Client.new(bitly_authorization).shorten(url).urls
-    end
-
-    def bitly_authorization
-      UrlShortener::Authorize.new(Settings.bitly.login, Settings.bitly.api_key)
-    end
-    
 end

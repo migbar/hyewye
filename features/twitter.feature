@@ -1,4 +1,3 @@
-@wip
 Feature: Twitter Messaging
   In order to let my twitter friends know about my questions and answers
   As a user

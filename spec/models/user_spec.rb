@@ -65,9 +65,7 @@ describe User do
       tweet = mock("tweet")
       question = Factory.build(:question)
       user = Factory.build(:twitter_user)
-      Tweet.should_receive(:new).with(question).and_return(tweet)
-      # user.should_receive(:tweet).with("#hyewye have plastic surgery? http://hyewye.com/questions/5")
-      user.should_receive(:tweet).with(tweet)
+      user.should_receive(:tweet).with(question)
       user.tweet_event(question)
     end
     
@@ -92,6 +90,9 @@ describe User do
       @client = mock("TwitterOAuth::Client", :update => nil, :authorized? => true)
       TwitterOAuth::Client.stub!(:new).and_return(@client)
       @user = Factory.build(:twitter_user)
+      @question = mock_model(Question, :body => "Foo")
+      @tweet = mock(Tweet, :to_s => "this is my status")
+      Tweet.stub(:new).and_return(@tweet)
     end
     
     it "builds a Twitter auth client with the consumer and user credentials" do
@@ -101,19 +102,25 @@ describe User do
              :token => @user.oauth_token, 
              :secret => @user.oauth_secret).
         and_return(@client)
-      @user.perform_twitter_update("this is my status")
+      @user.perform_twitter_update(@question)
+    end
+    
+    it "build a Tweet from the subject if authorized" do
+      @client.should_receive(:authorized?).and_return(true)
+      Tweet.should_receive(:new).with(@question).and_return(@tweet)
+      @user.perform_twitter_update(@question)
     end
     
     it "updates the status of the Twitter user using the OAuth client if authorized" do
       @client.should_receive(:authorized?).and_return(true)
-      @client.should_receive(:update).with("this is my status")
-      @user.perform_twitter_update("this is my status")
+      @client.should_receive(:update).with(@tweet.to_s)
+      @user.perform_twitter_update(@question)
     end
     
     it "does not try to update the status if client is not authorized" do
       @client.should_receive(:authorized?).and_return(false)
-      @client.should_not_receive(:update).with("this is my status")
-      @user.perform_twitter_update("this is my status")
+      @client.should_not_receive(:update).with(@tweet.to_s)
+      @user.perform_twitter_update(@question)
     end
   end
 

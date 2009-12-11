@@ -14,8 +14,10 @@ Given /^a Twitter user "([^\"]*)" registered with HyeWye$/ do |name|
   end
   
   User.class_eval do
-    def tweet(status)
-      TwitterQueue.add(screen_name, status)
+    def tweet(subject)
+      tweet = Tweet.new(subject)
+      tweet.url = tweet.normal_url
+      TwitterQueue.add(screen_name, tweet)
     end
   end
 end
