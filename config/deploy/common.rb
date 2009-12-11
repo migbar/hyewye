@@ -19,6 +19,8 @@ namespace :deploy do
   end
 end
 
+after 'deploy:update_code', 'deploy:copy_database_config'
+
 namespace :gems do
   task :install, :roles => :app, :except => {:no_symlink => true} do
     run <<-CMD
@@ -29,3 +31,21 @@ namespace :gems do
 end
 
 after 'deploy:update_code', 'gems:install'
+
+namespace :god do
+  task :stop_dj do
+    run "sudo god stop dj"
+  end
+  
+  task :start_dj do
+    run "sudo god start dj"
+  end
+  
+  task :reload do
+    run "sudo god load #{release_path}/config/god/app.god"
+  end
+end
+
+before 'deploy:update_code', 'god:stop_dj'
+after 'deploy:update_code', 'god:reload'
+after 'deploy:update_code', 'god:start_dj'

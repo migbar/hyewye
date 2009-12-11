@@ -11,4 +11,3 @@ set :user, "hyewye"
 set :branch, "stable"
 set :deploy_to, "/home/hyewye/app"
 
-after 'deploy:update_code', 'deploy:copy_database_config'

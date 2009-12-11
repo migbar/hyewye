@@ -1,5 +1,13 @@
 == Welcome to HYE ¿? WYE
 
-A silly question and answer app that aims at being somewhate interesting while being an utter waste of time !
+A silly question and answer app that aims at being somewhat interesting while being an utter waste of time !
 
 more to come ...
+
+== Installation
+
+=== Gems
+
+Install these by hand on the server:
+* god for process monitoring
+* daemons for delayed job worker

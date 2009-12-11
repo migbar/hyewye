@@ -9,9 +9,9 @@ God.watch do |w|
   env = ENV["RAILS_ENV"] || "production"
   
   w.pid_file = "#{RAILS_ROOT}/tmp/pids/delayed_job.pid"
-  w.start = "#{RAILS_ROOT}/script/delayed_job -e #{env} start"
-  w.stop = "#{RAILS_ROOT}/script/delayed_job -e #{env} stop"
-  w.restart = "#{RAILS_ROOT}/script/delayed_job -e #{env} restart"
+  w.start = "RAILS_ENV=#{env} #{RAILS_ROOT}/script/delayed_job start"
+  w.stop = "RAILS_ENV=#{env} #{RAILS_ROOT}/script/delayed_job stop"
+  w.restart = "RAILS_ENV=#{env} #{RAILS_ROOT}/script/delayed_job restart"
 
   if env == "production"
     w.uid = 'hyewye'
