@@ -8,6 +8,9 @@ God.watch do |w|
   
   env = ENV["RAILS_ENV"] || "production"
   
+  w.dir = rails_root
+  w.log = "#{rails_root}/log/dj-1.log"
+  
   w.pid_file = "#{rails_root}/tmp/pids/delayed_job.pid"
   start = "su - hyewye -c 'RAILS_ENV=#{env} #{rails_root}/script/delayed_job start'"
   puts start
