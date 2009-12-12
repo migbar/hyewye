@@ -9,7 +9,7 @@ God.watch do |w|
   env = ENV["RAILS_ENV"] || "production"
   
   w.pid_file = "#{rails_root}/tmp/pids/delayed_job.pid"
-  w.start = "RAILS_ENV=#{env} #{rails_root}/script/delayed_job start >> /var/log/dj_start.logs"
+  w.start = "RAILS_ENV=#{env} #{rails_root}/script/delayed_job start"
   w.stop = "RAILS_ENV=#{env} #{rails_root}/script/delayed_job stop"
   w.restart = "RAILS_ENV=#{env} #{rails_root}/script/delayed_job restart"
 
@@ -25,7 +25,7 @@ God.watch do |w|
   #     c.times = 2
   #   end
   # end
-  # 
+  # s
   # # determine the state on startup
   # w.transition(:init, { true => :up, false => :start }) do |on|
   #   on.condition(:process_running) do |c|

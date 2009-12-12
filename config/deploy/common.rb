@@ -23,7 +23,7 @@ after 'deploy:update_code', 'deploy:copy_database_config'
 
 namespace :gems do
   task :install, :roles => :app, :except => {:no_symlink => true} do
-    run <<-CMD
+    sudo <<-CMD
       cd #{release_path} &&
       RAILS_ENV=#{rails_env} rake gems:install
     CMD
