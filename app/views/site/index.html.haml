@@ -3,12 +3,12 @@
 #left-col
   #event-list-heading
     Recent Posts:
-  %ul{:id => "events-list"}
-    - present_events(@events).each do |event|
-      %li{:id => event.dom_id, :class => event.dom_class}
+  %div{:id => "events-list"}
+    - present_events(@events).each_with_index do |event, index|
+      %div{ :id => "event_#{@events.size - index}", :class => "event", :style=> "#{(@events.size - index) <= 10 ? 'display:block' : 'display:none'}"}
         .user
           = link_to(image_tag(event.user.avatar), user_path(event.user))
-        .event
+        %div{:id => event.dom_id, :class => event.dom_class}
           .event-body
             = event.link_to_user
             said:

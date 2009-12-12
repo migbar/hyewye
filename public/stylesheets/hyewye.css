@@ -164,7 +164,7 @@ div#page-wrap {
 		}
 		div#page-wrap div#container div#left-col {
 			float: left;
-			width: 545px;
+/*			width: 545px;*/
 			margin-left: 10px;
 			-webkit-border-radius:10px;
 			-moz-border-radius:10px;
