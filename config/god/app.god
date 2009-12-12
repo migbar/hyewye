@@ -9,14 +9,18 @@ God.watch do |w|
   env = ENV["RAILS_ENV"] || "production"
   
   w.pid_file = "#{rails_root}/tmp/pids/delayed_job.pid"
-  w.start = "RAILS_ENV=#{env} #{rails_root}/script/delayed_job start"
-  w.stop = "RAILS_ENV=#{env} #{rails_root}/script/delayed_job stop"
-  w.restart = "RAILS_ENV=#{env} #{rails_root}/script/delayed_job restart"
+  start = "su - hyewye -c 'RAILS_ENV=#{env} #{rails_root}/script/delayed_job start'"
+  puts start
+  w.start = start
+  
+  stop = "su - hyewye -c 'RAILS_ENV=#{env} #{rails_root}/script/delayed_job stop'"
+  puts stop
+  w.stop = stop
 
-  if env == "production"
-    w.uid = 'hyewye'
-    w.gid = 'hyewye'
-  end
+  # if env == "production"
+  #   w.uid = 'hyewye'
+  #   w.gid = 'hyewye'
+  # end
 
   # restart if memory gets too high
   # w.transition(:up, :restart) do |on|
