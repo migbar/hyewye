@@ -16,6 +16,8 @@ God.watch do |w|
   stop = "su - hyewye -c 'RAILS_ENV=#{env} #{rails_root}/script/delayed_job stop'"
   puts stop
   w.stop = stop
+  
+  w.behavior(:clean_pid_file)
 
   # if env == "production"
   #   w.uid = 'hyewye'
