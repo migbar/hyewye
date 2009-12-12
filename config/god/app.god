@@ -9,7 +9,7 @@ God.watch do |w|
   env = ENV["RAILS_ENV"] || "production"
   
   w.pid_file = "#{rails_root}/tmp/pids/delayed_job.pid"
-  w.start = "RAILS_ENV=#{env} #{rails_root}/script/delayed_job start"
+  w.start = "RAILS_ENV=#{env} #{rails_root}/script/delayed_job start >> /var/log/dj_start.logs"
   w.stop = "RAILS_ENV=#{env} #{rails_root}/script/delayed_job stop"
   w.restart = "RAILS_ENV=#{env} #{rails_root}/script/delayed_job restart"
 
