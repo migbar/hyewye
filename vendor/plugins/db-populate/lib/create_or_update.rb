@@ -11,7 +11,9 @@ class ActiveRecord::Base
     id = options.delete(primary_key.to_sym)
     record = send("find_by_#{primary_key}", id) || new
     record.id = id
-    record.attributes = options
+    options.each do |k, v|
+      record.send("#{k}=", v)
+    end
     record.save!
     
     record
