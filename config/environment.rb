@@ -28,7 +28,6 @@ Rails::Initializer.run do |config|
   config.gem "oauth",               :version => '0.3.6'
   config.gem "authlogic-oauth",     :version => '1.0.8', :lib => "authlogic_oauth"
   config.gem "twitter_oauth",       :version => '0.2.1'
-  config.gem "delayed_job",         :version => '1.8.4'
   config.gem "settingslogic",       :version => '2.0.3'
   config.gem "url_shortener",       :version => '0.0.6'
   

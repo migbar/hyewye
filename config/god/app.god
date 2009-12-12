@@ -12,17 +12,18 @@ God.watch do |w|
   w.log = "#{rails_root}/log/dj-1.log"
   
   w.pid_file = "#{rails_root}/tmp/pids/delayed_job.pid"
-  start = "su - hyewye -c 'RAILS_ENV=#{env} #{rails_root}/script/delayed_job start'"
+  # start = "su - hyewye -c 'RAILS_ENV=#{env} #{rails_root}/script/delayed_job start'"
+  start = "su - hyewye -c 'cd #{rails_root} && RAILS_ENV=#{env} rake jobs:work'"
   puts start
   w.start = start
   
-  stop = "su - hyewye -c 'RAILS_ENV=#{env} #{rails_root}/script/delayed_job stop'"
-  puts stop
-  w.stop = stop
-  
-  restart = "su - hyewye -c 'RAILS_ENV=#{env} #{rails_root}/script/delayed_job restart'"
-  puts restart
-  w.restart = restart
+  # stop = "su - hyewye -c 'RAILS_ENV=#{env} #{rails_root}/script/delayed_job stop'"
+  # puts stop
+  # w.stop = stop
+  # 
+  # restart = "su - hyewye -c 'RAILS_ENV=#{env} #{rails_root}/script/delayed_job restart'"
+  # puts restart
+  # w.restart = restart
   
   w.behavior(:clean_pid_file)
   
