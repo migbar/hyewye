@@ -32,20 +32,15 @@ end
 
 after 'deploy:update_code', 'gems:install'
 
-namespace :god do
+namespace :monit do
   task :stop_dj do
-    sudo "god stop dj"
+    sudo "monit stop delayed_job"
   end
   
   task :start_dj do
-    sudo "god start dj"
-  end
-  
-  task :reload do
-    sudo "god load #{release_path}/config/god/app.god"
+    sudo "monit start delayed_job"
   end
 end
 
-before 'deploy:update_code', 'god:stop_dj'
-after 'deploy:update_code', 'god:reload'
-after 'deploy:update_code', 'god:start_dj'
+before 'deploy:update_code', 'monit:stop_dj'
+after 'deploy:update_code', 'monit:start_dj'

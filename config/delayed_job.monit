@@ -1,0 +1,3 @@
+check process delayed_job with pidfile /home/hyewye/app/shared/pids/delayed_job.pid
+  start program = "/home/hyewye/app/current/script/delayed_job -e production start"
+  stop program = "/home/hyewye/app/current/script/delayed_job -e production stop"
