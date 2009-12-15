@@ -37,10 +37,15 @@ namespace :monit do
     sudo "monit stop delayed_job"
   end
   
+  task :reload do
+    sudo "monit reload"
+  end
+  
   task :start_dj do
     sudo "monit start delayed_job"
   end
 end
 
 before 'deploy:update_code', 'monit:stop_dj'
+after 'deploy:update_code', 'monit:reload'
 after 'deploy:update_code', 'monit:start_dj'
