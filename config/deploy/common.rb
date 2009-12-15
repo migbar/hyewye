@@ -33,14 +33,16 @@ end
 after 'deploy:update_code', 'gems:install'
 
 namespace :monit do
-  task :reload do
-    sudo "monit reload"
+  task :stop_dj do
+    sudo "monit stop delayed_job; sleep 5"
   end
   
   task :restart_dj do
-    sudo "monit restart delayed_job"
+    sudo "monit reload"
+    sudo "monit monitor delayed_job"
+    sudo "monit start delayed_job"
   end
 end
 
-after 'deploy:symlink', 'monit:reload'
+before 'deploy:symlink', 'monit:stop_dj'
 after 'deploy:symlink', 'monit:restart_dj'
