@@ -3,9 +3,9 @@
 #left-col
   #event-list-heading
     Recent Posts:
-  %div{:id => "events-list"}
+  %ul#events-list
     - present_events(@events).each_with_index do |event, index|
-      %div{ :id => "event_#{@events.size - index}", :class => "event", :style=> "#{(@events.size - index) <= 10 ? 'display:block' : 'display:none'}"}
+      %li.event{ :id => "event_#{@events.size - index}", :style=> "#{(@events.size - index) <= 10 ? 'display:block' : 'display:none'}"}
         .user
           = link_to(image_tag(event.user.avatar), user_path(event.user))
         %div{:id => event.dom_id, :class => event.dom_class}
