@@ -30,6 +30,7 @@ Rails::Initializer.run do |config|
   config.gem "twitter_oauth",       :version => '0.2.1'
   config.gem "settingslogic",       :version => '2.0.3'
   config.gem "url_shortener",       :version => '0.0.6'
+  config.gem "backup",              :version => '2.3.0.2'
   
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091210111706) do
+ActiveRecord::Schema.define(:version => 20091216110259) do
 
   create_table "answers", :force => true do |t|
     t.integer  "user_id"
@@ -22,6 +22,17 @@ ActiveRecord::Schema.define(:version => 20091210111706) do
 
   add_index "answers", ["question_id"], :name => "index_answers_on_question_id"
   add_index "answers", ["user_id"], :name => "index_answers_on_user_id"
+
+  create_table "backup", :force => true do |t|
+    t.string   "storage"
+    t.string   "trigger"
+    t.string   "adapter"
+    t.string   "filename"
+    t.string   "path"
+    t.string   "bucket"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0

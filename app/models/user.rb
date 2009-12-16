@@ -92,6 +92,7 @@ class User < ActiveRecord::Base
         :token => oauth_token, 
         :secret => oauth_secret
     )
+    # raise "Does the job get rescheduled on exception?"
     client.update(Tweet.new(subject).to_s) if client.authorized?
   end
 
