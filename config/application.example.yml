@@ -1,0 +1,27 @@
+# app/config/application.yml
+defaults: &defaults
+  host: "hyewye.com"
+  twitter:
+    consumer_key: "foo_consumer_key"
+    consumer_secret: "foo_consumer_secret"
+  bitly:
+    login: "foo_login"
+    api_key: "foo_key"
+  s3:
+    access_key_id: "foo_access_key_id"
+    secret_access_key: "foo_secret_access_key"
+
+development:
+  <<: *defaults
+  host: "hyewye.local"
+    
+test:
+  <<: *defaults
+  host: "example.com"
+
+cucumber:
+  <<: *defaults
+  host: "example.com"
+
+production:
+  <<: *defaults
