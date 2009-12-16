@@ -11,15 +11,16 @@ namespace :deploy do
     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
   end
   
-  task :copy_database_config, :roles => :app, :except => {:no_symlink => true} do
+  task :copy_configs, :roles => :app, :except => {:no_symlink => true} do
     run <<-CMD
       cd #{release_path} &&
       cp #{shared_path}/config/database.yml #{release_path}/config/database.yml
+      cp #{shared_path}/config/application.yml #{release_path}/config/application.yml
     CMD
   end
 end
 
-after 'deploy:update_code', 'deploy:copy_database_config'
+after 'deploy:update_code', 'deploy:copy_configs'
 
 namespace :gems do
   task :install, :roles => :app, :except => {:no_symlink => true} do
