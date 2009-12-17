@@ -14,7 +14,7 @@ namespace :deploy do
   task :copy_configs, :roles => :app, :except => {:no_symlink => true} do
     run <<-CMD
       cd #{release_path} &&
-      cp #{shared_path}/config/database.yml #{release_path}/config/database.yml
+      cp #{shared_path}/config/database.yml #{release_path}/config/database.yml &&
       cp #{shared_path}/config/application.yml #{release_path}/config/application.yml
     CMD
   end
