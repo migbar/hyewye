@@ -35,6 +35,13 @@ describe UserSessionsController do
     
   end
   
+  describe "handling GET show" do
+    it "redirects to the new action" do
+      get :show
+      response.should redirect_to(new_user_session_path)
+    end
+  end
+  
   describe "handling POST create" do
     before(:each) do
       UserSession.stub(:find).and_return(nil) # logged out

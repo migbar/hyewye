@@ -34,6 +34,28 @@ describe QuestionsController do
     end
   end
   
+  describe "handling GET show" do
+    before(:each) do
+      @question = mock_model(Question)
+      Question.stub(:find).and_return(@question)
+    end
+    
+    def do_get
+      get :show, :id => 42
+    end
+    
+    it "finds the question and assigns it for the view" do
+      Question.should_receive(:find).with("42").and_return(@question)
+      do_get
+      assigns[:question].should == @question
+    end
+    
+    it "redirects to the answers page for the question" do
+      do_get
+      response.should redirect_to(question_answers_path(@question))
+    end
+  end
+  
   describe "handling POST create action" do
     before(:each) do
       current_user.questions.stub(:build).and_return(@question)

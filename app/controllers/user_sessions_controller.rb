@@ -7,6 +7,10 @@ class UserSessionsController < ApplicationController
     @user_session = UserSession.new
   end
   
+  def show
+    redirect_to :action => :new
+  end
+  
   def create
     @user_session = UserSession.new(params[:user_session])
     @user_session.save do |result|

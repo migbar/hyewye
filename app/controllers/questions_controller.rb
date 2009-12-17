@@ -1,8 +1,13 @@
 class QuestionsController < ApplicationController
-  before_filter :require_user
+  before_filter :require_user, :except => :show
   
   def new
     @question = Question.new
+  end
+  
+  def show
+    @question = Question.find(params[:id])
+    redirect_to question_answers_path(@question)
   end
   
   def create
