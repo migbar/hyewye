@@ -25,7 +25,7 @@ config.gem 'rspec',       :lib => false,        :version => '>=1.2.8'
 config.gem 'rspec-rails', :lib => false,        :version => '>=1.2.7.1'
 config.gem 'nokogiri',    :lib => false,        :version => '>=1.4.0'
 config.gem 'factory_girl', :version => '>=1.2.3'
-config.gem 'pickle',      :lib => 'pickle/world', :version => '>=0.1.19'
+config.gem 'pickle',      :lib => false, :version => '>=0.2.1'
 config.gem 'email_spec',   :version => '>=0.3.5'
 config.gem 'fakeweb',      :version => '>=1.2.7'
 

@@ -43,6 +43,8 @@ module NavigationHelpers
       url_for(record)
     when /the answers page/
       question_answers_path(record)
+    when /the questions page/
+      user_questions_path(record)
     else
       raise "Can't find mapping from \"#{page_name}\" to a resource.\n" +
         "Now, go and add a mapping in #{__FILE__}"

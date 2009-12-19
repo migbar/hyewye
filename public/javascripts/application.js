@@ -1,18 +1,18 @@
 var delay = 6000;
-var count = 30;
-var showing = 10;
 var speed = 700;
-var i = 0;
-function move(i) {
-  return function() {
-    $('#event_'+i).remove().css('display', 'none').prependTo('#events-list');
-  }
-}
+
 function scrollEvents() {
-  var toShow = (i + showing) % count;
-  $('#event_'+toShow).slideDown(speed, move(i));
-  $('#event_'+i).slideUp(speed, move(i));
-  i = (i + 1) % count;
+  var move = function (e) {
+    return function() {
+      $(e).remove().css('display', 'none !important').prependTo("#events");
+    }
+  }
+  
+  $("#events li:hidden").filter(":last").slideDown(speed);
+  
+  var e = $("#events li:visible").filter(":last");
+  e.slideUp(speed, move(e));
+
   setTimeout('scrollEvents()', delay);
 }    
 $(document).ready(function() {

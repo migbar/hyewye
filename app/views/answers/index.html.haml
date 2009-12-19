@@ -22,16 +22,8 @@
     What other people said:
   %ul{:id => "answers-list"}
     - @answers.each do |answer|
-      %li.clearfix{:id => dom_id(answer), :class =>"answer_in_list"}
-        .user
-          = link_to(image_tag(answer.user.avatar), user_path(answer.user))
-        .event
-          .event-body
-            = link_to answer.user, user_path(answer.user)
-            said:
-            = answer.choice_name
-            ,
-            = h answer
+      = render_event(answer, :locals => { :hide_link => true })
+    
 
   = will_paginate @answers
   

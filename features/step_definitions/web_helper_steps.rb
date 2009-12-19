@@ -12,3 +12,9 @@ Then /^I should be at (.+?) for #{capture_model}$/ do |page_name, capture|
   record = model(capture)
   URI.parse(current_url).path.should == resource_to(page_name, record)
 end
+
+Then /^I should see the following:?$/ do |table|
+  table.rows.each do |row|
+    response.should contain(row.first)
+  end
+end

@@ -58,3 +58,4 @@ After do |scenario|
 end
 
 require 'features/support/regex_helpers'
+require 'features/support/pickle'

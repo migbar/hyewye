@@ -11,10 +11,10 @@ end
 Then /^I should see the following answers$/ do |expected_table|
   doc = Nokogiri::HTML(response.body) 
   hand_made = [%w{User Choice Answer}]  
-  doc.css('#answers-list .event .event-body').each do |answer_body|
-    user = answer_body.css('a').first.content
-    choice = answer_body.content[choice_regex, 0]
-    body = answer_body.content[body_regex, 0]
+  doc.css('#answers-list .answer').each do |element|
+    user = element.css('.author a').first.content
+    choice = element.css('.choice').first.content[choice_regex, 0]
+    body = element.css('.body').first.content
     hand_made << [user, choice, body]
   end
   my_table = Cucumber::Ast::Table.new(hand_made)

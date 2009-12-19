@@ -10,12 +10,39 @@ describe QuestionsController do
     end
   end
   
-  before(:each) do
-    @question = mock_model(Question)
+  describe "handling GET index" do
+    before(:each) do
+      @user = mock_model(User)
+      User.stub(:find).and_return(@user)
+      @questions = [mock_model(Question)]
+      @user.stub(:questions).and_return(@questions)
+    end
+    
+    def do_get
+      get :index, :user_id => 42
+    end
+    
+    it "finds the specified user and assigns it for the view" do
+      User.should_receive(:find).with("42").and_return(@user)
+      do_get
+      assigns[:user].should == @user
+    end
+    
+    it "fetches the questions for the user and assigns them for the view" do
+      @user.should_receive(:questions).and_return(@questions)
+      do_get
+      assigns[:questions].should == @questions
+    end
+    
+    it "renders the index template" do
+      do_get
+      response.should render_template(:index)
+    end
   end
   
   describe "handling GET new action" do
     before(:each) do
+      @question = mock_model(Question)
       login_user
     end
     
@@ -58,6 +85,7 @@ describe QuestionsController do
   
   describe "handling POST create action" do
     before(:each) do
+      @question = mock_model(Question)
       current_user.questions.stub(:build).and_return(@question)
       login_user
     end

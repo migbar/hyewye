@@ -1,5 +1,10 @@
 class QuestionsController < ApplicationController
-  before_filter :require_user, :except => :show
+  before_filter :require_user, :except => [:index, :show]
+  
+  def index
+    @user = User.find(params[:user_id])
+    @questions = @user.questions
+  end
   
   def new
     @question = Question.new

@@ -1,0 +1,10 @@
+%li.clearfix.event.question{:id => html[:id] || dom_id(question), :style => html[:style]}
+  .avatar
+    = link_to(image_tag(user.avatar), user_path(user))
+  .content
+    %span.author= link_to h(user.login), user_path(user)
+    asked:
+    %span.body= h question.body
+  .links
+    = link_to "Answer", question_answers_path(question)
+  

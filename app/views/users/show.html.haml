@@ -1,15 +1,6 @@
 - title "#{@user}'s Activity"
 = image_tag(@user.avatar)
-%table#stream
-  %tr
-    %th Event
-    %th
-    %th
-  
-  - present_events(@events).each do |event|
-    %tr{ :id => event.dom_id, :class => event.dom_class }
-      %td= h event.body 
-      %td<
-        - event.when_answer do
-          = event.choice
-      %td= event.link_to_question("answer")
+
+%ul#stream
+  - @events.each do |event|
+    = render_event(event.subject)
