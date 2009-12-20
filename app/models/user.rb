@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
   has_many :answers
   has_many :events
   
-  attr_accessible :password, :password_confirmation
+  attr_accessible :password, :password_confirmation, :name, :tweet_activity
 
   before_save :populate_oauth_user
 
@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
   end
   
   def using_twitter?
-    !oauth_token.blank?
+    !!oauth_token
   end
   
   def avatar
@@ -74,7 +74,7 @@ class User < ActiveRecord::Base
   end
   
   def event_created(subject)
-    tweet_event subject
+    tweet_event subject if tweet_activity?
   end
   
   def tweet_event(subject)

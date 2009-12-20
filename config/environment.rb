@@ -19,18 +19,19 @@ Rails::Initializer.run do |config|
   # config.gem "hpricot", :version => '0.6', :source => "http://code.whytheluckystiff.net"
   # config.gem "sqlite3-ruby", :lib => "sqlite3"
   # config.gem "aws-s3", :lib => "aws/s3"
-  config.gem "haml",                :version => '2.2.9'
-  config.gem "authlogic",           :version => '2.1.2'
-  config.gem "will_paginate",       :version => '2.3.11'
-  config.gem "active_presenter",    :version => '1.2.0'
-  config.gem "inherited_resources", :version => '0.9.3'
-  config.gem "formtastic",          :version => '0.9.3'
-  config.gem "oauth",               :version => '0.3.6'
-  config.gem "authlogic-oauth",     :version => '1.0.8', :lib => "authlogic_oauth"
-  config.gem "twitter_oauth",       :version => '0.2.1'
-  config.gem "settingslogic",       :version => '2.0.3'
-  config.gem "url_shortener",       :version => '0.0.6'
-  config.gem "backup",              :version => '2.3.0.2'
+  config.gem "haml",                               :version => '2.2.9'
+  config.gem "authlogic",                          :version => '2.1.2'
+  config.gem "will_paginate",                      :version => '2.3.11'
+  config.gem "active_presenter",                   :version => '1.2.0'
+  config.gem "inherited_resources",                :version => '0.9.3'
+  config.gem "formtastic",                         :version => '0.9.3'
+  config.gem "oauth",                              :version => '0.3.6'
+  config.gem "authlogic-oauth",                    :version => '1.0.8', :lib => "authlogic_oauth"
+  config.gem "twitter_oauth",                      :version => '0.2.1'
+  config.gem "settingslogic",                      :version => '2.0.3'
+  config.gem "url_shortener",                      :version => '0.0.6'
+  config.gem "backup",                             :version => '2.3.0.2'
+  config.gem "validation_reflection",              :version => '0.3.5'
   
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named

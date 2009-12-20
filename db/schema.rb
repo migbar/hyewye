@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091216110259) do
+ActiveRecord::Schema.define(:version => 20091219164949) do
 
   create_table "answers", :force => true do |t|
     t.integer  "user_id"
@@ -81,9 +81,9 @@ ActiveRecord::Schema.define(:version => 20091216110259) do
     t.string   "email"
     t.string   "crypted_password"
     t.string   "password_salt"
-    t.string   "persistence_token",   :null => false
-    t.string   "single_access_token", :null => false
-    t.string   "perishable_token",    :null => false
+    t.string   "persistence_token",                     :null => false
+    t.string   "single_access_token",                   :null => false
+    t.string   "perishable_token",                      :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "twitter_uid"
@@ -93,6 +93,7 @@ ActiveRecord::Schema.define(:version => 20091216110259) do
     t.string   "oauth_secret"
     t.string   "screen_name"
     t.string   "location"
+    t.boolean  "tweet_activity",      :default => true
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"

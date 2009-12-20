@@ -35,15 +35,14 @@ Feature: Account maintenance
       And I press "Update my password and log me in"
      Then I should see "Password successfully updated"
       And I should be on the homepage
-
-
-
-
-
-
-
-
-
-
-
-
+@wip
+  Scenario: opting to tweet my activity
+    Given a Twitter user "twitter_guy" registered with HyeWye
+      And I log in using Twitter
+      And I am on my account page
+     When I uncheck "tweet my activity" 
+      And I press "Save"
+     Then I should see "Account successfully updated"   
+  
+  
+  

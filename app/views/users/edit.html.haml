@@ -2,8 +2,13 @@
 
 - semantic_form_for @user, :url => account_path do |f|
   - f.inputs "General information" do
-    / gender & stuff
-  - unless @user.using_twitter?
+    = f.input :screen_name, :input_html => {:readonly => true}
+    = f.input :name
+    = f.input :location
+  - if @user.using_twitter?
+    - f.inputs "Twitter" do
+      = f.input :tweet_activity, :label => "tweet my activity"
+  - else
     = oauth_register_button :value => "Authorize with Twitter", :class => 'twitter'
     - f.inputs "Account information" do
       = f.input :password

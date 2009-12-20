@@ -18,8 +18,8 @@ describe QuestionsController do
       @user.stub(:questions).and_return(@questions)
     end
     
-    def do_get
-      get :index, :user_id => 42
+    def do_get(options={})
+      get :index, {:user_id => 42}.merge(options)
     end
     
     it "finds the specified user and assigns it for the view" do
@@ -37,6 +37,11 @@ describe QuestionsController do
     it "renders the index template" do
       do_get
       response.should render_template(:index)
+    end
+    
+    it "redirects to the home page if no user specified" do
+      do_get(:user_id => nil)
+      response.should redirect_to('/')
     end
   end
   

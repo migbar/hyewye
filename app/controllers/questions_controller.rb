@@ -2,8 +2,12 @@ class QuestionsController < ApplicationController
   before_filter :require_user, :except => [:index, :show]
   
   def index
-    @user = User.find(params[:user_id])
-    @questions = @user.questions
+    if params[:user_id].blank?
+      redirect_to root_path
+    else
+      @user = User.find(params[:user_id])
+      @questions = @user.questions
+    end
   end
   
   def new

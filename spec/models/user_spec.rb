@@ -52,10 +52,17 @@ describe User do
   end
   
   describe "#event_created" do
-    it "calls #tweet_event" do
+    it "calls #tweet_event if tweet_activity event is set" do
       question = Factory.build(:question)
       user = Factory.build(:user)
       user.should_receive(:tweet_event)
+      user.event_created(question)
+    end
+    
+    it "does not call #tweet_event if tweet_activity is not set" do
+      question = Factory.build(:question)
+      user = Factory.build(:twitter_user, :tweet_activity => false)
+      user.should_not_receive(:tweet_event)
       user.event_created(question)
     end
   end
