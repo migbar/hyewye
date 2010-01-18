@@ -3,6 +3,8 @@ ActionController::Routing::Routes.draw do |map|
   map.root :controller => 'invitations', :action => "new"
   
   map.site_index "/site", :controller => "site", :action => "index"
+  map.tos "/tos", :controller => "site", :action => "tos"
+  
   # map.root :controller => 'site'  
   
   map.resources :users, :only => [:show] do |user|

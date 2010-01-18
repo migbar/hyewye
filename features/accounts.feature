@@ -7,13 +7,14 @@ Feature: User Accounts
     Given I am on the site index
      When I follow "Sign Up"
      Then I should see "Register for an account"
-    
+@wip    
   Scenario: Registering for an account successfully
     Given I am on the registration page
      When I fill in "Login" with "my_login"
       And I fill in "Email" with "email@example.com"
       And I fill in "Password" with "password"
       And I fill in "Password Confirmation" with "password"
+      And I check "I agree to the terms of service"
       And I press "Create Account"
      Then I should see "Thank you for registering my_login, your account has been created!"
       And I should be on the home page

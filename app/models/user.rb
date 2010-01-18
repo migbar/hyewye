@@ -22,9 +22,11 @@ class User < ActiveRecord::Base
   has_many :answers
   has_many :events
   
-  attr_accessible :password, :password_confirmation, :name, :tweet_activity
+  attr_accessible :password, :password_confirmation, :name, :tweet_activity, :tos_agreement
 
   before_save :populate_oauth_user
+  
+  validates_acceptance_of :tos_agreement, :message => "You must accept the terms of service"
 
   TWITTER_AVATAR_SIZE = "48"
   
