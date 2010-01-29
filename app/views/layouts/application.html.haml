@@ -7,18 +7,17 @@
     = javascript_include_tag 'jquery', 'application'
     = yield(:head)
   %body
-    #page-wrap
-      #banner
-        #logo
-        #banner-body.clearfix
-          = render :partial => "shared/header"
-      #container
-        #main-content
-          - if show_title?
-            %h2= h yield(:title)
-          = render :partial => "shared/flash", :object => flash
-          .clearfix
-            = yield
-        #footer
-          = render :partial => "shared/footer"
+    #doc5
+      #hd{ :class => current_user ? "signed_in" : "guest"}
+        = render :partial => "shared/header"
+      #bd
+        #container
+          #main-content
+            - if show_title?
+              %h2= h yield(:title)
+            = render :partial => "shared/flash", :object => flash
+            .clearfix
+              = yield
+      #ft
+        = render :partial => "shared/footer"
     = GOOGLE_ANALYTICS

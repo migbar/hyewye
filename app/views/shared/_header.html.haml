@@ -1,34 +1,59 @@
-/ #header_background
-/   = link_to(image_tag('images/header_background.jpg'), '')
-/ %p
-#login-bar.clearfix
-  / = link_to "Sign up", new_account_path if !current_user
-  #nav
-    = link_to "Log in!", new_user_session_path if !current_user
-    = link_to "Log out", user_session_path, :method => 'delete' if current_user
-  - if !current_user  
-    #login
-      Have an account?
-#banner-container.clearfix
-  #banner-slogan
-    %p
-    Have You Ever, Would You Ever ...
-  #banner-container-inner.clearfix
-    #banner-container-inner-left
-      %p
-      How daring are you?
-      %p
-      How well do you know your friends?
-      %p
-      Find out what others are thinking ... 
-    #banner-container-inner-right.clearfix
-      #banner-container-inner-right-text
-        \... get curious!
-      #banner-container-inner-right-button.clearfix
-        /= link_to(image_tag('/images/button_signup_2.png'), new_account_path) if !current_user
-        = link_to("Sign Up", new_account_path) if !current_user
-#banner-footer
-  %p
-  HyeWye is a fun way to find out what you & your friends are all about.
-  come in and start discovering what's in other people's minds.
+#logo
+  = link_to 'HyeWye', '/'
 
+#login-bar.clearfix
+  - if !current_user
+    %ul
+      %li Already a member?
+      %li= link_to "Login", new_user_session_path
+  - else
+    %ul
+      %li Welcome Twitter Guy
+      %li= link_to "My account", "#"
+      %li= link_to "Log out", user_session_path, :method => 'delete'
+
+#banner
+  .hd
+    .c
+  .bd
+    #phrase Have You Ever... Would You Ever... ? 
+    - if !current_user
+      #slogan.clearfix
+        %p.first Do you ever wonder what others would do in your situation?
+        %p.second Ever want to tap into someone else’s experience?
+        %p.third
+          With
+          %span HYEWYE
+          \, you can easily ask the community what they would do and keep track of their answers.
+        #sign-up
+          = link_to "Sign un now!", new_account_path
+          %p.first-line Join with one click
+          %p.second-line using your Twitter account
+
+#bottom.green_bar
+  Fun and easy way to find out what your friends are thinking.
+  
+
+/ #banner-container.clearfix
+/   #banner-slogan
+/     %p
+/     Have You Ever, Would You Ever ...
+/   #banner-container-inner.clearfix
+/     #banner-container-inner-left
+/       %p
+/       How daring are you?
+/       %p
+/       How well do you know your friends?
+/       %p
+/       Find out what others are thinking ... 
+/     #banner-container-inner-right.clearfix
+/       #banner-container-inner-right-text
+/         \... get curious!
+/       #banner-container-inner-right-button.clearfix
+/         /= link_to(image_tag('/images/button_signup_2.png'), new_account_path) if !current_user
+/         = link_to("Sign Up", new_account_path) if !current_user
+/ #banner-footer
+/   %p
+/   HyeWye is a fun way to find out what you & your friends are all about.
+/   come in and start discovering what's in other people's minds.
+/ 
