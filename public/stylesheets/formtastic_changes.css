@@ -43,3 +43,14 @@ form.formtastic fieldset ol li#user_tos_agreement_input p.inline-errors { margin
 
 form.formtastic fieldset.inputs { padding-right: 20px; }
 form.formtastic fieldset.buttons { padding-left: 200px; }
+
+
+.account form.formtastic fieldset#twitter { padding-left: 0; margin-bottom: 20px;}
+.account form.formtastic fieldset#twitter ol {
+  margin-left: 200px;
+}
+
+.account form.formtastic fieldset ol li.boolean label {
+  padding-left:200px;
+  text-align:left;
+}
