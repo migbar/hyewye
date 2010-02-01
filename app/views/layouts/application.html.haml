@@ -12,10 +12,10 @@
         = render :partial => "shared/header"
       #bd
         #container
-          #main-content
+          #main-content.clearfix
+            = render :partial => "shared/flash", :object => flash
             - if show_title?
               %h2= h yield(:title)
-            = render :partial => "shared/flash", :object => flash
             .clearfix
               = yield
       #ft
