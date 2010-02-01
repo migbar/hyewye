@@ -48,6 +48,11 @@ end
 
 World(ActionView::Helpers::RecordIdentificationHelper)
 World(ActionView::Helpers::UrlHelper)
+World(Authlogic::TestCase)
+
+Before do
+  activate_authlogic
+end
 
 After do |scenario|
   TwitterQueue.reset

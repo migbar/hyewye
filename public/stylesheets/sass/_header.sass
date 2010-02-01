@@ -66,6 +66,7 @@
             :height 42px
             :text-indent -9999px
             :margin 15px auto 0 auto
+            :outline none
 
   &.signed_in
     #logo
@@ -94,8 +95,23 @@
       #phrase
         :text-indent -9999px
         :background transparent url("/images/css/slogan_signed_in.jpg") no-repeat left top
-        :height 110px
+        :height 75px
         :margin-left 250px
+        :width 277px
+        :float left
+        
+      #question_button
+        :float right
+        a
+          :display block
+          :background transparent url("/images/css/ask_a_question_button_signed_in.png") no-repeat left top
+          :width 221px
+          :height 43px
+          :text-indent -9999px
+          :outline none
+          :margin 15px 50px 0 0
+    .green_bar
+      :margin-top 0
 
   #login-bar
     :padding-top 50px
@@ -110,12 +126,14 @@
         a
           :color #FFFFFF
           :font-weight bold
-.green_bar
-  :font-size 123.1%
-  :font-weight bold
-  :background url("/images/css/green_bar_01.png") no-repeat left top
-  :padding 12px 0
-  :margin -34px -20px 0 -10px
-  :color #FFFFFF
-  :padding-left 20px
-    
+
+  .green_bar
+    :margin -34px 0 0 -8px
+    :font-size 123.1%
+    :font-weight bold
+    :background url("/images/css/hd_green_bar.png") no-repeat left top
+    :color #FFFFFF
+    .c
+      :background url("/images/css/hd_green_bar.png") no-repeat right top
+      :padding 12px 0 12px 20px
+      :margin 0 -12px 0 20px

@@ -1,15 +1,28 @@
 / - title "Recent posts"
 
-#left-col
-  #event-list-heading
-    Recent Posts:
-  %ul#events
-    - @events.each_with_index do |event, index|
-      = render_event(event.subject, :html => { :style => index < 20 ? "display:none !important" : nil })
+.yui-g
+  #left-col.yui-u.first
+    #event-list-heading
+      Recent Posts:
+    %ul#events
+      - @events.each_with_index do |event, index|
+        = render_event(event.subject, :html => { :style => index < 20 ? "display:none !important" : nil })
 
-#right-col
-  #nav
-    = link_to "Ask a question", new_question_path
-.clear
+  #right-col.yui-u
+    - if !current_user
+      #nav
+        = link_to "Ask a question", new_question_path
 
-
+    .box
+      .hd
+      .bd
+        %h2 DID YOU KNOW...?
+        %p ... that 28% of the people from New York City would have plastic surgery?
+      .ft
+    
+    .box
+      .hd
+      .bd
+        %h2 Have you Ever, Would you Ever
+        %p ...have plastic surgery?
+      .ft

@@ -2,22 +2,25 @@
   = link_to 'HyeWye', '/'
 
 #login-bar.clearfix
-  - if !current_user
-    %ul
-      %li Already a member?
-      %li= link_to "Login", new_user_session_path
-  - else
+  - if current_user
     %ul
       %li Welcome Twitter Guy
       %li= link_to "My account", "#"
       %li= link_to "Log out", user_session_path, :method => 'delete'
-
-#banner
+  - else
+    %ul
+      %li Already a member?
+      %li= link_to "Login", new_user_session_path
+    
+#banner.clearfix
   .hd
     .c
-  .bd
+  .bd.clearfix
     #phrase Have You Ever... Would You Ever... ? 
-    - if !current_user
+    - if current_user
+      #question_button
+        = link_to "Ask a question", new_question_path
+    - else
       #slogan.clearfix
         %p.first Do you ever wonder what others would do in your situation?
         %p.second Ever want to tap into someone else’s experience?
@@ -31,7 +34,8 @@
           %p.second-line using your Twitter account
 
 #bottom.green_bar
-  Fun and easy way to find out what your friends are thinking.
+  .c
+    Fun and easy way to find out what your friends are thinking.
   
 
 / #banner-container.clearfix
