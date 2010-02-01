@@ -1,35 +1,41 @@
 #hd
+  #banner
+    :margin-top 5px
+    .hd
+      :background transparent url("/images/css/layout_sprite.jpg") no-repeat left top
+      .c
+        :background transparent url("/images/css/layout_sprite.jpg") no-repeat right top
+        :margin-left 18px
+        :height 18px
+    .bd
+      :background-color #ffdb71
+  #logo
+    :position relative
+    a
+      :display block
+      :position absolute
+      :text-indent -9999px
+      :outline none
+      :top 10px
+      :left 30px
+      
+  
   &.guest
     #logo
       :position relative
       a
-        :background transparent url('/images/css/logo_guest.png') no-repeat left top
+        :background transparent url('/images/css/logos.png') no-repeat left top
         :width 327px
         :height 236px
-        :display block
-        :position absolute
-        :text-indent -9999px
-        :outline none
-        :top 10px
-        :left 30px
 
     #banner
-      :margin-top 5px
-      .hd
-        :background transparent url("/images/css/hd_top_corners.png") no-repeat left top
-        .c
-          :background transparent url("/images/css/hd_top_corners.png") no-repeat right top
-          :margin-left 18px
-          :height 18px
-      .bd
-        :background-color #ffdb71
       #phrase
         :text-indent -9999px
-        :background transparent url("/images/css/slogan.jpg") no-repeat left top
+        :background transparent url("/images/css/hd_sprite.jpg") no-repeat left top
         :height 109px
         :margin-left 400px
       #slogan
-        :background transparent url("/images/css/hd_twitter_icon.png") no-repeat right top
+        :background transparent url("/images/css/hd_sprite.jpg") no-repeat right -227px
         :margin-right 50px
         p
           :color #2C2E2E
@@ -72,29 +78,14 @@
     #logo
       :position relative
       a
-        :background transparent url('/images/css/logo_signed_in.png') no-repeat left top
+        :background transparent url('/images/css/logos.png') no-repeat right top
         :width 203px
         :height 146px
-        :display block
-        :position absolute
-        :text-indent -9999px
-        :outline none
-        :top 10px
-        :left 30px
 
     #banner
-      :margin-top 5px
-      .hd
-        :background transparent url("/images/css/hd_top_corners.png") no-repeat left top
-        .c
-          :background transparent url("/images/css/hd_top_corners.png") no-repeat right top
-          :margin-left 18px
-          :height 18px
-      .bd
-        :background-color #ffdb71
       #phrase
         :text-indent -9999px
-        :background transparent url("/images/css/slogan_signed_in.jpg") no-repeat left top
+        :background transparent url("/images/css/hd_sprite.jpg") no-repeat left -109px
         :height 75px
         :margin-left 250px
         :width 277px
@@ -104,7 +95,7 @@
         :float right
         a
           :display block
-          :background transparent url("/images/css/ask_a_question_button_signed_in.png") no-repeat left top
+          :background transparent url("/images/css/hd_sprite.jpg") no-repeat left -184px
           :width 221px
           :height 43px
           :text-indent -9999px
@@ -131,9 +122,9 @@
     :margin -34px 0 0 -8px
     :font-size 123.1%
     :font-weight bold
-    :background url("/images/css/hd_green_bar.png") no-repeat left top
+    :background url("/images/css/layout_sprite.jpg") no-repeat left -38px
     :color #FFFFFF
     .c
-      :background url("/images/css/hd_green_bar.png") no-repeat right top
+      :background url("/images/css/layout_sprite.jpg") no-repeat right -38px
       :padding 12px 0 12px 20px
       :margin 0 -12px 0 20px
