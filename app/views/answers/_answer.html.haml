@@ -6,9 +6,10 @@
     said:
     %span.choice= "#{answer.choice_name},"
     %span.body= h answer
-    %span.time
-      = time_ago_in_words(answer.created_at, include_seconds = false)
-      ago
-  .links
-    - unless defined?(hide_link)
-      = link_to "Answer", question_answers_path(answer.question)
+    %span.details
+      %span.time
+        = time_ago_in_words(answer.created_at, include_seconds = false)
+        ago        
+      %span.links
+        - unless defined?(hide_link)
+          = link_to "Answer", question_answers_path(answer.question)

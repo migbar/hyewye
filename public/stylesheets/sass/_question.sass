@@ -30,7 +30,7 @@
     .content
       :float left
       :font-size 116%
-      :width 580px
+      :width 570px
       a
         :color #DF793C
         :font-weight bold
@@ -87,30 +87,43 @@
   
 #answers-list
   :padding-bottom 20px
-  li.answer
-    :border-bottom 1px dashed #666666
-    :padding 10px 0
-    .avatar
-      :float left
-      :width 50px
-      :margin-right 10px
-    .content
-      :float left
-      :font-size 116%
-      :width 580px
-      a
-        :color #DF793C
-        :font-weight bold
-        :text-decoration none
-        &:hover
-          :text-decoration underline
-      .body
-        :display block
-      .time
-        :display block
+li.event
+  :border-bottom 1px dashed #666666
+  :padding 10px 0
+  .avatar
+    :float left
+    :width 50px
+    :margin-right 10px
+  .content
+    :float left
+    :font-size 116%
+    :width 570px
+    a
+      :color #DF793C
+      :font-weight bold
+      :text-decoration none
+      &:hover
+        :text-decoration underline
+    .body
+      :display block
+    .details
+      :display block
+      :margin-top 5px
+      .time, .answers_count
         :color #888888
         :font-size 85%
-        :margin-top 5px
+      .answers_count, .links
+        :border-left 1px solid #888888
+        :padding-left 5px
+      .answers_count
+        :text-decoration underline
+      .links
+        a
+          :color #719935
+          :text-decoration underline
+  &.answer
+    .body
+      :font-style italic
 
 #answer-list-heading
   h2

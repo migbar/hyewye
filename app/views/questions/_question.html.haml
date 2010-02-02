@@ -5,6 +5,11 @@
     %span.author= link_to h(user.login), user_path(user)
     asked:
     %span.body= h question.body
-  .links
-    = link_to "Answer", question_answers_path(question)
+    %span.details
+      %span.time
+        = time_ago_in_words(question.created_at, include_seconds = false)
+        ago
+      %span.answers_count= "#{question.answers.count} answers"
+      %span.links
+        = link_to "Answer", question_answers_path(question)
   

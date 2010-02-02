@@ -22,4 +22,8 @@ module ApplicationHelper
     args = args.map { |arg| arg == :defaults ? arg : arg.to_s }
     content_for(:head) { javascript_include_tag(*args) } # => @content_for_head << '...'
   end
+  
+  def with_sidebar(sidebar = true)
+    @sidebar = sidebar
+  end
 end
