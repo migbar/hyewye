@@ -1,11 +1,15 @@
 - title "Login"
 
 - if @user_session.errors.on_base =~ /Could not find user in our database/
-  It looks like you have not created an account on HyeWye yet. You can easily do this
-  by using your Twitter account.
+  - with_sidebar
+  .login_note It looks like you have not created an account on HyeWye yet. You can easily do this by using your Twitter account.
 
-  - form_tag account_path do
-    = oauth_register_button :value => "Let me login using Twitter", :class => "twitter_login"
+  - form_tag account_path, :class => "formtastic" do
+    %fieldset#twitter.buttons
+      %legend
+        %span I am a Twitter user
+      %ol
+        %li= oauth_register_button :value => "Let me login using Twitter", :class => "twitter_login"
   
 - else
   - semantic_form_for @user_session, :url => user_session_path do |f|

@@ -1,5 +1,5 @@
 - title "#{@user}'s Activity"
-= image_tag(@user.avatar)
+- with_sidebar
 
 %ul#stream
   - @events.each do |event|
