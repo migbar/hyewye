@@ -5,9 +5,9 @@ Feature: User Accounts
 
   Scenario: Going to the registration page
     Given I am on the site index
-     When I follow "Sign Up"
+     When I follow "Sign Up Now!"
      Then I should see "Register for an account"
-@wip    
+
   Scenario: Registering for an account successfully
     Given I am on the registration page
      When I fill in "Login" with "my_login"
@@ -15,31 +15,31 @@ Feature: User Accounts
       And I fill in "Password" with "password"
       And I fill in "Password Confirmation" with "password"
       And I check "I agree to the terms of service"
-      And I press "Create Account"
+      And I press "Create My Account!"
      Then I should see "Thank you for registering my_login, your account has been created!"
       And I should be on the home page
   
   Scenario: Failing to register due to invalid options
     Given I am on the registration page
-      And I press "Create Account"
+      And I press "Create My Account!"
      Then I should see "is too short"
 
   Scenario: Logging in successfully with an existing login name
     Given I am on the site index
       And a user exists with login: "my_login", password: "secret"
-     When I follow "Log in"
+     When I follow "Login"
       And I fill in "Login" with "my_login"
       And I fill in "Password" with "secret"
-      And I press "Log in"
+      And I press "Login"
      Then I should see "Welcome my_login!"
       And I should be on the home page
       
   Scenario: Failing to log in with an invalid login name
     Given I am on the site index
-     When I follow "Log in"
+     When I follow "Login"
       And I fill in "Login" with "my_login"
       And I fill in "Password" with "secret"
-      And I press "Log in"
+      And I press "Login"
      Then I should see "is not valid"
      # When I go to my account page # => /account
      # Then I should be on the login page # /user_session/new
@@ -47,7 +47,7 @@ Feature: User Accounts
   Scenario: logging out
     Given I log in with login: "my_login", password: "secret"
       And I am on the site index
-     When I follow "Log out"
+     When I follow "Sign out"
      Then I should see "You have logged out"
       And I should be on the home page 
   

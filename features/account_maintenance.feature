@@ -22,7 +22,7 @@ Feature: Account maintenance
   Scenario: reset password
     Given a user exists with email: "miguel@example.com"
       And I am on the login page
-     When I follow "Recover password"
+     When I follow "Forgot your password?"
       And I fill in "email" with "miguel@example.com"
       And I press "Request password reset"   
      Then I should see "We have sent password reset instructions to miguel@example.com. Please check your email."
@@ -35,7 +35,7 @@ Feature: Account maintenance
       And I press "Update my password and log me in"
      Then I should see "Password successfully updated"
       And I should be on the homepage
-@wip
+
   Scenario: opting to tweet my activity
     Given a Twitter user "twitter_guy" registered with HyeWye
       And I log in using Twitter

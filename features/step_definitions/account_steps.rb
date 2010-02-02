@@ -3,7 +3,7 @@ Given /^I log in with login: "([^\"]*)", password: "([^\"]*)"$/ do |login, passw
   When %Q{I am on the login page}
    And %Q{I fill in "Login" with "#{login}"}
    And %Q{I fill in "Password" with "#{password}"}
-   And %Q{I press "Log in"}
+   And %Q{I press "Login"}
 end
 
 Given /^I am logged in$/ do

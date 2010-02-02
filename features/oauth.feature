@@ -14,7 +14,7 @@ Feature: Oauth
       And I am on the login page
      When I press "Let me log in using Twitter"
      Then I should see "It looks like you have not created an account on HyeWye yet"
-     When I press "Use my Twitter account to register with HyeWye"
+     When I press "Let me login using Twitter"
      Then I should see "Thank you for registering twitter_guy"
   
   Scenario: Registering with Hyewye using Twitter

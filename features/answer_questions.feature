@@ -30,7 +30,7 @@ Feature: Answer questions
      When I follow "Let me Answer!"
       And I fill in "login" with "miguel"
       And I fill in "password" with "secret"
-      And I press "Log in"  
+      And I press "Login"
      Then I should be at the answers page for question "hps"
       And I should see "My answer"
       But I should not see "Log in to answer this question"
