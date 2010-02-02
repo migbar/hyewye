@@ -14,4 +14,4 @@
       = f.input :password_confirmation
       = f.input :tos_agreement, :as => :boolean, :label => "I agree to the #{link_to("terms of service", tos_path)}"
     - f.buttons do
-      %li= image_submit_tag("/images/css/button_create_account.png", :value => "Create my account!")
+      = f.commit_button "Create my account!"
