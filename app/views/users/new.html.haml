@@ -1,16 +1,16 @@
 - title "Register for an account"
 
-.yui-g.middle-stroke
-  - semantic_form_for @user, :url => account_path do |f|
-    .yui-u.first
-      - f.buttons :name => "I am a Twitter user", :id => "twitter" do
-        = oauth_register_button :value => "Register using Twitter"
-    .yui-u
-      - f.inputs "Regular Registration"  do
-        = f.input :login
-        = f.input :email
-        = f.input :password
-        = f.input :password_confirmation
-        = f.input :tos_agreement, :as => :boolean, :label => "I agree to the #{link_to("terms of service", tos_path)}"
-      - f.buttons do
-        = image_submit_tag("/images/css/create_account.png", :value => "Create my account!")
+- semantic_form_for @user, :url => account_path do |f|
+  .left
+    - f.buttons :name => "I am a Twitter user", :id => "twitter" do
+      = oauth_register_button :value => "Register using Twitter"
+      = f.error_message_on :oauth_token
+  .right
+    - f.inputs "Regular Registration"  do
+      = f.input :login
+      = f.input :email
+      = f.input :password
+      = f.input :password_confirmation
+      = f.input :tos_agreement, :as => :boolean, :label => "I agree to the #{link_to("terms of service", tos_path)}"
+    - f.buttons do
+      = image_submit_tag("/images/css/create_account.png", :value => "Create my account!")

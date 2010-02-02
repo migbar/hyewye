@@ -4,13 +4,6 @@
     #main-content
       :background transparent url("/images/css/bd_borders.png") repeat-y right top
       :margin-left 9px
-      
-
-.middle-stroke
-  :background transparent url("/images/css/middle_stroke.png") no-repeat 450px top
-  :min-height 450px
-  .yui-u
-    :margin-top 20px
 
 .with_sidebar
   .yui-g
@@ -25,3 +18,14 @@
   .yui-u.first
     :width 630px
     :padding-left 19px
+
+.without_sidebar
+  .yui-g
+    :background transparent url("/images/css/middle_stroke.png") no-repeat 450px top
+    :min-height 450px
+  .yui-u
+    :width 0
+  .yui-u.first
+    :width 100%
+  h2
+    :margin 0 0 20px 20px

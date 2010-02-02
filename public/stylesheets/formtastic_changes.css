@@ -50,7 +50,36 @@ form.formtastic fieldset.buttons { padding-left: 200px; }
   margin-left: 200px;
 }
 
-.account form.formtastic fieldset ol li.boolean label {
-  padding-left:200px;
+form.formtastic fieldset ol li#user_tos_agreement_input label {
+  padding-left:170px;
   text-align:left;
+}
+
+form.formtastic fieldset#twitter.buttons {
+  padding-left: 0;
+  margin: 50px 0 0 70px;
+}
+
+form.formtastic fieldset#twitter.buttons legend {
+  margin-bottom: 0px;
+}
+
+form.formtastic fieldset#twitter.buttons legend span {
+  background: transparent url("/images/css/register_twitter_icon.png") no-repeat right center;
+  width: 250px;
+  display: block;
+  padding: 25px 0 10px 15px;
+  color: #013334;
+  font-size: 116%;
+}
+
+form.formtastic fieldset#twitter.buttons ol input {
+  background: transparent url("/images/css/create_account_using_twitter.png") no-repeat left top;
+  display: block;
+  width: 265px;
+  height: 42px;
+  border: none;
+  text-indent: -9999px;
+  cursor: pointer;
+  margin-top: -2px;
 }
