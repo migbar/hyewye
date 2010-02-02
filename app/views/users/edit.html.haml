@@ -10,8 +10,8 @@
       - f.inputs "Twitter" do
         = f.input :tweet_activity, :label => "tweet my activity"
     - else
-      - f.buttons :name => "Twitter", :id => "twitter" do
-        = oauth_register_button :value => "Authorize with Twitter", :class => 'twitter'
+      - f.buttons :name => "Twitter", :id => "twitter_authorize" do
+        %li= oauth_register_button :value => "Authorize with Twitter", :class => 'twitter'
       - f.inputs "Account information" do
         = f.input :password
         = f.input :password_confirmation

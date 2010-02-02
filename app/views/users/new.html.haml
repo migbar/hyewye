@@ -3,8 +3,9 @@
 - semantic_form_for @user, :url => account_path do |f|
   .left
     - f.buttons :name => "I am a Twitter user", :id => "twitter" do
-      = oauth_register_button :value => "Register using Twitter", :class => "twitter_register"
-      = f.error_message_on :oauth_token
+      %li
+        = oauth_register_button :value => "Register using Twitter", :class => "twitter_register"
+        = f.error_message_on :oauth_token
   .right
     - f.inputs "Regular Registration"  do
       = f.input :login
@@ -13,4 +14,4 @@
       = f.input :password_confirmation
       = f.input :tos_agreement, :as => :boolean, :label => "I agree to the #{link_to("terms of service", tos_path)}"
     - f.buttons do
-      = image_submit_tag("/images/css/create_account.png", :value => "Create my account!")
+      %li= image_submit_tag("/images/css/button_create_account.png", :value => "Create my account!")

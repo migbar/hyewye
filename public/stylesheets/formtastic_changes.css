@@ -45,8 +45,8 @@ form.formtastic fieldset.inputs { padding-right: 20px; }
 form.formtastic fieldset.buttons { padding-left: 200px; }
 
 
-.account form.formtastic fieldset#twitter { padding-left: 0; margin-bottom: 20px;}
-.account form.formtastic fieldset#twitter ol {
+.account form.formtastic fieldset#twitter_authorize { padding-left: 0; margin-bottom: 20px;}
+.account form.formtastic fieldset#twitter_authorize ol {
   margin-left: 200px;
 }
 
@@ -65,7 +65,7 @@ form.formtastic fieldset#twitter.buttons legend {
 }
 
 form.formtastic fieldset#twitter.buttons legend span {
-  background: transparent url("/images/css/register_twitter_icon.png") no-repeat right center;
+  background: transparent url("/images/css/twitter_sprite.jpg") no-repeat right top;
   width: 250px;
   display: block;
   padding: 25px 0 10px 15px;
@@ -74,7 +74,7 @@ form.formtastic fieldset#twitter.buttons legend span {
 }
 
 form.formtastic fieldset#twitter.buttons ol input.twitter_register {
-  background: transparent url("/images/css/create_account_using_twitter.png") no-repeat left top;
+  background: transparent url("/images/css/twitter_sprite.jpg") no-repeat left -53px;
   display: block;
   width: 265px;
   height: 42px;
@@ -82,10 +82,12 @@ form.formtastic fieldset#twitter.buttons ol input.twitter_register {
   text-indent: -9999px;
   cursor: pointer;
   margin-top: -2px;
+  font-size:0px;
+  line-height:0px;
 }
 
 form.formtastic fieldset#twitter.buttons ol input.twitter_login {
-  background: transparent url("/images/css/login_twitter.png") no-repeat left top;
+  background: transparent url("/images/css/twitter_sprite.jpg") no-repeat left -95px;
   display: block;
   width: 265px;
   height: 43px;
@@ -93,6 +95,8 @@ form.formtastic fieldset#twitter.buttons ol input.twitter_login {
   text-indent: -9999px;
   cursor: pointer;
   margin-top: -2px;
+  font-size:0px;
+  line-height:0px;
 }
 
 form.formtastic fieldset ol li.login_errors p.inline-errors { margin-left: 0; }
