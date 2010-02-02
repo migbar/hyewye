@@ -4,7 +4,7 @@ var speed = 700;
 function scrollEvents() {
   var move = function (e) {
     return function() {
-      $(e).remove().css('display', 'none !important').prependTo("#events");
+      $(e).hide().remove().prependTo("#events");
     }
   }
   

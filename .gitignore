@@ -10,3 +10,5 @@ mkmf.log
 webrat-*.html
 config/application.yml
 public/stylesheets/master.css
+public/javascripts/site.js
+public/stylesheets/site.css

@@ -4,7 +4,7 @@
 #left-col
   %ul#events
     - @events.each_with_index do |event, index|
-      = render_event(event.subject, :html => { :style => index < 20 ? "display:none !important" : nil })
+      = render_event(event.subject, :html => { :style => index < 20 ? "display:none" : nil })
 
 - content_for :sidebar do
   #right-col
