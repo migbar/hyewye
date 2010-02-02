@@ -9,7 +9,6 @@
         = f.label :choice_1, "I have"
       %td.body{:rowspan => 3}
         = f.text_area :body, :cols => 60, :rows => 4
-        = f.error_message_on :body
     %tr
       %td.i_would
         = f.radio_button :choice, "2"
@@ -18,6 +17,9 @@
       %td.i_would_never
         = f.radio_button :choice, "3"
         = f.label :choice_3, "I would never"
+    %tr
+      %td= f.error_message_on :choice
+      %td= f.error_message_on :body
     %tr
       %td &nbsp;
       %td= image_submit_tag("/images/css/answer_button.png", :value => "Answer!")

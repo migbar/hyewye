@@ -1,44 +1,44 @@
-.yui-g
-  #left-col.yui-u.first
-    #question.clearfix
-      .user.clearfix
-        .image
-          = link_to(image_tag(@question.user.avatar), user_path(@question.user))
-        .content
-          = link_to @question.user, user_path(@question.user)
-          %strong wanted to know:
-          #question-body
-            Have You Ever / Would You Ever
-            = h @question
-    #answer_form
-      - if current_user
-        = render :partial => "form"
-      - else
-        #nav
-          = link_to "Let me Answer!", new_user_session_path(:return_to => request.request_uri)
-    
-    - if @answers.length > 0
-      #answer-list-heading
-        %h2 What other people said:
-      
-      %ul#answers-list
-        - @answers.each do |answer|
-          = render_event(answer, :locals => { :hide_link => true })
+- with_sidebar
 
-      = will_paginate @answers
+#question.clearfix
+  .user.clearfix
+    .image
+      = link_to(image_tag(@question.user.avatar), user_path(@question.user))
+    .content
+      = link_to @question.user, user_path(@question.user)
+      %strong wanted to know:
+      #question-body
+        Have You Ever / Would You Ever
+        = h @question
+#answer_form
+  - if current_user
+    = render :partial => "form"
+  - else
+    #nav
+      = link_to "Let me Answer!", new_user_session_path(:return_to => request.request_uri)
+
+- if @answers.length > 0
+  #answer-list-heading
+    %h2 What other people said:
   
-  #right-col.yui-u
-    - unless @question.answers.size == 0
-      #stats.box
-        .hd
-        .bd
-          %h2 Have you Ever, Would you Ever
-          .question= "... #{@question}"
-          .percents
-            .i_have.label= "have: #{@question.i_have_percent}%"
-            .percent{ :style => "width:#{@question.i_have_percent}%" }
-            .i_would.label= "would: #{@question.i_would_percent}%"
-            .percent{ :style => "width:#{@question.i_would_percent}%" }
-            .i_would_never.label= "would never: #{@question.i_would_never_percent}%"
-            .percent{ :style => "width:#{@question.i_would_never_percent}%" }
-        .ft
+  %ul#answers-list
+    - @answers.each do |answer|
+      = render_event(answer, :locals => { :hide_link => true })
+
+  = will_paginate @answers
+  
+- content_for :sidebar do
+  - unless @question.answers.size == 0
+    #stats.box
+      .hd
+      .bd
+        %h2 Have you Ever, Would you Ever
+        .question= "... #{@question}"
+        .percents
+          .i_have.label= "have: #{@question.i_have_percent}%"
+          .percent{ :style => "width:#{@question.i_have_percent}%" }
+          .i_would.label= "would: #{@question.i_would_percent}%"
+          .percent{ :style => "width:#{@question.i_would_percent}%" }
+          .i_would_never.label= "would never: #{@question.i_would_never_percent}%"
+          .percent{ :style => "width:#{@question.i_would_never_percent}%" }
+      .ft

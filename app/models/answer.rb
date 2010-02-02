@@ -34,7 +34,7 @@ class Answer < ActiveRecord::Base
   
   validates_presence_of :body
   validates_length_of :body, :maximum => 140
-  validates_inclusion_of :choice, :in => choices.values
+  validates_inclusion_of :choice, :in => choices.values, :message => "please select one"
   
   named_scope :latest, :order => "answers.created_at DESC"
   
