@@ -1,17 +1,23 @@
 - form_for @answer, :url => question_answers_path(@question) do |f|
-  %p
-    My answer:
-  %p
-    = f.radio_button :choice, "1"
-    = f.label :choice_1, "I have"
-  %p
-    = f.radio_button :choice, "2"
-    = f.label :choice_2, "I would"
-  %p
-    = f.radio_button :choice, "3"
-    = f.label :choice_3, "I would never"
-  %p
-    = f.text_field :body
-    = f.error_message_on :body
-  %p
-    = f.submit "answer!"
+  %table
+    %tr
+      %th My answer:
+      %th.chars 140
+    %tr
+      %td.i_have
+        = f.radio_button :choice, "1"
+        = f.label :choice_1, "I have"
+      %td.body{:rowspan => 3}
+        = f.text_area :body, :cols => 60, :rows => 4
+        = f.error_message_on :body
+    %tr
+      %td.i_would
+        = f.radio_button :choice, "2"
+        = f.label :choice_2, "I would"
+    %tr
+      %td.i_would_never
+        = f.radio_button :choice, "3"
+        = f.label :choice_3, "I would never"
+    %tr
+      %td &nbsp;
+      %td= image_submit_tag("/images/css/answer_button.png", :value => "Answer!")

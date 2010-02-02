@@ -1,11 +1,14 @@
 - title "Ask a question"
 
-- form_for @question do |f|
-  %p
-    = f.label :body, "Have you ever / Would you ever"
-  
-  %p
-    = f.text_area :body
-    = f.error_message_on :body
-  %p
-    = f.submit "ask away!"
+.new_question
+  - form_for @question do |f|
+    %table
+      %tr
+        %th= f.label :body, "Have you ever / Would you ever"
+        %th.chars 140
+      %tr
+        %td{:colspan => 2}
+          = f.text_area :body, :cols => 90, :rows => 5
+          = f.error_message_on :body
+      %tr
+        %td{:colspan => 2}= image_submit_tag("/images/css/ask_a_question.png", :value => "ask away!")

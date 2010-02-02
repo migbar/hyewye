@@ -1,0 +1,137 @@
+.new_question
+  :margin 20px 0 0 20px
+  :min-height 450px
+  table
+    label
+      :font
+        :size 116%
+        :weight bold
+      :color #000000
+    td, th
+      :padding 3px 0
+    th.chars
+      :font
+        :size 138.5%
+        :weight bold
+      :color #999999
+      :text-align right
+  .formError
+    :color #CC0000
+    :margin-top 3px
+    :font-weight bold
+
+#question
+  :margin-top 20px
+  .user
+    .image
+      :float left
+      :width 50px
+      :margin-right 10px
+    .content
+      :float left
+      :font-size 116%
+      :width 580px
+      a
+        :color #DF793C
+        :font-weight bold
+        :text-decoration none
+        &:hover
+          :text-decoration underline
+#answer_form
+  :margin-top 20px
+  table
+    :color #000000
+    :width 640px
+    th
+      :font
+        :size 116%
+        :weight bold
+        :width 150px
+      &.chars
+        :font-size 138.5%
+        :color #999999
+        :text-align right
+        :width 490px
+    td
+      :padding 3px 0
+      label
+        :padding 3px 0 3px 23px
+        :margin-left 5px
+      &.i_have
+        label
+          :background transparent url("/images/css/i_have.png") no-repeat left 5px
+      &.i_would
+        label
+          :background transparent url("/images/css/i_would.png") no-repeat left 1px
+      &.i_would_never
+        label
+          :background transparent url("/images/css/i_would_never.png") no-repeat left 5px
+      &.body
+        textarea
+          :width 488px
+      .fieldWithErrors
+        :display inline
+      .formError
+        :color #CC0000
+        :font-weight bold
+        :margin-top 3px
+  #nav
+    :margin 40px 0 20px 0
+    a
+      :display block
+      :background transparent url("/images/css/let_me_answer_button.png") no-repeat left top
+      :width 202px
+      :height 32px
+      :text-indent -9999px
+      :outline none
+  
+#answers-list
+  :padding-bottom 20px
+  li.answer
+    :border-bottom 1px dashed #666666
+    :padding 10px 0
+    .avatar
+      :float left
+      :width 50px
+      :margin-right 10px
+    .content
+      :float left
+      :font-size 116%
+      :width 580px
+      a
+        :color #DF793C
+        :font-weight bold
+        :text-decoration none
+        &:hover
+          :text-decoration underline
+      .body
+        :display block
+      .time
+        :display block
+        :color #888888
+        :font-size 85%
+        :margin-top 5px
+
+#answer-list-heading
+  h2
+    :padding 20px 0
+
+.pagination
+  :padding-bottom 20px
+  :text-align center
+  :font
+    :size 116%
+    :weight bold
+  a
+    :color #000000
+    :text-decoration none
+    :padding 2px 4px
+    &:hover
+      :color #BF502B
+      :text-decoration underline
+  .disabled
+    :color #888888
+  .current
+    :color #FFFFFF
+    :background-color #BF502B
+    :padding 2px 7px
