@@ -1,4 +1,5 @@
 - title "Reset password"
+- with_sidebar
 
 .account
   - semantic_form_for @user, :url => password_reset_path(:id => @user.perishable_token) do |f|
