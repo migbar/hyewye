@@ -73,7 +73,7 @@ form.formtastic fieldset#twitter.buttons legend span {
   font-size: 116%;
 }
 
-form.formtastic fieldset#twitter.buttons ol input {
+form.formtastic fieldset#twitter.buttons ol input.twitter_register {
   background: transparent url("/images/css/create_account_using_twitter.png") no-repeat left top;
   display: block;
   width: 265px;
@@ -83,3 +83,16 @@ form.formtastic fieldset#twitter.buttons ol input {
   cursor: pointer;
   margin-top: -2px;
 }
+
+form.formtastic fieldset#twitter.buttons ol input.twitter_login {
+  background: transparent url("/images/css/login_twitter.png") no-repeat left top;
+  display: block;
+  width: 265px;
+  height: 43px;
+  border: none;
+  text-indent: -9999px;
+  cursor: pointer;
+  margin-top: -2px;
+}
+
+form.formtastic fieldset ol li.login_errors p.inline-errors { margin-left: 0; }

@@ -3,7 +3,7 @@
 - semantic_form_for @user, :url => account_path do |f|
   .left
     - f.buttons :name => "I am a Twitter user", :id => "twitter" do
-      = oauth_register_button :value => "Register using Twitter"
+      = oauth_register_button :value => "Register using Twitter", :class => "twitter_register"
       = f.error_message_on :oauth_token
   .right
     - f.inputs "Regular Registration"  do
