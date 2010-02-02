@@ -4,7 +4,7 @@
   .content
     %span.author= link_to h(user), user_path(user)
     said:
-    %span.choice= "#{answer.choice_name},"
+    %span.choice{ :class => "choice_#{answer.choice}" }= "#{answer.choice_name},"
     %span.body= h answer
     %span.details
       %span.time
