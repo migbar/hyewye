@@ -1,20 +1,29 @@
-var delay = 6000;
-var speed = 700;
+var Home = function($){ 
+  var delay = 6000;
+	var speed = 700;
 
-function scrollEvents() {
-  var move = function (e) {
-    return function() {
-      $(e).hide().remove().prependTo("#events");
-    }
-  }
-  
-  $("#events li:hidden").filter(":last").slideDown(speed);
-  
-  var e = $("#events li:visible").filter(":last");
-  e.slideUp(speed, move(e));
+	var scrollEvents = function () {
+	  var move = function (e) {
+	    return function() {
+	      $(e).hide().remove().prependTo("#events");
+	    };
+	  };
 
-  setTimeout('scrollEvents()', delay);
-}    
-$(document).ready(function() {
-  setTimeout('scrollEvents()', delay);
-});
+	  $("#events li:hidden").filter(":last").slideDown(speed);
+
+	  var e = $("#events li:visible").filter(":last");
+	  e.slideUp(speed, move(e));
+
+	  setTimeout(scrollEvents, delay);
+	};
+	
+	return {
+		rotateEvents: function (limit) {
+			$(document).ready(function() {
+				if ($("#events li").size() > limit) {
+				  setTimeout(scrollEvents, delay);
+				}
+			});
+		}
+	};
+}(jQuery);

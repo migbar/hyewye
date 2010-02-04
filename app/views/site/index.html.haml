@@ -1,10 +1,15 @@
 - title "Recent posts"      
 - with_sidebar
 
+:javascript
+  Home.rotateEvents(#{Settings.home_events_threshold});
+
 #left-col
+  - overflow = @events.length - Settings.home_events_threshold
+  
   %ul#events
     - @events.each_with_index do |event, index|
-      = render_event(event.subject, :html => { :style => index < 20 ? "display:none" : nil })
+      = render_event(event.subject, :html => { :style => index < overflow ? "display:none" : nil })
 
 - content_for :sidebar do
   #right-col
