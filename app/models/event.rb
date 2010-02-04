@@ -17,9 +17,7 @@ class Event < ActiveRecord::Base
   belongs_to :user
   belongs_to :subject, :polymorphic => true
   named_scope :latest, lambda {
-    since = 1.hour.ago
-    
-    { :conditions => ["events.created_at >= ?", since],
+    { :limit => 20,
       :order => "events.created_at DESC"
     }
   }
