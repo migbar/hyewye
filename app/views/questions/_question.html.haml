@@ -2,10 +2,13 @@
   .avatar
     = link_to(image_tag(user.avatar, :size => "48x48"), user_path(user))
   .content
-    %span.author= link_to h(user), user_path(user)
-    asked:
-    %span.body= h question.body
+    %span.body
+      %strong HYEWYE
+      = h question.body
     %span.details
+      %span.author
+        by
+        = link_to h(user), user_path(user) 
       %span.time
         = time_ago_in_words(question.created_at, include_seconds = false)
         ago

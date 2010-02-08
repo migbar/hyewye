@@ -2,11 +2,12 @@
   .avatar
     = link_to(image_tag(user.avatar, :size => "48x48"), user_path(user))
   .content
-    %span.author= link_to h(user), user_path(user)
-    said:
     %span.choice{ :class => "choice_#{answer.choice}" }= "#{answer.choice_name},"
     %span.body= h answer
     %span.details
+      %span.author
+        by
+        = link_to h(user), user_path(user)
       %span.time
         = time_ago_in_words(answer.created_at, include_seconds = false)
         ago        
