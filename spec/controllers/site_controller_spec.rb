@@ -17,7 +17,7 @@ describe SiteController do
     end
     
     it "fetches the latest events and assigns them to the view" do
-      Event.should_receive(:latest).and_return(@events)
+      Event.should_receive(:latest).with(Settings.home_events_limit).and_return(@events)
       do_get
       assigns[:events].should == @events
     end

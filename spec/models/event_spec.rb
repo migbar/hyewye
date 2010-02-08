@@ -13,8 +13,8 @@ describe Event do
         (1..3).map { |i| Factory.create(:event, :created_at => (i+1).hours.ago) }
       end
       
-      it "fetches the latest events, most recent first, since a time stamp" do
-        results = Event.latest
+      it "fetches the latest events specified by a limit, most recent first" do
+        results = Event.latest(5)
         results.should == @expected_results
       end
     end

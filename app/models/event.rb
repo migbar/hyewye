@@ -16,8 +16,9 @@ class Event < ActiveRecord::Base
   
   belongs_to :user
   belongs_to :subject, :polymorphic => true
-  named_scope :latest, lambda {
-    { :limit => 20,
+  named_scope :latest, lambda { |*args|
+    limit = args.first
+    { :limit => limit,
       :order => "events.created_at DESC"
     }
   }
