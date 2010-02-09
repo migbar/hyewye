@@ -1,16 +1,25 @@
-%li.clearfix.event.answer{:id => html[:id] || dom_id(answer), :style => html[:style]}
-  .avatar
-    = link_to(image_tag(user.avatar, :size => "48x48"), user_path(user))
-  .content
-    %span.choice{ :class => "choice_#{answer.choice}" }= "#{answer.choice_name},"
-    %span.body= h answer
-    %span.details
+%li.event.answer{:id => html[:id] || dom_id(answer), :style => html[:style]}
+  .question
+    - answer.question.tap do |question|
+      %strong HYEWYE
+      %span.body= h question
       %span.author
         by
-        = link_to h(user), user_path(user)
-      %span.time
-        = time_ago_in_words(answer.created_at, include_seconds = false)
-        ago        
-      - unless defined?(hide_link)
-        %span.links
-          = link_to "Answer", question_answers_path(answer.question)
+        = link_to h(question.user), user_path(question.user)
+  .clearfix
+    .avatar
+      = link_to(image_tag(user.avatar, :size => "48x48"), user_path(user))
+    .content
+      %span.body
+        %span.choice{ :class => "choice_#{answer.choice}" }= "#{answer.choice_name},"
+        = h answer
+      %span.details
+        %span.author
+          by
+          = link_to h(user), user_path(user)
+        %span.time
+          = time_ago_in_words(answer.created_at, include_seconds = false)
+          ago        
+        - unless defined?(hide_link)
+          %span.links
+            = link_to "Answer", question_answers_path(answer.question)
