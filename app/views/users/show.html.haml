@@ -8,3 +8,5 @@
 %ul#stream
   - @events.each do |event|
     = render_event(event.subject)
+
+= will_paginate(@events)

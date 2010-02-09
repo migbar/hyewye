@@ -28,3 +28,11 @@ Given /^(\d+) answers exist for #{capture_model}$/ do |quantity, capture|
   end
   
 end
+
+Given /^#{capture_model} answered (\d+) questions$/ do |capture, quantity|
+  user = model(capture)
+  (1..quantity.to_i).each do |index|
+    Factory.create(:answer, "user" => user, "body" => "Answer-#{index}", "created_at" => index.minutes.ago)
+  end
+  
+end

@@ -41,7 +41,7 @@ describe AnswersController do
       assigns[:question].should == @question
     end
     
-    it "should fetch the latest answers for a question and assigns them for the view" do
+    it "should paginate the latest answers for a question and assigns them for the view" do
       @question.answers.latest.should_receive(:paginate).with(hash_including(:page => "42")).and_return(@answers)
       do_get(:page => 42)
       assigns[:answers].should == @answers

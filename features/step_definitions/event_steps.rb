@@ -13,7 +13,7 @@ Then /^I should see the following users and events$/ do |expected_table|
   hand_made = [%w{user body}]  
   doc.css('#events .event').each do |event|
     user = event.css('.author a').first.content
-    body = event.css('.body').first.content
+    body = event.css('.body').first.content.strip
     hand_made << [user, body]
   end
   my_table = Cucumber::Ast::Table.new(hand_made)

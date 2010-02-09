@@ -80,7 +80,7 @@ describe UsersController do
       before(:each) do
         User.stub(:find).and_return(@user)
         @events = (1..3).map { mock_model(Event) }
-        @user.stub_chain(:events, :latest).and_return(@events)
+        @user.stub_chain(:events, :latest, :paginate).and_return(@events)
       end
 
       def do_get(options={})
@@ -97,10 +97,10 @@ describe UsersController do
         do_get
         response.should render_template(:show)
       end
-
-      it "finds the events for the user and assigns them for the view" do
-        @user.events.should_receive(:latest).and_return(@events)
-        do_get
+      
+      it "should paginate the latest answers for a question and assigns them for the view" do
+        @user.events.latest.should_receive(:paginate).with(hash_including(:page => "42")).and_return(@events)
+        do_get(:page => 42)
         assigns[:events].should == @events
       end
     end

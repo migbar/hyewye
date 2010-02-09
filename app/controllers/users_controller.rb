@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   def show
     if request.path =~ /users/
       @user = User.find(params[:id])
-      @events = @user.events.latest
+      @events = @user.events.latest.paginate(:page => params[:page], :per_page => 15, :include => :subject) 
     else
       redirect_to edit_account_path
     end
