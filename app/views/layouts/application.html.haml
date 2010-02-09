@@ -9,7 +9,7 @@
     
     /[if lte IE 6]
       = stylesheet_link_tag "ie6"
-  %body
+  %body{ :class => controller.controller_name, :id => controller.action_name }
     #doc5
       #hd{ :class => current_user ? "signed_in" : "guest"}
         = render :partial => "shared/header"
