@@ -1,6 +1,6 @@
 var Home = function($){ 
-  var delay = 6000;
-	var speed = 700;
+  var delay = 9000;
+	var speed = 1500;
 
 	var scrollEvents = function () {
 	  var move = function (e) {

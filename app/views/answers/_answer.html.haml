@@ -7,9 +7,9 @@
         by
         = link_to h(question.user), user_path(question.user)
   .clearfix
-    .avatar
+    %span.avatar
       = link_to(image_tag(user.avatar, :size => "48x48"), user_path(user))
-    .content
+    %span.content
       %span.body
         %span.choice{ :class => "choice_#{answer.choice}" }= "#{answer.choice_name},"
         = h answer
@@ -23,3 +23,7 @@
         - unless defined?(hide_link)
           %span.links
             = link_to "Answer", question_answers_path(answer.question)
+    %span.tweetmeme
+      = render :partial => "shared/tweetmeme_button", :locals => {:hyewye_event_url => question_answers_url(answer.question)}
+      
+      

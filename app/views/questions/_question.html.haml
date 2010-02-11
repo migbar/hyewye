@@ -15,4 +15,5 @@
       %span.answers_count= link_to "#{question.answers.count} answers", question_answers_path(question)
       %span.links
         = link_to "Answer", question_answers_path(question)
-  
+  %span.tweetmeme
+    = render :partial => "shared/tweetmeme_button", :locals => {:hyewye_event_url => question_answers_url(question)}
