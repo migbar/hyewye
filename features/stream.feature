@@ -2,7 +2,7 @@ Feature: Stream
   In order find out what people are asking and answering
   As a user
   I want to view all recent activity
-@wip
+
   Scenario: viewing the stream shows only the events up to a limit
     Given the following questions and answers exist
       | model    | user    | body         | since |

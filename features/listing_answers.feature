@@ -5,7 +5,7 @@ Feature: Listing answers
   
   Background:
     Given a question "hps" exists with body: "Have plastic surgery?"
-  
+
   Scenario: Seeing the answers for a question
     Given the following answers exist for question "hps"
        | user    | choice | body       | since |

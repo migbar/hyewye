@@ -6,7 +6,7 @@ Feature: User Activity Stream
   Background: 
     Given a user "bob" exists
       And a user "john" exists
-  
+
   Scenario: viewing the stream for a user
     Given the following questions and answers exist for user "bob"
       | model    | body | since |
@@ -30,7 +30,7 @@ Feature: User Activity Stream
       | q5    |
       | q6    |
  
-@wip
+
   Scenario: Paginating events for a user
     Given user "bob" answered 20 questions
      When I navigate to the model page for user "bob"
