@@ -13,7 +13,7 @@ describe Answer do
   
   describe "validations" do
     should_validate_presence_of :body
-    should_validate_length_of :body, :maximum => 140   
+    should_validate_length_of :body, :maximum => 255   
     should_validate_inclusion_of :choice, :in => 1..3, :message => "please select one"
   end
   

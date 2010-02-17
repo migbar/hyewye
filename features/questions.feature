@@ -15,8 +15,15 @@ Feature: Managing Questions
      Then I should see "thanks for asking"
       And I should be on the home page 
   
-  Scenario: Requiring question body to be less than 140 characters
+  Scenario: Requiring question body to be less than 255 characters
     Given I am on the ask question page
-     When I fill "Have you ever / Would you ever" with 150 characters
+     When I fill "Have you ever / Would you ever" with 260 characters
       And I press "ask away!"
      Then I should see "is too long"
+@wip
+   Scenario: Allowing question body to be 255 characters
+     Given I am on the ask question page
+      When I fill "Have you ever / Would you ever" with 255 characters
+       And I press "ask away!"
+      Then I should not see "is too long"
+       And I should see "thanks for asking" 

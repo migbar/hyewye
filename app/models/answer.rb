@@ -33,7 +33,7 @@ class Answer < ActiveRecord::Base
   has_one :event, :as => :subject
   
   validates_presence_of :body
-  validates_length_of :body, :maximum => 140
+  validates_length_of :body, :maximum => 255
   validates_inclusion_of :choice, :in => choices.values, :message => "please select one"
   
   named_scope :latest, :order => "answers.created_at DESC"

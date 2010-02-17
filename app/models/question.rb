@@ -15,7 +15,7 @@ class Question < ActiveRecord::Base
   include Behaviours::CreateEvent
 
   validates_presence_of :body
-  validates_length_of   :body, :maximum => 140
+  validates_length_of   :body, :maximum => 255
 
   belongs_to :user
   has_one :event, :as => :subject

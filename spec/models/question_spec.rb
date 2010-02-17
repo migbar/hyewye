@@ -14,7 +14,7 @@ describe Question do
   end
   
   describe "validations" do
-    should_validate_length_of :body, :maximum => 140
+    should_validate_length_of :body, :maximum => 255
     should_validate_presence_of :body    
   end
     
