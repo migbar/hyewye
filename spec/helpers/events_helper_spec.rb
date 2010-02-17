@@ -34,4 +34,13 @@ describe EventsHelper do
       end
     end
   end
+  
+  describe "#linkify" do
+    it "calls to_s on the object"
+    it "escapes the text"
+    it "converts a text fragment into a link" do
+      result = helper.linkify("http://foobar.com")
+      result.should have_tag("a[rel=nofollow][target=_blank][href=?]", "http://foobar.com")
+    end
+  end
 end

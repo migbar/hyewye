@@ -20,10 +20,16 @@ Feature: Managing Questions
      When I fill "Have you ever / Would you ever" with 260 characters
       And I press "ask away!"
      Then I should see "is too long"
-@wip
+
    Scenario: Allowing question body to be 255 characters
      Given I am on the ask question page
       When I fill "Have you ever / Would you ever" with 255 characters
        And I press "ask away!"
       Then I should not see "is too long"
        And I should see "thanks for asking" 
+@wip  
+  Scenario: Linkifying question bodies
+    Given a question "hps" exists with body: "Blah http://foobar.com blah"
+     When I navigate to the answers page for question "hps"
+     Then I should see a link to "http://foobar.com"
+  

@@ -18,4 +18,8 @@ module EventsHelper
     
     render :partial => object, :locals => locals
   end
+  
+  def linkify(text_blob)
+    auto_link(h(text_blob.to_s), :html => {:target => "_blank", :rel => "nofollow" })
+  end
 end

@@ -1,3 +1,0 @@
-module AvatarHelper
-  
-end

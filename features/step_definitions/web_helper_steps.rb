@@ -18,3 +18,7 @@ Then /^I should see the following:?$/ do |table|
     response.should contain(row.first)
   end
 end
+
+Then /^I should see a link to "([^\"]*)"$/ do |url|
+  response.body.should =~ /href="#{Regexp.escape(url)}"/
+end

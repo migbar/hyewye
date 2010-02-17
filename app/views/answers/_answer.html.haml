@@ -2,7 +2,7 @@
   .question
     - answer.question.tap do |question|
       %strong HYEWYE
-      %span.body= h question
+      %span.body= linkify question
       %span.author
         by
         = link_to h(question.user), user_path(question.user)
@@ -12,7 +12,7 @@
     %span.content
       %span.body
         %span.choice{ :class => "choice_#{answer.choice}" }= "#{answer.choice_name},"
-        = h answer
+        = linkify answer
       %span.details
         %span.author
           by

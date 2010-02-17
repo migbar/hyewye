@@ -23,7 +23,6 @@ Feature: Answer questions
      Then I should see "can't be blank"
       But I should not see "Thanks for answering!"
       
-@wip
   Scenario: Requiring an answer body to be less than 255 characters
     Given I am logged in
       And I navigate to the answers page for question "hps"
@@ -32,7 +31,6 @@ Feature: Answer questions
       And I press "answer!"
      Then I should see "is too long"
      
-@wip
   Scenario: Allowing an answer body to be 255 characters
     Given I am logged in
       And I navigate to the answers page for question "hps"
