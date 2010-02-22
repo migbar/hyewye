@@ -36,11 +36,26 @@ describe EventsHelper do
   end
   
   describe "#linkify" do
-    it "calls to_s on the object"
-    it "escapes the text"
+    before(:each) do
+      @linkifiable = mock("linkifiable object",
+        :to_s => "linkifiable http://foobar.com/foo/bar/baz/one/two/three/four/five body")
+    end
+    
+    it "escapes the text before auto linking it" do
+      @linkifiable.should_receive(:to_s).and_return("linkifiable http://foobar.com body")
+      helper.should_receive(:h).with("linkifiable http://foobar.com body").and_return("escaped html")
+      helper.should_receive(:auto_link).with("escaped html", an_instance_of(Hash))
+      helper.linkify(@linkifiable)
+    end
+    
     it "converts a text fragment into a link" do
       result = helper.linkify("http://foobar.com")
       result.should have_tag("a[rel=nofollow][target=_blank][href=?]", "http://foobar.com")
+    end
+    
+    it "truncates the anchor label to 40 charcters and strip out the protocol" do
+      result = helper.linkify(@linkifiable)
+      result.should have_tag("a", "foobar.com/foo/bar/baz/one/two/three/...")
     end
   end
 end
