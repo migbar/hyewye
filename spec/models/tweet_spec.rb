@@ -131,12 +131,12 @@ describe Tweet do
   
   describe "#subject_body_without_links" do
     before(:each) do
-      @question = mock_question(:body => "foo http://example.com bar")
+      @question = mock_question(:body => "use aperture instead of lightroom? http://news.cnet.com/8301-13580_3-9875221-39.html #photo #photoshop #aperture #lightroom")
       @tweet = Tweet.new(@question)
     end
     
     it "strips out any links from the body" do
-      @tweet.subject_body_without_links.should == "foo bar"
+      @tweet.subject_body_without_links.should == "use aperture instead of lightroom? #photo #photoshop #aperture #lightroom"
     end
   end
   

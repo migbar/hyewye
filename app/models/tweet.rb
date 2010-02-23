@@ -35,7 +35,7 @@ class Tweet
   end
   
   def subject_body_without_links
-    subject_body.gsub(%r{https?://([-\w\.]+)+(:\d+)?(/([\w/_\.]*(\?\S+)?)?)?}, '').gsub(/\s+/, ' ')
+    subject_body.gsub(%r{https?://([-\w\.]+)+(:\d+)?(/([\w/_\.\-]*(\?\S+)?)?)?}, '').gsub(/\s+/, ' ')
   end
   
   def to_s
