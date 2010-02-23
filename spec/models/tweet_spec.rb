@@ -5,7 +5,7 @@ describe Tweet do
   
   describe "#to_s" do
     before(:each) do
-      @question = mock_model(Question, :body => "Short Question")
+      @question = mock_question(:body => "Short Question")
     end
     
     describe "for a question" do
@@ -20,7 +20,7 @@ describe Tweet do
         tweet = Tweet.new(@question)
         tweet.url = "http://bit.ly/blah"
         tweet_str = tweet.to_s
-        tweet_str.size.should == 140
+        tweet_str.size.should == 138
         escaped_url = Regexp.escape(tweet.url)
         tweet_str.should =~ /^#hyewye Foo bar.+?\.{3} #{escaped_url}$/
       end
@@ -43,7 +43,7 @@ describe Tweet do
         tweet = Tweet.new(@answer)
         tweet.url = "http://bit.ly/blah"
         tweet_str = tweet.to_s
-        tweet_str.size.should == 140
+        tweet_str.size.should == 139
         escaped_url = Regexp.escape(tweet.url)
         tweet_str.should =~ /^@#{@user.screen_name} #{@answer.choice_name}, Foo bar.+?\.{3} #hyewye #{escaped_url}$/
       end
@@ -52,7 +52,7 @@ describe Tweet do
   
   describe "#url" do
     before(:each) do
-      @question = mock_model(Question, :body => "have plastic surgery?", :to_param => "4")
+      @question = mock_question(:body => "have plastic surgery?", :to_param => "4")
       @tweet = Tweet.new(@question)
       @tweet.stub(:question_answers_url).and_return("http://hyewye.com/foo")
       @tweet.stub(:shorten).and_return("http://bit.ly/foo")
@@ -73,18 +73,27 @@ describe Tweet do
   
   describe "#body" do
     before(:each) do
-      @question = mock_model(Question, :body => "A" * 140, :to_param => "4")
+      @body_without_links = "A" * 140
+      @question = mock_question(:body => "http://example.com " + @body_without_links)
+      
       @tweet = Tweet.new(@question)
     end
     
-    it "truncates the subject body to fit within 140 characters given the rest of the components" do
-      @tweet.body(%w[foo bar baz]).size.should == 128
+    it "truncates the subject body without link to fit within trimmed size" do
+      @tweet.should_receive(:trimmed_size).with(%w[foo bar baz]).and_return(128)
+      @tweet.should_receive(:subject_body_without_links).and_return("subject body without links")
+      @tweet.should_receive(:truncate_words).with("subject body without links", 128).and_return("truncated body")
+      @tweet.body(%w[foo bar baz]).should == "truncated body"
+    end
+    
+    it "strips out the links from tbe body" do
+      @tweet.body(%w[foo]).should_not include("http://example.com")
     end
   end
   
   describe "#bitly_authorization" do
     it "builds a bitly authorization with the login and key and returns it" do
-      @question = mock_model(Question, :body => "A" * 140, :to_param => "4")
+      @question = mock_question(:body => "A" * 140, :to_param => "4")
       @tweet = Tweet.new(@question)
       UrlShortener::Authorize.should_receive(:new).with(Settings.bitly.login, Settings.bitly.api_key).and_return("authorization")
       @tweet.bitly_authorization.should == "authorization"
@@ -93,7 +102,7 @@ describe Tweet do
   
   describe "#shorten" do
     before(:each) do
-      @question = mock_model(Question, :body => "A" * 140, :to_param => "4")
+      @question = mock_question(:body => "A" * 140)
       @tweet = Tweet.new(@question)
       @tweet.stub(:bitly_authorization).and_return(mock(UrlShortener::Authorize))
       
@@ -118,6 +127,40 @@ describe Tweet do
     it "returns the shortened url" do
       @tweet.shorten("http://hyewye.com/").should == @shorten.urls
     end
+  end
+  
+  describe "#subject_body_without_links" do
+    before(:each) do
+      @question = mock_question(:body => "foo http://example.com bar")
+      @tweet = Tweet.new(@question)
+    end
+    
+    it "strips out any links from the body" do
+      @tweet.subject_body_without_links.should == "foo bar"
+    end
+  end
+  
+  describe "#truncate_words" do
+    before(:each) do
+      @tweet = Tweet.new(mock_question)
+    end
+    it "does nothing if size does not esceed limit" do
+      @tweet.truncate_words("foo bar", 10).should == "foo bar"
+    end
+    
+    it "truncates the first word if it exceeds the limit" do
+      @tweet.truncate_words("foobar", 5).should == "fo..."
+    end
+    
+    (23..29).each do |limit|
+      it "truncate 'this is a really long sentence' with limit #{limit} on word boundary" do
+        @tweet.truncate_words("this is a really long sentence", limit ).should == "this is a really long..."
+      end
+    end
+  end
+  
+  def mock_question(stubs={})
+    @mock_question ||= mock_model(Question, {:body => "foo http://example.com bar"}.merge(stubs))
   end
 end
 

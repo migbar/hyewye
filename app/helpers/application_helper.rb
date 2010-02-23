@@ -26,4 +26,5 @@ module ApplicationHelper
   def with_sidebar(sidebar = true)
     @sidebar = sidebar
   end
+  
 end

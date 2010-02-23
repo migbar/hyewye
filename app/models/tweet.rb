@@ -9,9 +9,9 @@ class Tweet
   attr_writer :url
   
   def initialize(subject)
-    self.subject_type          = subject.class.name
+    self.subject_type  = subject.class.name
     self.subject_body  = subject.body
-    
+
     case subject_type
     when "Question"
       self.param       = subject.to_param
@@ -31,7 +31,11 @@ class Tweet
   end
     
   def body(joined_values)
-    truncate(subject_body, :length => trimmed_size(joined_values))
+    truncate_words(subject_body_without_links, trimmed_size(joined_values))
+  end
+  
+  def subject_body_without_links
+    subject_body.gsub(%r{https?://([-\w\.]+)+(:\d+)?(/([\w/_\.]*(\?\S+)?)?)?}, '').gsub(/\s+/, ' ')
   end
   
   def to_s
@@ -52,6 +56,25 @@ class Tweet
 
   def bitly_authorization
     UrlShortener::Authorize.new(Settings.bitly.login, Settings.bitly.api_key)
+  end
+  
+  def truncate_words(text, lettercount)
+    return text if text.length <= lettercount
+
+    words = text.split(/\s/)
+    return truncate(text, :length => lettercount) if words.first.length >= lettercount
+    
+    sentence = words.first
+    words[1..words.length-1].each do |word|
+      if sentence.length + word.length + 3 <= lettercount
+        sentence << " #{word}"
+      else
+        sentence << "..."
+        break
+      end
+    end
+    
+    return sentence
   end
   
   private
