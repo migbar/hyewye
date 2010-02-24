@@ -27,7 +27,7 @@ Feature: Managing Questions
        And I press "ask away!"
       Then I should not see "is too long"
        And I should see "thanks for asking" 
-@wip  
+  
   Scenario: Linkifying question bodies
     Given a question "hps" exists with body: "Blah http://foobar.com blah"
      When I navigate to the answers page for question "hps"

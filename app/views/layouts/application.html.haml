@@ -22,7 +22,7 @@
                 - if show_title?
                   %h2= h yield(:title)
                 = yield
-              .yui-u
+              #sidebar.yui-u
                 = yield(:sidebar)
       #ft
         = render :partial => "shared/footer"

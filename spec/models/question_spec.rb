@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: questions
+#
+#  id               :integer(4)      not null, primary key
+#  user_id          :integer(4)      indexed
+#  body             :string(255)
+#  created_at       :datetime
+#  updated_at       :datetime
+#  answers_count    :integer(4)      default(0)
+#  hotness          :float           default(0.0)
+#  last_answered_at :datetime
+#
+
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe Question do
@@ -16,6 +30,22 @@ describe Question do
   describe "validations" do
     should_validate_length_of :body, :maximum => 255
     should_validate_presence_of :body    
+  end
+  
+  describe "named scopes" do
+    should_have_named_scope :hottest
+    it "hottest returns the questions ordered by hotness" do
+      q1 = Factory.create(:question, :hotness => 5)
+      q2 = Factory.create(:question, :hotness => 10)
+      Factory.create(:question, :hotness => 3)
+      
+      Question.hottest(2).should == [q2, q1]
+    end
+    
+    it "hottest does not return questions with hottness 0" do
+      Factory.create(:question, :hotness => 0)
+      Question.hottest(1).should be_empty
+    end
   end
     
   describe "creating associated event" do      
@@ -154,4 +184,27 @@ describe Question do
     question = Question.new(:body => "foo")
     question.to_s.should == "foo"
   end
+  
+  describe "#for_sidebar" do
+    before(:each) do
+      @hottest_questions = (1..5).map { mock_model(Question) }
+    end
+    
+    it "fetches the hottest 5 questions" do
+      Question.should_receive(:hottest).with(5).and_return(@hottest_questions)
+      question = Question.for_sidebar
+      @hottest_questions.should include(question)
+    end
+  end
+  
+  describe "#update_hotness" do
+    before(:each) do
+      @question = Factory.create(:question)
+    end
+    
+    it "updates the hotness coeficient for the question when an answer is created" do
+      pending
+    end
+  end
 end
+

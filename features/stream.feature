@@ -20,6 +20,15 @@ Feature: Stream
       | adam | question-3    |
       | dave | question-4    |
   
+  @wip
+  Scenario: showing stats for a question in the sidebar
+    Given the following questions and answers exist
+      | model             | user | body       |
+      | question          | bob  | question-2 |
+      | answered_question | adam | question-1 |
+     When I go to the site index
+     Then I should see "question-1" within "#sidebar #stats"
+  
   Scenario: Answering a question in the stream
     Given a question "hps" exists with body: "Have plastic surgery?"
       And I am on the site index

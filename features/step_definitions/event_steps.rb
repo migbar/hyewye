@@ -1,7 +1,7 @@
 Given /^the following questions and answers exist$/ do |events|
   events.hashes.each do |hash|
     factory = hash.delete("model")
-    since = hash.delete("since")
+    since = hash.delete("since") || 1
     login = hash.delete("user")
     user = User.find_by_login(login) || Factory.create(:user, :login => login)
     Factory.create(factory, hash.merge("user" => user, "created_at" => since.to_i.minutes.ago))

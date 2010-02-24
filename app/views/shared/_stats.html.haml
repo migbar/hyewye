@@ -1,0 +1,13 @@
+#stats.box
+  .hd
+  .bd
+    %h2 Have you Ever, Would you Ever
+    .question= "... #{question}"
+    .percents
+      .i_have.label= "have: #{question.i_have_percent}%"
+      .percent{ :style => "width:#{question.i_have_percent}%" }
+      .i_would.label= "would: #{question.i_would_percent}%"
+      .percent{ :style => "width:#{question.i_would_percent}%" }
+      .i_would_never.label= "would never: #{question.i_would_never_percent}%"
+      .percent{ :style => "width:#{question.i_would_never_percent}%" }
+  .ft

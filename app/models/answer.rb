@@ -1,11 +1,10 @@
 # == Schema Information
-# Schema version: 20091111111409
 #
 # Table name: answers
 #
 #  id          :integer(4)      not null, primary key
-#  user_id     :integer(4)
-#  question_id :integer(4)
+#  user_id     :integer(4)      indexed
+#  question_id :integer(4)      indexed
 #  choice      :integer(4)
 #  body        :string(255)
 #  created_at  :datetime

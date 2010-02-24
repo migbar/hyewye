@@ -11,11 +11,18 @@
     - @events.each_with_index do |event, index|
       = render_event(event.subject, :html => { :style => index < overflow ? "display:none" : nil })
 
+/ - content_for :sidebar do
+
+
+
 - content_for :sidebar do
   #right-col
     - if !current_user
       #nav
         = link_to "Ask a question", new_question_path
+
+  - if @sidebar_question
+    = render "shared/stats", :question => @sidebar_question
 
     #did_you_know.box
       .hd

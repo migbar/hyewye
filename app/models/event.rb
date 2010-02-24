@@ -1,14 +1,13 @@
 # == Schema Information
-# Schema version: 20091117132515
 #
 # Table name: events
 #
 #  id           :integer(4)      not null, primary key
-#  subject_id   :integer(4)
-#  subject_type :string(255)
+#  subject_id   :integer(4)      indexed => [subject_type], indexed
+#  subject_type :string(255)     indexed => [subject_id], indexed
 #  created_at   :datetime
 #  updated_at   :datetime
-#  user_id      :integer(4)
+#  user_id      :integer(4)      indexed
 #
 
 class Event < ActiveRecord::Base

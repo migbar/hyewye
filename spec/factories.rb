@@ -19,6 +19,12 @@ Factory.define(:question) do |f|
   f.association(:user)
 end
 
+Factory.define(:answered_question, :parent => :question) do |f|
+  f.after_create do |q|
+    Factory.create(:answer, :question => q)
+  end
+end
+
 Factory.define(:answer) do |f|
   f.sequence(:body) {|i| "answer #{i}"}
   f.sequence(:choice) { (rand() * 3).to_i + 1 }
