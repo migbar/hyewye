@@ -18,7 +18,8 @@ describe Question do
   
   
   describe "structure" do
-    should_have_column :body, :type => :string    
+    should_have_column :body, :type => :string
+    should_have_column :hotness, :type => :float, :default => 1.0
   end
   
   describe "associations" do
@@ -35,16 +36,17 @@ describe Question do
   describe "named scopes" do
     should_have_named_scope :hottest
     it "hottest returns the questions ordered by hotness" do
-      q1 = Factory.create(:question, :hotness => 5)
-      q2 = Factory.create(:question, :hotness => 10)
-      Factory.create(:question, :hotness => 3)
+      q1 = Factory.create(:question, :hotness => 5, :answers_count => 1)
+      q2 = Factory.create(:question, :hotness => 10, :answers_count => 1)
+      Factory.create(:question, :hotness => 3, :answers_count => 1)
       
       Question.hottest(2).should == [q2, q1]
     end
     
-    it "hottest does not return questions with hottness 0" do
-      Factory.create(:question, :hotness => 0)
-      Question.hottest(1).should be_empty
+    it "hottest does not return questions with answers_count of 0" do
+      Factory.create(:question, :answers_count => 0)
+      Factory.create(:question, :answers_count => 1)
+      Question.hottest(2).size.should == 1
     end
   end
     
@@ -115,6 +117,45 @@ describe Question do
         @question = Factory.create(:question)
         @question.answers.i_would_never_percent.should == 0
       end
+    end
+  end
+  
+  describe "#answer_created" do
+    before(:each) do
+      @question = Factory.create(:question)
+    end
+    
+    it "expires the percentages cache" do
+      @question.should_receive(:expire_percentages_cache)
+      @question.answer_created
+    end
+    
+    it "updates the hotness using the created_at timestamp if not answers are present" do
+      now = Time.now
+      Time.should_receive(:now).any_number_of_times.and_return(now)
+      @question.should_receive(:update_hotness).with(now, @question.created_at)
+      @question.answer_created
+    end
+    
+    it "updates the hotness using the last_answered_at time" do
+      now = Time.now
+      @question.last_answered_at = 1.hour.ago
+      Time.should_receive(:now).any_number_of_times.and_return(now)
+      @question.should_receive(:update_hotness).with(now, @question.last_answered_at)
+      @question.answer_created
+    end
+    
+    it "updates the last_answered_at time with Time.now" do
+      now = Time.now
+      @question.last_answered_at = 1.hour.ago
+      Time.should_receive(:now).any_number_of_times.and_return(now)
+      @question.answer_created
+      @question.last_answered_at.should == now
+    end
+    
+    it "saves the question" do
+      @question.should_receive(:save!)
+      @question.answer_created
     end
   end
   
@@ -200,10 +241,15 @@ describe Question do
   describe "#update_hotness" do
     before(:each) do
       @question = Factory.create(:question)
+      
     end
     
     it "updates the hotness coeficient for the question when an answer is created" do
-      pending
+      now = Time.now
+      previous = now - 100
+      @question.hotness = 20
+      @question.update_hotness(now, previous)
+      @question.hotness.should == 720
     end
   end
 end

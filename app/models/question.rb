@@ -14,6 +14,8 @@
 
 class Question < ActiveRecord::Base
   include Behaviours::CreateEvent
+  
+  HOTNESS_COEFFICIENT = 3600
 
   validates_presence_of :body
   validates_length_of   :body, :maximum => 255
@@ -28,7 +30,7 @@ class Question < ActiveRecord::Base
   
   named_scope :hottest, lambda { |limit|
     { :order     => "#{Question.table_name}.hotness DESC",
-      :conditions => "#{Question.table_name}.hotness > 0",
+      :conditions => "#{Question.table_name}.answers_count > 0",
       :limit     => limit }
   }
   
@@ -57,13 +59,14 @@ class Question < ActiveRecord::Base
   end
   
   def answer_created
+    now = Time.now
     expire_percentages_cache
-    # update_hotness
-    # self.last_answered_at = Time.now
-    # save!
+    update_hotness(now, last_answered_at || created_at)
+    self.last_answered_at = now
+    save!
   end
   
-  # def update_hotness
+  # def update_hotness(now, before)
   # # Additional considerations:
   # # 1 - dont update hotness if the answer is from someone who's already answered it
   # # 2 - take into consideration the "freshness" of the question too. Because we record hotness at the time of the answer,
@@ -71,9 +74,20 @@ class Question < ActiveRecord::Base
   # # freshness as a condition(i.e., do not select hot but old questions) or as a order criteria (i.e., select only based on 
   # # hotness but then use freshness to sort the old ones to the bottom)
   
-  #   k = 1000
-  #   initial_hotness = 1
-  #   self.hotness = (hotness > 0 ? hotness : initial_hotness) * k / (Time.now - last_answered_at)
+  #   k = 1000 * 3600
+  #   self.hotness = hotness * k / (now - before)
+  # end
+  
+  def update_hotness(now, before)
+    self.hotness = hotness * Question::HOTNESS_COEFFICIENT / (now - before)
+  end
+  
+  # def update_hotness_from_start
+  #   prev = answers.first
+  #   answers[1..answers.size-1].each do |a|
+  #     update_hotness(a.created_at, prev.created_at)
+  #     prev = a
+  #   end
   # end
   
   def percentage_cache_key(choice)

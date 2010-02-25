@@ -1,6 +1,6 @@
 class AddHotnessToQuestion < ActiveRecord::Migration
   def self.up
-    add_column :questions, :hotness, :float, :default => 0.0
+    add_column :questions, :hotness, :float, :default => 1.0
     add_column :questions, :last_answered_at, :datetime
   end
 

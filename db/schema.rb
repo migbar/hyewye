@@ -72,7 +72,7 @@ ActiveRecord::Schema.define(:version => 20100224112139) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "answers_count",    :default => 0
-    t.float    "hotness",          :default => 0.0
+    t.float    "hotness",          :default => 1.0
     t.datetime "last_answered_at"
   end
 
