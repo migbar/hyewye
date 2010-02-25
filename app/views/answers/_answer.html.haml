@@ -23,7 +23,8 @@
         - unless defined?(hide_link)
           %span.links
             = link_to "Answer", question_answers_path(answer.question)
-    %span.tweetmeme
-      = render :partial => "shared/tweetmeme_button", :locals => {:hyewye_event_url => question_answers_url(answer.question)}
+    - unless defined? hide_tweetmeme
+      %span.tweetmeme
+        = render "shared/tweetmeme_button", :hyewye_event_url => question_answers_url(answer.question)
       
       

@@ -8,10 +8,12 @@
       = link_to(image_tag(@question.user.avatar), user_path(@question.user))
     .content
       = link_to @question.user, user_path(@question.user)
-      %strong wanted to know:
+      %span.wanted-to-know wanted to know:
       #question-body
         Have You Ever / Would You Ever
         = linkify @question
+    %span.tweetmeme
+      = render "shared/tweetmeme_button", :hyewye_event_url => question_answers_url(@question)
 #answer_form
   - if current_user
     = render :partial => "form"
@@ -25,7 +27,7 @@
   
   %ul#answers-list
     - @answers.each do |answer|
-      = render_event(answer, :locals => { :hide_link => true })
+      = render_event(answer, :locals => { :hide_link => true, :hide_tweetmeme => true })
 
   = will_paginate @answers
   
