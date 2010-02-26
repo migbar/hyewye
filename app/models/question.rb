@@ -16,7 +16,7 @@ class Question < ActiveRecord::Base
   include Behaviours::CreateEvent
   
   HOTNESS_COEFFICIENT = 3600
-  DECREASE_THRESHOLD = 3600
+  DECREASE_THRESHOLD = 3600 * 24 * 7
 
   validates_presence_of :body
   validates_length_of   :body, :maximum => 255
