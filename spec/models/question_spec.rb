@@ -34,7 +34,6 @@ describe Question do
   end
   
   describe "named scopes" do
-    should_have_named_scope :hottest
     it "hottest returns the questions ordered by hotness" do
       q1 = Factory.create(:question, :hotness => 5, :answers_count => 1)
       q2 = Factory.create(:question, :hotness => 10, :answers_count => 1)
@@ -48,6 +47,14 @@ describe Question do
       Factory.create(:question, :answers_count => 1)
       Question.hottest(2).size.should == 1
     end
+  end
+  
+  it "sets the hotness_decreased_at before create" do
+    q = Factory.build(:question)
+    now = Time.now
+    Time.should_receive(:now).any_number_of_times.and_return(now)
+    q.save
+    q.hotness_decreased_at.should == now
   end
     
   describe "creating associated event" do      
@@ -129,12 +136,20 @@ describe Question do
       @question.should_receive(:expire_percentages_cache)
       @question.answer_created
     end
+  end
+  
+  describe "#update_hotness_delayed" do
+    before(:each) do
+      @question = Factory.create(:question)
+      @question.hotness_decreased_at = 1.day.ago
+      @question.save
+    end
     
     it "updates the hotness using the created_at timestamp if not answers are present" do
       now = Time.now
       Time.should_receive(:now).any_number_of_times.and_return(now)
       @question.should_receive(:update_hotness).with(now, @question.created_at)
-      @question.answer_created
+      @question.update_hotness_delayed(now)
     end
     
     it "updates the hotness using the last_answered_at time" do
@@ -142,20 +157,27 @@ describe Question do
       @question.last_answered_at = 1.hour.ago
       Time.should_receive(:now).any_number_of_times.and_return(now)
       @question.should_receive(:update_hotness).with(now, @question.last_answered_at)
-      @question.answer_created
+      @question.update_hotness_delayed(now)
     end
     
     it "updates the last_answered_at time with Time.now" do
       now = Time.now
       @question.last_answered_at = 1.hour.ago
       Time.should_receive(:now).any_number_of_times.and_return(now)
-      @question.answer_created
+      @question.update_hotness_delayed(now)
       @question.last_answered_at.should == now
+    end
+    
+    it "sets the hotness_decreased_at to now" do
+      now = Time.now
+      Time.should_receive(:now).any_number_of_times.and_return(now)
+      @question.update_hotness_delayed(now)
+      @question.hotness_decreased_at.should == now
     end
     
     it "saves the question" do
       @question.should_receive(:save!)
-      @question.answer_created
+      @question.update_hotness_delayed(Time.now)
     end
   end
   
@@ -247,10 +269,56 @@ describe Question do
     it "updates the hotness coeficient for the question when an answer is created" do
       now = Time.now
       previous = now - 100
-      @question.hotness = 20
+      @question.hotness = 20.0
       @question.update_hotness(now, previous)
-      @question.hotness.should == 720
+      @question.hotness.should == 740.0
+    end
+    
+    it "keeps the same hotness if the time difference is below 1.0 second" do
+      now = Time.now
+      previous = now - 0.5
+      @question.hotness = 20.0
+      @question.update_hotness(now, previous)
+      @question.hotness.should == 20.0      
+    end
+  end
+  
+  describe "#update_hotness" do
+    before(:each) do
+      @questions = (1..5).map { |i| mock_model(Question)}
+    end
+    
+    it "sends #recalculate_hotness to all the questions" do
+      @questions.each do |q|
+        q.should_receive(:recalculate_hotness)
+      end
+      Question.should_receive(:all).and_return(@questions)
+      Question.update_hotness
+    end
+  end
+  
+  describe "#recalculate_hotness" do
+    before(:each) do
+      @times = (1..3).map { |i| i.hours.ago }
+      @answers = @times.map do |time|
+        mock_model(Answer, :created_at => time)
+      end
+      @question = stub_model(Question, :created_at => 1.day.ago, :answers => @answers, :save! => true)
+    end
+    
+    it "updates the hotness going through all the answers" do
+      @question.should_receive(:update_hotness).with(@times[0], @question.created_at).ordered
+      @question.should_receive(:update_hotness).with(@times[1], @times[0]).ordered
+      @question.should_receive(:update_hotness).with(@times[2], @times[1]).ordered
+      @question.recalculate_hotness
+      
+    end
+    
+    it "saves the question" do
+      @question.should_receive(:save!)
+      @question.recalculate_hotness
     end
   end
 end
+
 

@@ -16,6 +16,7 @@ class Question < ActiveRecord::Base
   include Behaviours::CreateEvent
   
   HOTNESS_COEFFICIENT = 3600
+  DECREASE_THRESHOLD = 3600
 
   validates_presence_of :body
   validates_length_of   :body, :maximum => 255
@@ -34,9 +35,19 @@ class Question < ActiveRecord::Base
       :limit     => limit }
   }
   
+  before_create :set_hotness_decreased_at
+  
   class << self
     def for_sidebar
       hottest(5).sort_by { rand }.first
+    end
+    
+    def update_hotness
+      Question.all.each(&:recalculate_hotness)
+    end
+    
+    def decrease_hotness
+      Question.update_all("hotness = hotness * 0.95, hotness_decreased_at = '#{Time.now.utc.to_s(:db)}'", ["hotness_decreased_at IS NULL OR hotness_decreased_at < ?", DECREASE_THRESHOLD.seconds.ago.utc])
     end
   end
   
@@ -59,36 +70,38 @@ class Question < ActiveRecord::Base
   end
   
   def answer_created
-    now = Time.now
     expire_percentages_cache
+    send_later(:update_hotness_delayed, Time.now)
+  end
+  
+  def update_hotness_delayed(now)
     update_hotness(now, last_answered_at || created_at)
     self.last_answered_at = now
+    self.hotness_decreased_at = now
     save!
   end
-  
-  # def update_hotness(now, before)
-  # # Additional considerations:
-  # # 1 - dont update hotness if the answer is from someone who's already answered it
-  # # 2 - take into consideration the "freshness" of the question too. Because we record hotness at the time of the answer,
-  # # it becomes a cached value, so effectively making it 'sticky' even long after a long time has passed. Should we consider
-  # # freshness as a condition(i.e., do not select hot but old questions) or as a order criteria (i.e., select only based on 
-  # # hotness but then use freshness to sort the old ones to the bottom)
-  
-  #   k = 1000 * 3600
-  #   self.hotness = hotness * k / (now - before)
-  # end
-  
+
   def update_hotness(now, before)
-    self.hotness = hotness * Question::HOTNESS_COEFFICIENT / (now - before)
+    # Additional considerations:
+    # 1 - dont update hotness if the answer is from someone who's already answered it
+    # 2 - take into consideration the "freshness" of the question too. Because we record hotness at the time of the answer,
+    # it becomes a cached value, so effectively making it 'sticky' even long after a long time has passed. Should we consider
+    # freshness as a condition(i.e., do not select hot but old questions) or as a order criteria (i.e., select only based on 
+    # hotness but then use freshness to sort the old ones to the bottom)
+    difference = now - before
+    factor = difference < 1.0 ? 1.0 : (1 + Question::HOTNESS_COEFFICIENT / difference)
+    self.hotness = hotness * factor
   end
   
-  # def update_hotness_from_start
-  #   prev = answers.first
-  #   answers[1..answers.size-1].each do |a|
-  #     update_hotness(a.created_at, prev.created_at)
-  #     prev = a
-  #   end
-  # end
+  def recalculate_hotness
+    prev = nil
+    self.hotness = 1.0
+    answers.each do |a|
+      update_hotness(a.created_at, prev.try(:created_at) || self.created_at)
+      prev = a
+    end
+    save!
+  end
   
   def percentage_cache_key(choice)
     "question:#{id}:#{choice}"
@@ -97,5 +110,11 @@ class Question < ActiveRecord::Base
   def to_s
     body
   end
+  
+  private
+  def set_hotness_decreased_at
+    self.hotness_decreased_at = Time.now
+  end
+  
 end
   
