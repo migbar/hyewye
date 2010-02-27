@@ -14,12 +14,12 @@
         = linkify @question
     %span.tweetmeme
       = render "shared/tweetmeme_button", :hyewye_event_url => question_answers_url(@question)
-#answer_form
-  - if current_user
-    = render :partial => "form"
-  - else
-    #nav
-      = link_to "Let me Answer!", new_user_session_path(:return_to => request.request_uri)
+  #answer_form
+    - if current_user
+      = render :partial => "form"
+    - else
+      #nav.let_me_answer
+        = link_to "Let me Answer!", new_user_session_path(:return_to => request.request_uri)
 
 - if @answers.length > 0
   #answer-list-heading

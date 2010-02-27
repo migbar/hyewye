@@ -12,7 +12,7 @@ Then /^I should see the following events$/ do |expected_table|
   doc = Nokogiri::HTML(response.body) 
   hand_made = [%w{Event}]  
   doc.css('#stream .event .body').each do |element|
-    hand_made << [element.content.strip]
+    hand_made << [element.content.gsub!(/Have You Ever \/ Would You Ever ...\n/, '').strip]
   end
   my_table = Cucumber::Ast::Table.new(hand_made)
   expected_table.diff!(my_table)

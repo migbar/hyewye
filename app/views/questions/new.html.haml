@@ -1,15 +1,16 @@
 - title "Ask a question"
 - with_sidebar
 
-.new_question
-  - form_for @question do |f|
-    %table
-      %tr
-        %th= f.label :body, "Have you ever / Would you ever"
-        %th.chars 140
-      %tr
-        %td{:colspan => 2}
-          = f.text_area :body, :cols => 90, :rows => 5
-          = f.error_message_on :body
-      %tr
-        %td{:colspan => 2}= image_submit_tag("/images/css/button_ask_a_question.png", :value => "Ask away!")
+
+- form_for @question do |f|
+  %table
+    %tr
+      %th= f.label :body, "Have you ever / Would you ever"
+      %th.chars 140
+    %tr
+      %td{:colspan => 2}
+        = f.text_area :body, :cols => 90, :rows => 5
+        = f.error_message_on :body
+    %tr
+      %td
+      %td.ask_away= image_submit_tag("/images/css/button_ask_a_question.png", :value => "Ask away!")
