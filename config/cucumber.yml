@@ -1,0 +1,10 @@
+# default: --tags ~@wip --format progress -r features features
+# autotest: --tags @wip --format pretty -r features features
+<%
+rerun = File.file?('rerun.txt') ? IO.read('rerun.txt') : ""
+rerun_opts = rerun.to_s.strip.empty? ? "--format progress features" : "--format #{ENV['CUCUMBER_FORMAT'] || 'pretty'} #{rerun}"
+std_opts = "#{rerun_opts} --format rerun --out rerun.txt --strict --tags @wip"
+%>
+autotest: <%= std_opts %>
+default: --format pretty --strict --tags ~@wip
+wip: --tags @wip:4 --wip features
