@@ -8,7 +8,7 @@ describe Notifier do
   describe "#password_reset_instructions" do
     before(:each) do
       @user = Factory.create(:user)
-      @sent_time = 1.hour.ago
+      @sent_time = 1.hour.ago.utc
       @email = Notifier.create_password_reset_instructions(@user, @sent_time)
     end
     

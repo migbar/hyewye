@@ -8,6 +8,9 @@ require 'remarkable_rails'
 require "email_spec/helpers"
 require "email_spec/matchers"
 
+# require 'factory_girl'
+# require File.dirname(__FILE__) + '/factories'
+
 # Uncomment the next line to use webrat's matchers
 #require 'webrat/integrations/rspec-rails'
 
