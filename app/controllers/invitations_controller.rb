@@ -9,8 +9,5 @@ class InvitationsController < InheritedResources::Base
       redirect_to root_path
     end    
   end
-  
-  # def index
-  #   redirect_to root_path
-  # end
+ 
 end
